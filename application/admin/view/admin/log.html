@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body>
+
+<table class="layui-table" lay-even="" lay-skin="row" lay-size="sm" style="margin-top: 20px;">
+  <!-- <colgroup>
+    <col width="50">
+    <col width="80">
+    <col width="100">
+    <col width="150">
+    <col width="150">
+    <col width="200">
+    <col width="200">
+    <col width="200">
+    <col width="100">
+  </colgroup> -->
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>操作</th>
+      <th>路径</th>
+      <th>节点备注</th>
+      <th>返回对象</th>
+      <th>操作者</th>
+      <th>记录时间</th>
+      <th>记录IP</th>
+    </tr> 
+  </thead>
+  <tbody>
+    {volist name="log" id="vo"}
+    <tr>
+      <td>{$vo.id}</td>
+      <td>{empty name="$vo.name"}{$vo.menu.name}{else /}{$vo.name}{/empty}</td>
+      <td>{$vo.menu.module}/{$vo.menu.controller}/{$vo.menu.function}{notempty name="$vo.menu.parameter"}/{$vo.menu.parameter}{/notempty}</td>
+      <td>{notempty name="$vo.menu.description"}{$vo.menu.description}{/notempty}</td>
+      <td>{notempty name="$vo.operation_id"}{$vo.operation_id}{else /}无{/notempty}</td>
+      <td>{$vo.admin.nickname} <{volist name="admin_cate" id="cate"}{eq name="$vo.admin.admin_cate_id" value="$cate.id"}{$cate.name}{/eq}{/volist}></td>
+      <td>{$vo.create_time}</td>
+      <td>{$vo.ip}</td>
+    </tr>
+    {/volist}
+  </tbody>
+</table>
+<div style="padding:0 20px;">{$log->render()}</div>
+        
+<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+<script src="__PUBLIC__/jquery/jquery.min.js"></script>
+<script>
+        var message;
+        layui.config({
+            base: '__JS__/',
+            version: '1.0.1'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+        });
+    </script> 
+<script type="text/javascript">
+$(function(){
+  var x = 10;
+  var y = 20;
+  $(".tooltip").mouseover(function(e){ 
+    var tooltip = "<div id='tooltip'><img src='"+ this.href +"' alt='预览图' height='200'/>"+"<\/div>"; //创建 div 元素
+    $("body").append(tooltip);  //把它追加到文档中             
+    $("#tooltip")
+      .css({
+        "top": (e.pageY+y) + "px",
+        "left":  (e.pageX+x)  + "px"
+      }).show("fast");    //设置x坐标和y坐标，并且显示
+    }).mouseout(function(){  
+    $("#tooltip").remove();  //移除 
+    }).mousemove(function(e){
+    $("#tooltip")
+      .css({
+        "top": (e.pageY+y) + "px",
+        "left":  (e.pageX+x)  + "px"
+      });
+  });
+})
+
+$('.delete').click(function(){
+  var id = $(this).attr('id');
+  layer.confirm('确定要删除?', function(index) {
+    $.ajax({
+      url:"{:url('admin/attachment/delete')}",
+      data:{id:id},
+      success:function(res) {
+        layer.msg(res.msg);
+        if(res.code == 1) {
+          setTimeout(function(){
+            location.href = res.url;
+          },1500)
+        }
+      }
+    })
+  })
+})
+</script>
+<script type="text/javascript">
+  layui.use('layer', function(){
+    var layer = layui.layer;
+    $('.open').click(function(){
+      var id = $(this).attr('data-id');
+      layer.msg('文件审核',{
+        time:20000
+        ,btn: ['仁慈通过', '残忍拒绝', '再想想']
+        ,yes: function(index, layero){
+          $.ajax({
+            url:"{:url('admin/attachment/audit')}"
+            ,type:'post'
+            ,data:{id:id,status:'1'}
+            ,success:function(res){
+              layer.msg(res.msg);
+              if(res.code == 1){
+                setTimeout(function(){
+                  location.href = res.url;
+                },1500)
+              }
+            }
+          })
+        }
+        ,btn2: function(index, layero){
+          $.ajax({
+            url:"{:url('admin/attachment/audit')}"
+            ,type:'post'
+            ,data:{id:id,status:'-1'}
+            ,success:function(res){
+              layer.msg(res.msg);
+              if(res.code == 1){
+                setTimeout(function(){
+                  location.href = res.url;
+                },1500)
+              }
+            }
+          })
+        }
+      })
+    })
+  });              
+</script>
+</body>
+</html>

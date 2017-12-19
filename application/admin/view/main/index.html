@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="__PUBLIC__/echarts/echarts.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all">
+    <style>
+        .info-box {
+            height: 85px;
+            background-color: white;
+            background-color: #ecf0f5;
+        }
+        
+        .info-box .info-box-icon {
+            border-top-left-radius: 2px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 2px;
+            display: block;
+            float: left;
+            height: 85px;
+            width: 85px;
+            text-align: center;
+            font-size: 45px;
+            line-height: 85px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-box .info-box-content {
+            padding: 10px;
+            margin-left: 85px;
+        }
+        
+        .info-box .info-box-content .info-box-text {
+            display: block;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-transform: uppercase;
+        }
+
+        .info-box .info-box-content .info-box-a {
+            display: block;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            margin:0 auto;
+            width:60px;
+        }
+        
+        .info-box .info-box-content .info-box-number {
+            display: block;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .major {
+            font-weight: 10px;
+            color: #01AAED;
+        }
+        
+        .main {
+            margin-top: 25px;
+        }
+        
+        .main .layui-row {
+            margin: 10px 0;
+        }
+
+body .demo-class textarea {background:#23262E;width:200px;color:#fff;}
+#LAY_layuipro {position: relative;}
+body .demo-class .layui-layer-btn{
+    position: absolute;
+    bottom:10px;
+    right:0;
+    padding:0;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="layui-fluid main">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md3">
+                <div class="info-box">
+                    <span class="info-box-icon" style="background-color:#00c0ef !important;color:white;"><i class="fa fa-users" aria-hidden="true"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">会员总数</span>
+                        <span class="info-box-number">{$web.user_num}</span>
+                        <span class="info-box-text">管理员角色：{$web.admin_cate}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <div class="info-box">
+                    <span class="info-box-icon" style="background-color:#f39c12 !important;color:white;"><i class="fa fa-file-text" aria-hidden="true"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">文章总数</span>
+                        <span class="info-box-number">{$web.article_num}</span>
+                        <span class="info-box-text">待审核：{$web.status_article}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <div class="info-box">
+                    <span class="info-box-icon" style="background-color:#00a65a !important;color:white;"><i class="fa fa-shopping-bag" aria-hidden="true"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">文件总数</span>
+                        <span class="info-box-number">{$web.file_num}</span>
+                        <span class="info-box-text">待审核：{$web.status_file}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <div class="info-box">
+                    <span class="info-box-icon" style="background-color:#dd4b39 !important;color:white;"><i class="fa fa-heart" aria-hidden="true"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">留言总数</span>
+                        <span class="info-box-number">{$web.message_num}</span>
+                        <span class="info-box-text">待查看：{$web.look_message}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div style="width:100%;height:300px;">
+        <div id="main" style="width:45%;height:300px;float: left;"></div>
+        <div id="mains" style="width:45%;height:300px;float: left;"></div>
+        </div>
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+            var myCharts = echarts.init(document.getElementById('mains'));
+
+            // 指定图表的配置项和数据
+            var option = {
+                color: ['#00c0ef'],
+                title: {
+                    text: '访问量图表'
+                },
+
+                itemStyle: {
+                    color: '#009688'
+                },
+                tooltip: {},
+                legend: {
+                    data:['访问量']
+                },
+
+                xAxis: {
+                    data: ["12-04","12-05","12-06","12-07","12-08","12-09"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '访问量',
+                    type: 'bar',
+                    data: [5, 20, 36, 10, 10, 20]
+                }]
+            };
+
+            var options = {
+                color: ['#dd4b39'],
+                title: {
+                    text: '下载量图表'
+                },
+
+                itemStyle: {
+                    color: '#009688'
+                },
+                tooltip: {},
+                legend: {
+                    data:['下载量']
+                },
+
+                xAxis: {
+                    data: ["12-04","12-05","12-06","12-07","12-08","12-09"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '下载量',
+                    type: 'line',
+                    data: [5, 20, 36, 10, 10, 20]
+                }]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+            myCharts.setOption(options);
+        </script>
+
+        <div class="layui-tab" style="width:45%;float: left;">
+          <ul class="layui-tab-title">
+            <li class="layui-this">说明文档</li>
+            <li>更新日志</li>
+            <li>开发信息</li>
+            <li>系统信息</li>
+          </ul>
+          <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show" style="max-height: 230px;overflow: scroll;overflow-x:hidden">
+              <ul class="layui-timeline">
+                    <li class="layui-timeline-item">
+                        <i class="layui-icon layui-timeline-axis"></i>
+                        <div class="layui-timeline-content layui-text">
+                            <h3 class="layui-timeline-title">置顶的说明文档</h3>
+                            <ul>
+                                <li>交流群：
+                                    <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5wZeNTd"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="Tplay" title="Tplay"></a>
+                                </li>
+                                <li>点击加群，如果实在加不了还有群号啊[221470096]
+                                </li>
+                                <li>下载地址：
+                                    <a href="javascript:;" target="_blank">敬请期待</a>(可以先加群，待功能完善就免费开源啊.)
+                                </li>
+                                <li>控制面板上的图表什么的都还只是个演示，没想好放什么数据(⊙o⊙)…</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="layui-timeline-item">
+                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text">
+                            <h3 class="layui-timeline-title">开发基于</h3>
+                                <ul>
+                                    <li>Tplay是一款基于ThinkPHP{$info.tp} + layui2.2.45 + ECharts + Mysql开发的后台管理框架，集成了一般应用所必须的基础性功能，为开发者节省大量的时间。</li>
+                                    <li>ThinkPHP版本：{$info.tp} <a href="https://www.kancloud.cn/manual/thinkphp5/118003" target="_blank">查看开发文档</a></li>
+                                    <li>Layui版本：2.2.45 <a href="http://www.layui.com/doc/" target="_blank">查看开发文档</a></li>
+                                    <li>ECharts版本：1.0 <a href="http://echarts.baidu.com/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts" target="_blank">查看开发文档</a></li>
+                                </ul>
+                        </div>
+                    </li>
+                    <li class="layui-timeline-item">
+                        <i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop layui-timeline-axis"></i>
+                        <div class="layui-timeline-content layui-text">
+                            <h3 class="layui-timeline-title">系统信息</h3>
+                            <p>
+                                <ul>
+                                    <li>操作系统：{$info.win}</li>
+                                    <li>PHP版本：{$info.php}</li>
+                                    <li>运行环境：{$info.environment}</li>
+                                    <li>上传最大限制：{$info.upload_size}</li>
+                                    <li>执行时间限制：{$info.execution_time}</li>
+                                    <li>剩余空间大小：{notempty name="$info.disk"}{$info.disk}{else/}未知{/notempty}</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="layui-tab-item" style="max-height: 250px;overflow: scroll;overflow-x:hidden">
+                更新日志
+            </div>
+            <div class="layui-tab-item" style="max-height: 250px;overflow: scroll;overflow-x:hidden">开发信息</div>
+            <div class="layui-tab-item" style="max-height: 250px;overflow: scroll;overflow-x:hidden">系统信息</div>
+          </div>
+        </div>
+
+        <div id="biaopan" style="width:45%;height:300px;float: left;"></div>
+
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('biaopan'));
+            var option = {
+                title : {
+                    text: '访客属性玫瑰图',
+                    subtext: '纯属虚构',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    x : 'center',
+                    y : 'bottom',
+                    data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {
+                            show: true,
+                            type: ['pie', 'funnel']
+                        },
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                series : [
+                    {
+                        name:'访客地域占比',
+                        type:'pie',
+                        radius : [20, 110],
+                        center : ['25%', '50%'],
+                        roseType : 'radius',
+                        label: {
+                            normal: {
+                                show: true
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        lableLine: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        data:[
+                            {value:10, name:'北京'},
+                            {value:5, name:'上海'},
+                            {value:15, name:'深圳'},
+                            {value:25, name:'广州'},
+                            {value:20, name:'郑州'},
+                            {value:35, name:'开封'},
+                            {value:30, name:'南京'},
+                            {value:40, name:'新乡'}
+                        ]
+                    },
+                    {
+                        name:'访客年龄段',
+                        type:'pie',
+                        radius : [30, 110],
+                        center : ['75%', '50%'],
+                        roseType : 'radius',
+                        data:[
+                            {value:10, name:'15-20'},
+                            {value:5, name:'21-25'},
+                            {value:15, name:'26-30'},
+                            {value:25, name:'31-35'},
+                            {value:20, name:'35-40'},
+                            {value:35, name:'40以上'}
+                        ]
+                    }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        </script>
+
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <script src="__PUBLIC__/jquery/jquery.min.js"></script>
+    <script>
+    layui.use('element', function(){
+      var $ = layui.jquery
+      ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+      
+      //触发事件
+      var active = {
+        tabAdd: function(){
+          //新增一个Tab项
+          element.tabAdd('demo', {
+            title: '新选项'+ (Math.random()*1000|0) //用于演示
+            ,content: '内容'+ (Math.random()*1000|0)
+            ,id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+          })
+        }
+        ,tabDelete: function(othis){
+          //删除指定Tab项
+          element.tabDelete('demo', '44'); //删除：“商品管理”
+          
+          
+          othis.addClass('layui-btn-disabled');
+        }
+        ,tabChange: function(){
+          //切换到指定Tab项
+          element.tabChange('demo', '22'); //切换到：用户管理
+        }
+      };
+      
+      $('.site-demo-active').on('click', function(){
+        var othis = $(this), type = othis.data('type');
+        active[type] ? active[type].call(this, othis) : '';
+      });
+      
+      //Hash地址的定位
+      var layid = location.hash.replace(/^#test=/, '');
+      element.tabChange('test', layid);
+      
+      element.on('tab(test)', function(elem){
+        location.hash = 'test='+ $(this).attr('lay-id');
+      });
+      
+    });
+    </script>
+
+<script type="text/javascript">
+  layui.use('layer', function(){
+    var layer = layui.layer;
+    $(document).ready(function(){
+      layer.prompt({
+        formType: 2,
+        offset: 'b',
+        value: '开源优先通知群：221470096',
+        title: '意见和建议收集(限100字)',
+        skin: 'demo-class',
+        area: ['280px', '120px'],
+        id: 'LAY_layuipro' ,//设定一个id，防止重复弹出
+        btn: ['朕写好了', '无fuck说'],
+        shade: 0,
+        moveType: 1 //拖拽模式，0或者1
+      }, function(value, index, elem){
+        if(value = '开源优先通知群：221470096') {
+            layer.msg('如果你有建议，请修改默认内容');
+        } else {
+            $.ajax({
+                url:"{:url('admin/tomessages/publish')}"
+                ,type:"post"
+                ,data:{message:value}
+                ,success:function(res) {
+                    layer.msg(res.msg);
+                    if(res.code == 1) {
+                      layer.close(index);
+                    }
+                }
+            })
+        }
+      })
+    });
+  });              
+</script>
+</body>
+</html>

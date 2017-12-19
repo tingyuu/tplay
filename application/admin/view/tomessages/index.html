@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body>
+<fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;border:0">
+</fieldset>
+<table class="layui-table" lay-even="" lay-skin="row" lay-size="sm">
+  <colgroup>
+    <col width="50">
+    <col width="100">
+    <col width="100">
+    <col width="600">
+    <col width="150">
+    <col width="100">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>留言时间</th>
+      <th>留言IP</th>
+      <th>留言内容</th>
+      <th>状态</th>
+      <th>操作</th>
+    </tr> 
+  </thead>
+  <tbody>
+    {volist name="message" id="vo"}
+    <tr>
+      <td>{$vo.id}</td>
+      <td>{$vo.create_time}</td>
+      <td>{$vo.ip}</td>
+      <td>{$vo.message}</td>
+      <td>{if condition="$vo.is_look eq 1"}<span class="layui-badge">管理员已阅</span>{else /}<span class="layui-badge layui-bg-orange">管理员待阅</span>{/if}</td>
+      <td class="operation-menu">
+        <a href="javascript:;" class="look" data-id="{$vo.id}"><button class="layui-btn layui-btn-xs" ><i class="fa fa-eye"></i></button></a>
+        <a href="javascript:;"><button class="layui-btn layui-btn-xs delete" id="{$vo.id}"><i class="layui-icon"></i></button></a>
+      </td>
+    </tr>
+    {/volist}
+  </tbody>
+</table>
+    {$message->render()}
+        
+<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+<script src="__PUBLIC__/jquery/jquery.min.js"></script>
+<script>
+        var message;
+        layui.config({
+            base: '__JS__/',
+            version: '1.0.1'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+        });
+    </script> 
+<script type="text/javascript">
+
+$('.delete').click(function(){
+  var id = $(this).attr('id');
+  layer.confirm('确定要删除?', function(index) {
+    $.ajax({
+      url:"{:url('admin/tomessages/delete')}",
+      data:{id:id},
+      success:function(res) {
+        layer.msg(res.msg);
+        if(res.code == 1) {
+          setTimeout(function(){
+            location.href = res.url;
+          },1500)
+        }
+      }
+    })
+  })
+})
+</script>
+<script type="text/javascript">
+  layui.use('layer', function(){
+    var layer = layui.layer;
+    $('.look').click(function(){
+      var id = $(this).attr('data-id');
+      layer.msg('留言标记',{
+        time:20000
+        ,btn: ['标记已读', '标记未读', '再想想']
+        ,yes: function(index, layero){
+          $.ajax({
+            url:"{:url('admin/tomessages/mark')}"
+            ,type:'post'
+            ,data:{id:id,is_look:'1'}
+            ,success:function(res){
+              layer.msg(res.msg);
+              if(res.code == 1){
+                setTimeout(function(){
+                  location.href = res.url;
+                },1500)
+              }
+            }
+          })
+        }
+        ,btn2: function(index, layero){
+          $.ajax({
+            url:"{:url('admin/tomessages/mark')}"
+            ,type:'post'
+            ,data:{id:id,is_look:'0'}
+            ,success:function(res){
+              layer.msg(res.msg);
+              if(res.code == 1){
+                setTimeout(function(){
+                  location.href = res.url;
+                },1500)
+              }
+            }
+          })
+        }
+      })
+    })
+  });              
+</script>
+</body>
+</html>

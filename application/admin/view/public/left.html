@@ -1,0 +1,27 @@
+        <div class="layui-side layui-bg-black kit-side">
+            <div class="layui-side-scroll">
+                <div class="kit-side-fold" style="font-size: 14px;"> 
+                  <span>
+                  <i class="fa fa-home" aria-hidden="true" id="home"></i>
+                  <i class="fa fa-trash" aria-hidden="true" id="clear"></i> 
+                  </span>                
+                  <i class="fa fa-navicon" aria-hidden="true" id="kit-side-fold"></i>
+                </div>
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
+                {volist name="menus" id="data"}
+
+                    <li class="layui-nav-item {if condition="$data.is_open eq 1"}layui-nav-itemed{/if}">
+                        <a href="javascript:;"><i class="fa {$data.icon}" aria-hidden="true"></i><span> {$data.name}</span></a>
+                        <dl class="layui-nav-child">
+                        {notempty name="$data.list"}{volist name="$data.list" id="vo"}
+                            <dd>
+                                <a href="javascript:;" data-url="{$vo.url}" data-icon="{$vo.icon}" data-title="{$vo.name}" kit-target data-id='{$vo.id}'><i class="fa {$vo.icon}" aria-hidden="true"></i><span> {$vo.name}</span></a>
+                            </dd>
+                        {/volist}{/notempty}
+                        </dl>
+                    </li>
+                {/volist}
+                </ul>
+            </div>
+        </div>

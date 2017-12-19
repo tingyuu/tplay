@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body>
+<!-- <blockquote class="layui-elem-quote layui-quote-nm" style="margin:10px 20px;">注：支持无参数和有参数的操作分开设置权限，例如：给了某个角色"/module/controller/delete"的权限，未给"/module/controller/delete/id/1"的权限(需单独设置菜单)，那该角色就只能对id为1以外的数据进行删除操作。</blockquote> -->
+<fieldset class="layui-elem-field site-demo-button" style="margin-top: 10px;border:0"> 
+<div class="layui-btn-group demoTable">
+  <a href="{:url('admin/menu/publish')}" class="a_menu">
+    <button class="layui-btn layui-btn-sm"><i class="fa fa-edit"> </i>添加新菜单</button>
+  </a>
+</div>
+</fieldset>
+<table class="layui-table" lay-even="" lay-skin="row" lay-size="sm">
+  <colgroup>
+    <col width="50">
+    <col width="50">
+    <col width="250">
+    <col width="100">
+    <col width="100">
+    <col width="100">
+    <col width="300">
+    <col width="100">
+    <col width="100">
+    <col width="150">
+    <col width="150">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>排序</th>
+      <th>编号</th>
+      <th>名称</th>
+      <th>模块</th>
+      <th>控制器</th>
+      <th>方法</th>
+      <th>备注</th>
+      <th>类型</th>
+      <th>状态</th>
+      <th>创建时间</th>
+      <th>操作</th>
+    </tr> 
+  </thead>
+  <tbody>
+      <form class="layui-form" id="admin">
+    {volist name="menus" id="vo"}
+    <tr>
+      <td><input type="text" name="orders[]" value="{$vo.orders}" style="width: 20px;" class="orders"><input type="hidden" name="id[]" value="{$vo.id}"></td>
+      <td>{$vo.id}</td>
+      <td><span style="font-weight:500;">{$vo.str}</span>{$vo.name}</td>
+      <td>{$vo.module}</td>
+      <td>{$vo.controller}</td>
+      <td>{$vo.function}</td>
+      <td>{$vo.description}</td>
+      <td>{eq name="$vo.type" value="1"}权限节点{else /}普通节点{/eq}</td>
+      <td>{eq name="$vo.is_display" value="1"}显示在左侧菜单{else /}只做为操作节点{/eq}</td>
+      <td>{$vo.create_time}</td>
+      <td class="operation-menu">
+        <a href="{:url('admin/menu/publish',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu"><i class="layui-icon"></i></a>
+        <a href="{:url('admin/menu/publish',['pid'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu"><i class="layui-icon"></i></a>
+        <a href="javascript:;" class="layui-btn layui-btn-xs delete" id="{$vo.id}"><i class="layui-icon"></i></a>
+      </td>
+    </tr>
+    {/volist}
+  </tbody>
+</table>
+<button class="layui-btn layui-btn-sm" lay-submit lay-filter="admin">更新排序</button>
+  </form>
+        
+<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+<script src="__PUBLIC__/jquery/jquery.min.js"></script>
+<script>
+        var message;
+        layui.config({
+            base: '__JS__/',
+            version: '1.0.1'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+        });
+    </script> 
+<script type="text/javascript">
+$(function(){
+  var x = 10;
+  var y = 20;
+  $(".tooltip").mouseover(function(e){ 
+    var tooltip = "<div id='tooltip'><img src='"+ this.href +"' alt='产品预览图' height='200'/>"+"<\/div>"; //创建 div 元素
+    $("body").append(tooltip);  //把它追加到文档中             
+    $("#tooltip")
+      .css({
+        "top": (e.pageY+y) + "px",
+        "left":  (e.pageX+x)  + "px"
+      }).show("fast");    //设置x坐标和y坐标，并且显示
+    }).mouseout(function(){  
+    $("#tooltip").remove();  //移除 
+    }).mousemove(function(e){
+    $("#tooltip")
+      .css({
+        "top": (e.pageY+y) + "px",
+        "left":  (e.pageX+x)  + "px"
+      });
+  });
+})
+
+$('.delete').click(function(){
+  var id = $(this).attr('id');
+  layer.confirm('确定要删除?', function(index) {
+    $.ajax({
+      url:"{:url('admin/menu/delete')}",
+      data:{id:id},
+      success:function(res) {
+        layer.msg(res.msg);
+        if(res.code == 1) {
+          setTimeout(function(){
+            location.href = res.url;
+          },1500)
+        }
+      }
+    })
+  })
+})
+</script>
+<script type="text/javascript">
+$('.a_menu').click(function(){
+  var url = $(this).attr('href');
+  var id = $(this).attr('id');
+  var a = true;
+  if(id) {
+    $.ajax({
+      url:url
+      ,async:false
+      ,data:{id:id}
+      ,success:function(res){
+        if(res.code == 0) {
+          layer.msg(res.msg);
+          a = false;
+        }
+      }
+    })
+  } else {
+    $.ajax({
+      url:url
+      ,async:false
+      ,success:function(res){
+        if(res.code == 0) {
+          layer.msg(res.msg);
+          a = false;
+        }
+      }
+    })
+  }
+  return a;
+})
+</script>
+
+<script>
+  layui.use(['layer', 'form'], function() {
+      var layer = layui.layer,
+          $ = layui.jquery,
+          form = layui.form;
+      $(window).on('load', function() {
+          form.on('submit(admin)', function(data) {
+              $.ajax({
+                  url:"{:url('admin/menu/orders')}",
+                  data:$('#admin').serialize(),
+                  type:'post',
+                  async: false,
+                  success:function(res) {
+                      if(res.code == 1) {
+                          layer.alert(res.msg, function(index){
+                            location.href = res.url;
+                          })
+                      } else {
+                          layer.msg(res.msg);
+                      }
+                  }
+              })
+              return false;
+          });
+      });
+  });
+</script>
+</body>
+</html>
