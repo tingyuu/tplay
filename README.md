@@ -15,7 +15,12 @@ Tplay是一款基于ThinkPHP5.0.13 + layui2.2.45 + Mysql开发的后台管理框
 ~~~
 www  WEB部署目录（或者子目录）
 ├─application           应用目录
-│  ├─common             公共模块目录（可以更改）
+│  ├─admin              Tplay核心目录
+   │  ├─config.php      模块配置文件
+│  │  ├─common.php      模块函数文件
+│  │  ├─controller      控制器目录
+│  │  ├─model           模型目录
+│  │  ├─view            视图模板目录
 │  ├─module_name        模块目录
 │  │  ├─config.php      模块配置文件
 │  │  ├─common.php      模块函数文件
@@ -31,6 +36,9 @@ www  WEB部署目录（或者子目录）
 │  ├─tags.php           应用行为扩展定义文件
 │  └─database.php       数据库配置文件
 │
+├─static                css、js等资源目录
+│  ├─admin          	Tplay后台css、js文件
+│  ├─public         	公共css、js文件
 ├─public                WEB目录（对外访问目录）
 │  ├─index.php          入口文件
 │  ├─router.php         快速测试文件
@@ -60,9 +68,14 @@ www  WEB部署目录（或者子目录）
 ├─think                 命令行入口文件
 ~~~
 
-> router.php用于php自带webserver支持，可用于快速测试
-> 切换到public目录后，启动命令：php -S localhost:8888  router.php
-> 上面的目录结构和名称是可以改变的，这取决于你的入口文件和配置参数。
+## 安装使用
+
+Tplay的安装非常简单：
+					
+1.将你下载的程序包放在服务器环境的根目录下
+2.将根目录下的tlay.sql文件导入mysql数据库
+3.修改/application/database.php文件中的数据库配置信息
+4.浏览器访问：你的域名/public/admin
 
 
 ## 版权信息
