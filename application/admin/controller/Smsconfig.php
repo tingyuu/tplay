@@ -56,10 +56,10 @@ class Smsconfig extends User
 
     public function smsto()
     {
-    	//return $this->error('hehe');
+        //return $this->error('hehe');
         if($this->request->isPost()) {
-    		$post = $this->request->post();
-    		//验证  唯一规则： 表名，字段名，排除主键值，主键名
+            $post = $this->request->post();
+            //验证  唯一规则： 表名，字段名，排除主键值，主键名
             $validate = new \think\Validate([
                 ['phone', 'require|length:11,11|number', '手机号码不能为空|手机号码格式不正确|手机号码格式不正确'],
             ]);
@@ -68,27 +68,21 @@ class Smsconfig extends User
                 $this->error('提交失败：' . $validate->getError());
             }
 
-            $data = Db::name('smsconfig')->where('sms','sms')->find();
-            $appkey = $data['appkey'];
-            $secretkey = $data['secretkey'];
-            $type = $data['type'];
-            $name = $data['name'];
-            $code = $data['code'];
             $phone = (string)$post['phone'];
 
             $param = '{"name":"Tplay用户"}';
 
-            $smsto = SendSms($appkey,$secretkey,$type,$name,$param,$phone,$code);
+            $smsto = SendSms($param,$phone);
             
             if(!empty($smsto)) {
-            	return $this->error('发送失败');
+                return $this->error('发送失败');
             } else {
                 $phone = hide_phone($phone);
-            	addlog($phone);//写入日志
-            	return $this->success('短信发送成功');
+                addlog($phone);//写入日志
+                return $this->success('短信发送成功');
             }
-    	} else {
-    		return $this->fetch();
-    	}
+        } else {
+            return $this->fetch();
+        }
     }
 }

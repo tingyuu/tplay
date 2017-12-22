@@ -130,9 +130,81 @@ body .demo-class .layui-layer-btn{
         </div>
         <br>
 
-        
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div style="width:100%;height:300px;">
+        <div id="main" style="width:45%;height:300px;float: left;"></div>
+        <div id="mains" style="width:45%;height:300px;float: left;"></div>
+        </div>
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+            var myCharts = echarts.init(document.getElementById('mains'));
+
+            // 指定图表的配置项和数据
+            var option = {
+                color: ['#00c0ef'],
+                title: {
+                    text: '访问量图表'
+                },
+
+                itemStyle: {
+                    color: '#009688'
+                },
+                tooltip: {},
+                legend: {
+                    data:['访问量']
+                },
+
+                xAxis: {
+                    data: ["12-04","12-05","12-06","12-07","12-08","12-09"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '访问量',
+                    type: 'bar',
+                    data: [5, 20, 36, 10, 10, 20]
+                }]
+            };
+
+            var options = {
+                color: ['#dd4b39'],
+                title: {
+                    text: '下载量图表'
+                },
+
+                itemStyle: {
+                    color: '#009688'
+                },
+                tooltip: {},
+                legend: {
+                    data:['下载量']
+                },
+
+                xAxis: {
+                    data: ["12-04","12-05","12-06","12-07","12-08","12-09"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '下载量',
+                    type: 'line',
+                    data: [5, 20, 36, 10, 10, 20]
+                }]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+            myCharts.setOption(options);
+        </script>
+
+        <div class="layui-tab" style="width:45%;float: left;">
+          <ul class="layui-tab-title">
+            <li class="layui-this">说明文档</li>
+            <li>更新日志</li>
+            <li>开发信息</li>
+            <li>系统信息</li>
+          </ul>
           <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
+            <div class="layui-tab-item layui-show" style="max-height: 230px;overflow: scroll;overflow-x:hidden">
               <ul class="layui-timeline">
                     <li class="layui-timeline-item">
                         <i class="layui-icon layui-timeline-axis"></i>
@@ -145,9 +217,9 @@ body .demo-class .layui-layer-btn{
                                 <li>点击加群，如果实在加不了还有群号啊[221470096]
                                 </li>
                                 <li>下载地址：
-                                    <a href="https://github.com/tingyuu/tplay" target="_blank">记得给个Star哦 </a>(如果有问题可以在qq群问.)
+                                    <a href="javascript:;" target="_blank">敬请期待</a>(可以先加群，待功能完善就免费开源啊.)
                                 </li>
-                                <li>目前也只是做了适配性较强的一些功能模块，后续会不断增加新功能模块(⊙o⊙)…</li>
+                                <li>控制面板上的图表什么的都还只是个演示，没想好放什么数据(⊙o⊙)…</li>
                             </ul>
                         </div>
                     </li>
@@ -156,9 +228,10 @@ body .demo-class .layui-layer-btn{
                         <div class="layui-timeline-content layui-text">
                             <h3 class="layui-timeline-title">开发基于</h3>
                                 <ul>
-                                    <li>Tplay是一款基于ThinkPHP{$info.tp} + layui2.2.45 + Mysql开发的后台管理框架，集成了一般应用所必须的基础性功能，为开发者节省大量的时间。</li>
+                                    <li>Tplay是一款基于ThinkPHP{$info.tp} + layui2.2.45 + ECharts + Mysql开发的后台管理框架，集成了一般应用所必须的基础性功能，为开发者节省大量的时间。</li>
                                     <li>ThinkPHP版本：{$info.tp} <a href="https://www.kancloud.cn/manual/thinkphp5/118003" target="_blank">查看开发文档</a></li>
                                     <li>Layui版本：2.2.45 <a href="http://www.layui.com/doc/" target="_blank">查看开发文档</a></li>
+                                    <li>ECharts版本：1.0 <a href="http://echarts.baidu.com/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts" target="_blank">查看开发文档</a></li>
                                 </ul>
                         </div>
                     </li>
@@ -180,6 +253,103 @@ body .demo-class .layui-layer-btn{
                     </li>
                 </ul>
             </div>
+            <div class="layui-tab-item" style="max-height: 250px;overflow: scroll;overflow-x:hidden">
+                更新日志
+            </div>
+            <div class="layui-tab-item" style="max-height: 250px;overflow: scroll;overflow-x:hidden">开发信息</div>
+            <div class="layui-tab-item" style="max-height: 250px;overflow: scroll;overflow-x:hidden">系统信息</div>
+          </div>
+        </div>
+
+        <div id="biaopan" style="width:45%;height:300px;float: left;"></div>
+
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('biaopan'));
+            var option = {
+                title : {
+                    text: '访客属性玫瑰图',
+                    subtext: '纯属虚构',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    x : 'center',
+                    y : 'bottom',
+                    data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {
+                            show: true,
+                            type: ['pie', 'funnel']
+                        },
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                series : [
+                    {
+                        name:'访客地域占比',
+                        type:'pie',
+                        radius : [20, 110],
+                        center : ['25%', '50%'],
+                        roseType : 'radius',
+                        label: {
+                            normal: {
+                                show: true
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        lableLine: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        data:[
+                            {value:10, name:'北京'},
+                            {value:5, name:'上海'},
+                            {value:15, name:'深圳'},
+                            {value:25, name:'广州'},
+                            {value:20, name:'郑州'},
+                            {value:35, name:'开封'},
+                            {value:30, name:'南京'},
+                            {value:40, name:'新乡'}
+                        ]
+                    },
+                    {
+                        name:'访客年龄段',
+                        type:'pie',
+                        radius : [30, 110],
+                        center : ['75%', '50%'],
+                        roseType : 'radius',
+                        data:[
+                            {value:10, name:'15-20'},
+                            {value:5, name:'21-25'},
+                            {value:15, name:'26-30'},
+                            {value:25, name:'31-35'},
+                            {value:20, name:'35-40'},
+                            {value:35, name:'40以上'}
+                        ]
+                    }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        </script>
 
     <script src="__PUBLIC__/layui/layui.js"></script>
     <script src="__PUBLIC__/jquery/jquery.min.js"></script>
@@ -227,7 +397,7 @@ body .demo-class .layui-layer-btn{
     });
     </script>
 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
   layui.use('layer', function(){
     var layer = layui.layer;
     $(document).ready(function(){
@@ -261,6 +431,6 @@ body .demo-class .layui-layer-btn{
       })
     });
   });              
-</script> -->
+</script>
 </body>
 </html>

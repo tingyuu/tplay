@@ -46,14 +46,15 @@ class Common extends Controller
             $res['msg']='没有上传文件';
             return json($res);
         }
+        $module = $this->request->has('module') ? $this->request->param('module') : $module;//模块
         $web_config = Db::name('webconfig')->where('web','web')->find();
-        $info = $file->validate(['size'=>$web_config['file_size']*1024,'ext'=>$web_config['file_type']])->rule('date')->move(ROOT_PATH . 'uploads');
+        $info = $file->validate(['size'=>$web_config['file_size']*1024,'ext'=>$web_config['file_type']])->rule('date')->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . $module . DS . $use);
         if($info) {
-        	//写入到附件表
+            //写入到附件表
             $data = [];
-            $data['module'] = $this->request->has('module') ? $this->request->param('module') : $module;//模块
+            $data['module'] = $module;
             $data['filename'] = $info->getFilename();//文件名
-            $data['filepath'] = '/uploads/' . $info->getSaveName();//文件路径
+            $data['filepath'] = '/public' . DS . 'uploads' . DS . $module . DS . $use . DS . $info->getSaveName();//文件路径
             $data['fileext'] = $info->getExtension();//文件后缀
             $data['filesize'] = $info->getSize();//文件大小
             $data['create_time'] = time();//时间
@@ -67,10 +68,10 @@ class Common extends Controller
             }
             $data['use'] = $this->request->has('use') ? $this->request->param('use') : $use;//用处
             $res['id'] = Db::name('attachment')->insertGetId($data);
-        	$res['src'] = '/uploads/' . $info->getSaveName();
-        	$res['code'] = 2;
-            addlog($res['id']);//记录日志
-        	return json($res);
+            $res['src'] = '/public' . DS . 'uploads' . DS . $module . DS . $use . DS . $info->getSaveName();
+            $res['code'] = 2;
+            //addlog($res['id']);//记录日志
+            return json($res);
         } else {
             // 上传失败获取错误信息
             return $this->error('上传失败：'.$file->getError());
@@ -135,7 +136,7 @@ class Common extends Controller
         if(!empty(Cookie::get('admin'))) {
             return $this->error('退出失败');
         } else {
-            return $this->success('感谢你的支持,再会...','admin/common/login');
+            return $this->success('正在退出...','admin/common/login');
         }
     }
 }

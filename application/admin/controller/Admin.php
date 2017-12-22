@@ -209,7 +209,7 @@ class Admin extends User
     		if($id == 1) {
     			return $this->error('网站所有者不能被删除');
     		}
-    		if($id == Cookie::get('admin')['id']) {
+    		if($id == Cookie::get('admin')) {
     			return $this->error('自己不能删除自己');
     		}
     		if(false == Db::name('admin')->where('id',$id)->delete()) {

@@ -70,16 +70,7 @@ class Emailconfig extends User
             }
 
             $address = $post['email'];
-            $data = Db::name('emailconfig')->where('email','email')->find();
-            $title = $data['title'];
-            $message = $data['content'];
-            $from = $data['from_email'];
-            $fromname = $data['from_name'];
-            $smtp = $data['smtp'];
-            $username = $data['username'];
-            $password = $data['password'];
-
-            $mailto = SendMail($address,$title,$message,$from,$fromname,$smtp,$username,$password);
+            $mailto = SendMail($address);
             if(false == $mailto) {
             	return $this->error('发送失败');
             } else {

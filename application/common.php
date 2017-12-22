@@ -46,7 +46,7 @@ function geturl($id)
  * @param [type] $username [description]
  * @param [type] $password [description]
  */
-function SendMail($address,$title,$message,$from,$fromname,$smtp,$username,$password)
+function SendMail($address)
 {
     vendor('phpmailer.PHPMailerAutoload');
     //vendor('PHPMailer.class#PHPMailer');
@@ -56,7 +56,16 @@ function SendMail($address,$title,$message,$from,$fromname,$smtp,$username,$pass
     // 设置邮件的字符编码，若不指定，则为'UTF-8'
     $mail->CharSet='UTF-8';         
     // 添加收件人地址，可以多次使用来添加多个收件人
-    $mail->AddAddress($address);    
+    $mail->AddAddress($address); 
+
+    $data = \think\Db::name('emailconfig')->where('email','email')->find();
+            $title = $data['title'];
+            $message = $data['content'];
+            $from = $data['from_email'];
+            $fromname = $data['from_name'];
+            $smtp = $data['smtp'];
+            $username = $data['username'];
+            $password = $data['password'];   
     // 设置邮件正文
     $mail->Body=$message;           
     // 设置邮件头的From字段。
@@ -90,7 +99,7 @@ function SendMail($address,$title,$message,$from,$fromname,$smtp,$username,$pass
  * @param [type] $code      [description]
  * @param [type] $data      [description]
  */
-function SendSms($appkey,$secretkey,$type,$name,$param,$phone,$code)
+function SendSms($param,$phone)
 {
     // 配置信息
     import('dayu.top.TopClient');
@@ -98,6 +107,14 @@ function SendSms($appkey,$secretkey,$type,$name,$param,$phone,$code)
     import('dayu.top.request.AlibabaAliqinFcSmsNumSendRequest');
     import('dayu.top.ResultSet');
     import('dayu.top.RequestCheckUtil');
+
+    //获取短信配置
+    $data = \think\Db::name('smsconfig')->where('sms','sms')->find();
+            $appkey = $data['appkey'];
+            $secretkey = $data['secretkey'];
+            $type = $data['type'];
+            $name = $data['name'];
+            $code = $data['code'];
     
     $c = new \TopClient();
     $c ->appkey = $appkey;
