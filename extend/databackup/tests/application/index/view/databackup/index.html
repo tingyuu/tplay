@@ -1,0 +1,131 @@
+<link rel="stylesheet" type="text/css" href="/layui/css/layui.css" media="all">
+<script type="text/javascript" src="/layui/layui.js"></script>
+
+<script>
+    layui.use(['jquery','layer'],function(){
+      window.$ = layui.$;
+      var layer = layui.layer;
+      //备份表方法
+      $("#export").click(function(){
+          $(this).html("正在发送备份请求...");
+          $.post(
+            $("#export-form").attr("action"),
+            $("#export-form").serialize(), 
+            function(data){
+               
+              if(data.code==1){
+                $("#export").html( "开始备份，请不要关闭本页面！");
+                backup(data.data.tab);
+                window.onbeforeunload = function(){ return "正在备份数据库，请不要关闭！" }
+              }else{
+                 layer.tips(data.msg, "#export", {
+                  tips: [1, '#3595CC'],
+                  time: 4000
+                });
+                $("#export").html("立即备份");
+              }
+              
+            }, "json");
+            return false;  
+      }); 
+      //递归备份表
+      function backup(tab,status){
+        status && showmsg(tab.id, "开始备份...(0%)");
+        $.get( $("#export-form").attr("action"), tab, function(data){
+          // console.log(data)
+                if(data.code==1){
+                  showmsg(tab, data.msg);
+
+                  if(!$.isPlainObject(data.data.tab)){
+                    $("#export").html("备份完成");
+                    window.onbeforeunload = function(){ return null }
+                    return;
+                  } 
+
+                  backup(data.data.tab, tab.id != data.data.tab.id);
+                } else {
+                  $("#export").html("立即备份");
+                }
+            }, "json");
+
+      }
+    //修改备份状态
+    function showmsg(tab, msg){
+       $("table tbody tr").eq(tab.id).find(".info").html(msg)
+    }
+   
+     //优化表
+      $("#optimize").click(function(){
+           $.post(this.href, $("#export-form").serialize(), function(data){
+           
+            layer.tips(data.msg, "#optimize", {
+              tips: [1, '#3595CC'],
+              time: 4000
+            });
+    
+            }, "json");
+            return false;    
+      });
+
+      //修复表
+      $("#repair").on("click",function(e){
+         
+          $.post(this.href, $("#export-form").serialize(), function(data){
+            layer.tips(data.msg, "#repair", {
+              tips: [1, '#3595CC'],
+              time: 4000
+            });
+            }, "json");
+            return false; 
+      });
+    });
+
+  </script>
+
+<div class="layui-form">
+    <a id="export" class="layui-btn" href="javascript:;" autocomplete="off">立即备份</a>
+
+    <a id="optimize" href="{:url('index/optimize')}" class="layui-btn ">优化表</a>
+    <a id="repair" href="{:url('index/repair')}" class="layui-btn">修复表</a>
+    <a  href="{:url('index/importlist')}" class="layui-btn">还原数据库</a>
+    <form id="export-form" method="post" action="{:url('index/export')}">
+    <table class="layui-table">
+
+
+      <thead>
+        <tr>
+            <th width="48"><input class="check-all" checked="chedked" type="checkbox" value=""></th>
+          <th>表名</th>
+          <th>数据量</th>
+          <th>数据大小</th>
+          <th>创建时间</th>
+          <th>备份状态</th>
+          <th>操作</th>
+        </tr> 
+      </thead>
+    
+
+
+  <tbody>
+    {foreach name='list' item='table'}   
+       <tr>
+          <td>
+              <input class="ids" checked="chedked" type="checkbox" name="tables[]" value="{$table.name}">
+          </td>
+          <td>{$table.name}</td>
+          <td>{$table.rows}</td>
+          <td>{$table.data_length|format_bytes}</td>
+          <td>{$table.create_time}</td>
+          <td class="info">未备份</td>
+          <td>
+              <a  href="{:url('index/optimize',['tables'=>$table['name']])}">优化表</a>&nbsp;
+              <a  href="{:url('index/repair',['tables'=>$table['name']])}">修复表</a>
+          </td>
+        </tr>
+    {/foreach}
+      </tbody>
+
+
+    </table>
+  </form>
+  </div>
