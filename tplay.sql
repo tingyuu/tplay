@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-12-22 15:01:48
+Date: 2017-12-22 15:46:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,12 +31,12 @@ CREATE TABLE `tplay_admin` (
   `login_ip` varchar(100) DEFAULT NULL COMMENT '最后登录ip',
   `admin_cate_id` int(2) NOT NULL DEFAULT '1' COMMENT '管理员分组',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tplay_admin
 -- ----------------------------
-INSERT INTO `tplay_admin` VALUES ('1', 'Tplay', 'admin', '44f38ed640c35dd713cf5bce182a39ec', '1', '1510885948', '1513926085', '1513925240', '127.0.0.1', '1');
+INSERT INTO `tplay_admin` VALUES ('1', 'Tplay', 'admin', '31c64b511d1e90fcda8519941c1bd660', '1', '1510885948', '1513926085', '1513925240', '127.0.0.1', '1');
 
 -- ----------------------------
 -- Table structure for `tplay_admin_cate`

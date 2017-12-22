@@ -75,7 +75,7 @@ Tplay的安装非常简单：
 1.将你下载的程序包放在服务器环境的根目录下
 2.将根目录下的tlay.sql文件导入mysql数据库
 3.修改/application/database.php文件中的数据库配置信息
-4.浏览器访问：你的域名/public/admin
+4.浏览器访问：你的域名/public/admin   默认管理员账户：tplay 密码：tplay
 
 
 ## 版权信息
