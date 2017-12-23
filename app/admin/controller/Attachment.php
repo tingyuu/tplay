@@ -54,8 +54,8 @@ class Attachment extends User
     	if($this->request->isAjax()) {
     		$id = $this->request->has('id') ? $this->request->param('id', 0, 'intval') : 0;
     		$attachment = Db::name('attachment')->where('id',$id)->value('filepath');
-            if(file_exists($attachment)) {
-                if(unlink(ROOT_PATH . $attachment)) {
+            if(file_exists(ROOT_PATH . 'public' . $attachment)) {
+                if(unlink(ROOT_PATH . 'public' . $attachment)) {
                     if(false == Db::name('attachment')->where('id',$id)->delete()) {
                         return $this->error('删除失败');
                     } else {
