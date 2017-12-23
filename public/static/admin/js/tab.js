@@ -20,7 +20,7 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
     var Tab = function() {
         this.config = {
             elem: undefined,
-            mainUrl: "/public/admin/main/index",
+            mainUrl: "/admin/main/index",
             renderType: 'iframe',
             openWait: false
         };

@@ -54,7 +54,7 @@ class Common extends Controller
             $data = [];
             $data['module'] = $module;
             $data['filename'] = $info->getFilename();//文件名
-            $data['filepath'] = '/public' . DS . 'uploads' . DS . $module . DS . $use . DS . $info->getSaveName();//文件路径
+            $data['filepath'] = DS . 'uploads' . DS . $module . DS . $use . DS . $info->getSaveName();//文件路径
             $data['fileext'] = $info->getExtension();//文件后缀
             $data['filesize'] = $info->getSize();//文件大小
             $data['create_time'] = time();//时间
@@ -68,9 +68,9 @@ class Common extends Controller
             }
             $data['use'] = $this->request->has('use') ? $this->request->param('use') : $use;//用处
             $res['id'] = Db::name('attachment')->insertGetId($data);
-            $res['src'] = '/public' . DS . 'uploads' . DS . $module . DS . $use . DS . $info->getSaveName();
+            $res['src'] = DS . 'uploads' . DS . $module . DS . $use . DS . $info->getSaveName();
             $res['code'] = 2;
-            //addlog($res['id']);//记录日志
+            addlog($res['id']);//记录日志
             return json($res);
         } else {
             // 上传失败获取错误信息

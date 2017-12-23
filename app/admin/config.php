@@ -13,8 +13,8 @@
 //配置文件
 return [
 	'view_replace_str' => [
-		'__CSS__'      => '/public/static/admin/css',
-		'__PUBLIC__'   => '/public/static/public',
-		'__JS__'       => '/public/static/admin/js'
+		'__CSS__'      => '/static/admin/css',
+		'__PUBLIC__'   => '/static/public',
+		'__JS__'       => '/static/admin/js'
 	],
 ];
