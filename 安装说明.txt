@@ -14,4 +14,27 @@ Tplay的安装非常简单：
 
 6.如果你用到了短信配置，请前往阿里大鱼官网申请下载自己的apk文件，替换/extend/dayu下的文件，在后台配置自己的appkey即可
 
-如遇问题可在QQ群221470096交流。
+## 常见问题
+
+路径出现问题：
+
+1.检查自己的域名是不是指向了根目录下的public目录
+
+2.如果你用的环境工具是wamp，请修改/public/.htaccess文件
+
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks -Multiviews
+  RewriteEngine On
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L]
+</IfModule>
+
+## 注意事项
+
+1.菜单数据表tplay_admin_menu分别关联着管理员权限和日志表，最好不要删除系统自带的菜单，否则会造成日志记录出问题，如非要删除，可找到操作方法删掉addlog()代码。
+
+2.系统自带的‘超级管理员’角色默认拥有所有操作权限，包括你新拓展的，因为系统默认跳过id为1的管理员角色组，如有需求可修改User控制器里的代码。
+
+3.为管理员角色分组分配权限时，系统默认会把普通节点勾选，但不会存入数据表，避免之后修改节点时造成权限错乱，系统会默认跳过普通节点不验证权限。

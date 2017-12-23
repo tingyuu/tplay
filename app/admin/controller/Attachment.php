@@ -109,13 +109,13 @@ class Attachment extends User
             return json($res);
         }
         $web_config = Db::name('webconfig')->where('web','web')->find();
-        $info = $file->validate(['size'=>$web_config['file_size']*1024,'ext'=>$web_config['file_type']])->rule('date')->move(ROOT_PATH . 'uploads');
+        $info = $file->validate(['size'=>$web_config['file_size']*1024,'ext'=>$web_config['file_type']])->rule('date')->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . $module . DS . $use);
         if($info) {
             //写入到附件表
             $data = [];
             $data['module'] = $this->request->has('module') ? $this->request->param('module') : $module;//模块
             $data['filename'] = $info->getFilename();//文件名
-            $data['filepath'] = '/uploads/' . $info->getSaveName();//文件路径
+            $data['filepath'] = DS . 'uploads' . DS . $module . DS . $use . DS . $info->getSaveName();//文件路径
             $data['fileext'] = $info->getExtension();//文件后缀
             $data['filesize'] = $info->getSize();//文件大小
             $data['create_time'] = time();//时间

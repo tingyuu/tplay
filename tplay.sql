@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-12-22 15:46:40
+Date: 2017-12-23 14:45:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,7 +36,7 @@ CREATE TABLE `tplay_admin` (
 -- ----------------------------
 -- Records of tplay_admin
 -- ----------------------------
-INSERT INTO `tplay_admin` VALUES ('1', 'Tplay', 'admin', '31c64b511d1e90fcda8519941c1bd660', '1', '1510885948', '1513926085', '1513925240', '127.0.0.1', '1');
+INSERT INTO `tplay_admin` VALUES ('1', 'Tplay', 'admin', '31c64b511d1e90fcda8519941c1bd660', '1', '1510885948', '1514011509', '1514008455', '127.0.0.1', '1');
 
 -- ----------------------------
 -- Table structure for `tplay_admin_cate`
@@ -224,7 +224,7 @@ CREATE TABLE `tplay_attachment` (
 -- ----------------------------
 -- Records of tplay_attachment
 -- ----------------------------
-INSERT INTO `tplay_attachment` VALUES ('1', 'admin', '95a30be1d1ec9d1397843e245bb240f6.jpg', '/public\\uploads\\admin\\admin_thumb\\20171222\\95a30be1d1ec9d1397843e245bb240f6.jpg', '13781', 'jpg', '1', '127.0.0.1', '1', '1513926084', '1', '1513926084', 'admin_thumb', '0');
+INSERT INTO `tplay_attachment` VALUES ('1', 'admin', '856fedb321ed602111ebdd50d30f83e8.jpeg', '\\uploads\\admin\\admin_thumb\\20171223\\856fedb321ed602111ebdd50d30f83e8.jpeg', '18140', 'jpeg', '1', '127.0.0.1', '1', '1514011508', '1', '1514011508', 'admin_thumb', '0');
 
 -- ----------------------------
 -- Table structure for `tplay_emailconfig`
@@ -322,4 +322,4 @@ CREATE TABLE `tplay_webconfig` (
 -- ----------------------------
 -- Records of tplay_webconfig
 -- ----------------------------
-INSERT INTO `tplay_webconfig` VALUES ('web', 'Tplay后台管理框架', 'Tplay,后台管理,thinkphp5,layui', 'Tplay是一款基于ThinkPHP5.0.12 + layui2.2.45 + ECharts + Mysql开发的后台管理框架，集成了一般应用所必须的基础性功能，为开发者节省大量的时间。', '1', 'jpg,png,gif,mp4,zip', '500', '', '', null);
+INSERT INTO `tplay_webconfig` VALUES ('web', 'Tplay后台管理框架', 'Tplay,后台管理,thinkphp5,layui', 'Tplay是一款基于ThinkPHP5.0.12 + layui2.2.45 + ECharts + Mysql开发的后台管理框架，集成了一般应用所必须的基础性功能，为开发者节省大量的时间。', '1', 'jpg,png,gif,mp4,zip,jpeg', '500', '', '', null);
