@@ -4,7 +4,7 @@ Tplay 1.0
 
 Tplay是一款基于ThinkPHP5.0.13 + layui2.2.45 + Mysql开发的后台管理框架，PHP版本要求提升到5.5。Tplay集成了一般应用所必须的基础性功能，为开发者减少重复性的工作，提升开发速度，规范团队开发模式。
 
-> Tplay的运行环境要求PHP5.5以上。
+> Tplay的运行环境要求PHP >= 5.5，其余要求参考thinkPHP5的配置要求。
 
 二次开发请参考 [ThinkPHP5完全开发手册](http://www.kancloud.cn/manual/thinkphp5)
 
