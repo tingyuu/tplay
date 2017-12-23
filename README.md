@@ -29,9 +29,6 @@ www  WEB部署目录（或者子目录）
 │  ├─tags.php           应用行为扩展定义文件
 │  └─database.php       数据库配置文件
 │
-├─static                css、js等资源目录
-│  ├─admin          	Tplay后台css、js文件
-│  ├─public         	公共css、js文件
 ├─public                WEB目录（对外访问目录）
 │  ├─static          	css、js等资源目录
 │  │   ├─admin          	Tplay后台css、js文件
