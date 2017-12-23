@@ -14,20 +14,13 @@ Tplay是一款基于ThinkPHP5.0.13 + layui2.2.45 + Mysql开发的后台管理框
 
 ~~~
 www  WEB部署目录（或者子目录）
-├─application           应用目录
+├─app           		应用目录
 │  ├─admin              Tplay核心目录
-   │  ├─config.php      模块配置文件
-│  │  ├─common.php      模块函数文件
-│  │  ├─controller      控制器目录
-│  │  ├─model           模型目录
-│  │  ├─view            视图模板目录
-│  ├─module_name        模块目录
 │  │  ├─config.php      模块配置文件
 │  │  ├─common.php      模块函数文件
 │  │  ├─controller      控制器目录
 │  │  ├─model           模型目录
-│  │  ├─view            视图目录
-│  │  └─ ...            更多类库目录
+│  │  ├─view            视图模板目录
 │  │
 │  ├─command.php        命令行工具配置文件
 │  ├─common.php         公共函数文件
@@ -40,6 +33,9 @@ www  WEB部署目录（或者子目录）
 │  ├─admin          	Tplay后台css、js文件
 │  ├─public         	公共css、js文件
 ├─public                WEB目录（对外访问目录）
+│  ├─static          	css、js等资源目录
+│  │   ├─admin          	Tplay后台css、js文件
+│  │   ├─public         	公共css、js文件
 │  ├─index.php          入口文件
 │  ├─router.php         快速测试文件
 │  └─.htaccess          用于apache的重写
@@ -66,6 +62,7 @@ www  WEB部署目录（或者子目录）
 ├─LICENSE.txt           授权说明文件
 ├─README.md             README 文件
 ├─think                 命令行入口文件
+├─tplay.sql             Tplay框架sql文件
 ~~~
 
 ## 安装使用
@@ -76,7 +73,7 @@ Tplay的安装非常简单：
 
 2.将根目录下的tlay.sql文件导入mysql数据库
 
-3.修改/application/database.php文件中的数据库配置信息
+3.修改/app/database.php文件中的数据库配置信息
 
 4.浏览器访问：你的域名/public/admin   默认管理员账户：admin 密码：tplay
 
