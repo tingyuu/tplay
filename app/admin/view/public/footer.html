@@ -1,0 +1,102 @@
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            2017 &copy;
+            <a href="javascript:;">Tplay后台基础框架</a> tplay.pengyichen.cn
+        </div>
+    </div>
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <script>
+        var message;
+        layui.config({
+            base: '__JS__/',
+            version: '1.0.1'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+            
+            $('dl.skin > dd').on('click', function() {
+                var $that = $(this);
+                var skin = $that.children('a').data('skin');
+                switchSkin(skin);
+            });
+            var setSkin = function(value) {
+                    layui.data('kit_skin', {
+                        key: 'skin',
+                        value: value
+                    });
+                },
+                getSkinName = function() {
+                    return layui.data('kit_skin').skin;
+                },
+                switchSkin = function(value) {
+                    var _target = $('link[kit-skin]')[0];
+                    _target.href = _target.href.substring(0, _target.href.lastIndexOf('/') + 1) + value + _target.href.substring(_target.href.lastIndexOf('.'));
+                    setSkin(value);
+                },
+                initSkin = function() {
+                    var skin = getSkinName();
+                    switchSkin(skin === undefined ? 'default' : skin);
+                }();
+        });
+    </script>
+    <script src="__PUBLIC__/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+        layui.use('jquery', function() {
+            var $ = layui.jquery;
+            $('#clear').on('click', function() {
+                $(this).attr("class","fa fa-spinner");
+                $.ajax({
+                  url:"{:url('common/clear')}"
+                  ,success:function(res) {
+                    if(res.code == 1) {
+                        setTimeout(function(){
+                            parent.message.show({
+                                skin: 'cyan',
+                                msg:res.msg
+                            });
+                            $('#clear').attr("class","fa fa-trash");
+                        },1000)
+                    }
+                  }
+                })
+            });
+        });
+      // $('#clear').click(function() {
+      //   $.ajax({
+      //     url:"{:url('common/clear')}"
+      //     ,success:function(res) {
+      //       layer.msg(res.msg,{offset: '250px',anim: 1});
+      //     }
+      //   })
+      // })
+
+      $('#home').click(function(){
+        location.href = "{:url('admin/index/index')}";
+      })
+
+      $('#logout').click(function(){
+        layer.confirm('真的要退出?',{icon: 3, title:'提示',anim: 2}, function(index){
+            $.ajax({
+              url:"{:url('admin/common/logout')}"
+              ,success:function(res) {
+                layer.msg(res.msg,{offset: '250px',anim: 4});
+                if(res.code == 1) {
+                    setTimeout(function(){
+                        location.href = res.url;
+                    },2000)
+                }
+              }
+            })
+        }) 
+      })
+    </script>
+</body>
+</html>
