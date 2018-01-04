@@ -253,7 +253,7 @@ body .demo-class .layui-layer-btn{
                 ,success:function(res) {
                     layer.msg(res.msg);
                     if(res.code == 1) {
-                        $('#remember textarea').html('');
+                        $('#remember textarea').val('');
                     }
                 }
             })
