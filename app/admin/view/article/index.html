@@ -41,6 +41,8 @@
     <col width="150">
     <col width="100">
     <col width="150">
+    <col width="50">
+    <col width="50">
     <col width="100">
   </colgroup>
   <thead>
@@ -53,6 +55,8 @@
       <th>创建时间</th>
       <th>最后修改人</th>
       <th>最后修改时间</th>
+      <th>置顶</th>
+      <th>审核</th>
       <th>操作</th>
     </tr> 
   </thead>
@@ -67,9 +71,11 @@
       <td>{$vo.create_time}</td>
       <td>{$vo.edit_admin}</td>
       <td>{$vo.update_time}</td>
+      <td><a href="javascript:;" style="font-size:18px;" class="is_top" data-id="{$vo.id}" data-val="{$vo.is_top}">{eq name="vo.is_top" value="1"}<i class="fa fa-toggle-on"></i>{else /}<i class="fa fa-toggle-off"></i>{/eq}</a></td>
+      <td><a href="javascript:;" style="font-size:18px;" class="status" data-id="{$vo.id}" data-val="{$vo.status}">{eq name="vo.status" value="1"}<i class="fa fa-toggle-on"></i>{else /}<i class="fa fa-toggle-off"></i>{/eq}</a></td>
       <td class="operation-menu">
-        <a href="{:url('admin/article/publish',['id'=>$vo.id])}" class="a_menu"><button class="layui-btn layui-btn-xs" ><i class="layui-icon"></i></button></a>
-        <a href="javascript:;"><button class="layui-btn layui-btn-xs delete" id="{$vo.id}"><i class="layui-icon"></i></button></a>
+        <a href="{:url('admin/article/publish',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu" style="margin-right: 0;font-size:12px;">修改</a>
+        <a href="javascript:;" class="layui-btn layui-btn-xs layui-btn-danger delete" id="{$vo.id}" style="margin-right: 0;font-size:12px;">删除</a>
       </td>
     </tr>
     {/volist}
@@ -166,6 +172,77 @@ $('.a_menu').click(function(){
     })
   }
   return a;
+})
+
+$('.is_top').click(function(){
+  var val = $(this).attr('data-val');
+  var id = $(this).attr('data-id');
+  var i = $(this).find('i');
+  var the = $(this);
+  if(val == 1){
+    var is_top = 0;
+  } else {
+    var is_top = 1;
+  }
+  $.ajax({
+    type:"post",
+    url:"{:url('admin/article/is_top')}",
+    data:{is_top:is_top,id:id},
+    success:function(res){
+      
+      if(res.code == 1) {
+        top();
+      } else {
+        layer.msg(res.msg);
+      }
+    }
+  })
+
+  function top(){
+    if(val == 1){
+      i.attr("class","fa fa-toggle-off");
+      the.attr('data-val',0);
+    } else {
+      i.attr("class","fa fa-toggle-on");
+      $the.attr('data-val',1);
+    }
+  }
+})
+
+
+$('.status').click(function(){
+  var val = $(this).attr('data-val');
+  var id = $(this).attr('data-id');
+  var i = $(this).find('i');
+  var the = $(this);
+  if(val == 1){
+    var status = 0;
+  } else {
+    var status = 1;
+  }
+  $.ajax({
+    type:"post",
+    url:"{:url('admin/article/status')}",
+    data:{status:status,id:id},
+    success:function(res){
+      
+      if(res.code == 1) {
+        tostatus();
+      } else {
+        layer.msg(res.msg);
+      }
+    }
+  })
+
+  function tostatus(){
+    if(val == 1){
+      i.attr("class","fa fa-toggle-off");
+      the.attr('data-val',0);
+    } else {
+      i.attr("class","fa fa-toggle-on");
+      $the.attr('data-val',1);
+    }
+  }
 })
 </script>
 </body>

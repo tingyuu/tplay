@@ -36,14 +36,14 @@
 
   <div class="layui-form-item">
     <label class="layui-form-label">标签</label>
-    <div class="layui-input-block" style="max-width:600px;">
+    <div class="layui-input-block" style="max-width:500px;">
       <input name="tag" autocomplete="off" placeholder="标签之间用,隔开" class="layui-input" type="text" {notempty name="$cate.tag"}value="{$cate.tag}"{/notempty}>
     </div>
   </div>
 
   <div class="layui-form-item layui-form-text">
     <label class="layui-form-label">备注</label>
-    <div class="layui-input-block" style="max-width:600px;">
+    <div class="layui-input-block" style="max-width:500px;">
       <textarea placeholder="请输入内容" class="layui-textarea" name="description">{notempty name="$cate.description"}{$cate.description}{/notempty}</textarea>
     </div>
   </div>
@@ -93,12 +93,12 @@
                   type:'post',
                   async: false,
                   success:function(res) {
+                      layer.msg(res.msg);
                       if(res.code == 1) {
-                          layer.alert(res.msg, function(index){
-                            location.href = res.url;
-                          })
-                      } else {
-                          layer.msg(res.msg);
+                          setTimeout(function(){
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                          },1500) 
                       }
                   }
               })

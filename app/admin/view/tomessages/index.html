@@ -54,8 +54,8 @@
       <td>{$vo.message}</td>
       <td>{if condition="$vo.is_look eq 1"}<span class="layui-badge">管理员已阅</span>{else /}<span class="layui-badge layui-bg-orange">管理员待阅</span>{/if}</td>
       <td class="operation-menu">
-        <a href="javascript:;" class="look" data-id="{$vo.id}"><button class="layui-btn layui-btn-xs" ><i class="fa fa-eye"></i></button></a>
-        <a href="javascript:;"><button class="layui-btn layui-btn-xs delete" id="{$vo.id}"><i class="layui-icon"></i></button></a>
+        <a href="javascript:;" class="layui-btn layui-btn-xs look" data-id="{$vo.id}" style="margin-right: 0;font-size:12px;">标记</a>
+        <a href="javascript:;" class="layui-btn layui-btn-xs layui-btn-danger delete" id="{$vo.id}" style="margin-right: 0;font-size:12px;">删除</a>
       </td>
     </tr>
     {/volist}

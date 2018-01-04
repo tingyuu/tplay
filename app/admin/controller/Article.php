@@ -134,4 +134,32 @@ class Article extends User
             }
     	}
     }
+
+
+    public function is_top()
+    {
+        if($this->request->isPost()){
+            $post = $this->request->post();
+            if(false == Db::name('article')->where('id',$post['id'])->update(['is_top'=>$post['is_top']])) {
+                return $this->error('设置失败');
+            } else {
+                addlog($post['id']);//写入日志
+                return $this->success('设置成功','admin/article/index');
+            }
+        }
+    }
+
+
+    public function status()
+    {
+        if($this->request->isPost()){
+            $post = $this->request->post();
+            if(false == Db::name('article')->where('id',$post['id'])->update(['status'=>$post['status']])) {
+                return $this->error('设置失败');
+            } else {
+                addlog($post['id']);//写入日志
+                return $this->success('设置成功','admin/article/index');
+            }
+        }
+    }
 }

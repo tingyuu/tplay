@@ -26,7 +26,7 @@
 <body>
 <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;border:0"> 
 <div class="layui-btn-group demoTable">
-    <button type="button" class="layui-btn layui-btn-sm" id="test"><i class="layui-icon"></i>上传文件</button>
+    <button type="button" class="layui-btn layui-btn-sm" id="test"><i class="layui-icon"></i>上传压缩文件</button>
 </div>
 </fieldset>
 <!-- <blockquote class="layui-elem-quote layui-quote-nm" style="margin:10px 20px;">注：由后台(admin模块)上传的文件默认为审核通过状态，另：模块为admin的文件，其上传id是指管理员id。</blockquote> -->
@@ -79,9 +79,9 @@
       <td>{$vo.audit_time|date="Y-m-d",###}</td>
       <td>{$vo.download}</td>
       <td class="operation-menu">
-        <button class="layui-btn layui-btn-xs open" data-id="{$vo.id}"><i class="layui-icon"></i></button>
-        <a class="layui-btn layui-btn-xs download" data-id="{$vo.id}" id="download{$vo.id}" style="margin-right: 0"><i class="fa fa-download"></i></a>
-        <button class="layui-btn layui-btn-xs delete" id="{$vo.id}"><i class="layui-icon"></i></button>
+        <a class="layui-btn layui-btn-xs open" data-id="{$vo.id}" style="margin-right: 0;font-size:12px;">审核</a>
+        <a class="layui-btn layui-btn-xs download" data-id="{$vo.id}" id="download{$vo.id}" style="margin-right: 0;font-size:12px;">下载</a>
+        <button class="layui-btn layui-btn-xs layui-btn-danger delete" id="{$vo.id}" style="margin-right: 0;font-size:12px;">删除</button>
       </td>
     </tr>
     {/volist}

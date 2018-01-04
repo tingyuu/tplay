@@ -95,10 +95,18 @@
     <form id="export-form" method="post" action="{:url('admin/databackup/export')}">
     <table class="layui-table" lay-even="" lay-skin="row" lay-size="sm">
 
-
+      <colgroup>
+        <col width="50">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="200">
+        <col width="200">
+        <col width="100">
+      </colgroup>
       <thead>
         <tr>
-            <th width="48"><input lay-skin="primary" checked="chedked" type="checkbox" value=""></th>
+          <th width="48"><input lay-skin="primary" checked="chedked" type="checkbox" value=""></th>
           <th>表名</th>
           <th>数据量</th>
           <th>数据大小</th>

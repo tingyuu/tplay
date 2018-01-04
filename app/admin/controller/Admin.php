@@ -283,8 +283,8 @@ class Admin extends User
                     //将菜单id字符串拆分成数组
                     $info['cate']['permissions'] = explode(',',$info['cate']['permissions']);
                 }
-                $menus = $menuModel->select();
-                $info['menu'] = $menuModel->menulist($menus);
+                $menus = Db::name('admin_menu')->select();
+                $info['menu'] = $this->menulist($menus);
                 $this->assign('info',$info);
                 return $this->fetch();
             }
@@ -318,13 +318,61 @@ class Admin extends User
                 }
             } else {
                 //非提交操作
-                $info['menu'] = $menuModel->select();
-                $info['menu'] = $menuModel->menulist($info['menu']);
+                $menus = Db::name('admin_menu')->select();
+                $info['menu'] = $this->menulist($menus);
+                //$info['menu'] = $this->menulist($info['menu']);
                 $this->assign('info',$info);
                 return $this->fetch();
             }
         }
     }
+
+
+    public function preview()
+    {
+        $id = $this->request->has('id') ? $this->request->param('id', 0, 'intval') : 0;
+        $model = new \app\admin\model\AdminCate();
+        $info['cate'] = $model->where('id',$id)->find();
+        if(!empty($info['cate']['permissions'])) {
+            //将菜单id字符串拆分成数组
+            $info['cate']['permissions'] = explode(',',$info['cate']['permissions']);
+        }
+        $menus = Db::name('admin_menu')->select();
+        $info['menu'] = $this->menulist($menus);
+        $this->assign('info',$info);
+        return $this->fetch();
+    }
+
+
+    protected function menulist($menu,$id=0,$level=0){
+        
+        static $menus = array();
+        $size = count($menus)-1;
+        foreach ($menu as $value) {
+            if ($value['pid']==$id) {
+                $value['level'] = $level+1;
+                if($level == 0)
+                {
+                    $value['str'] = str_repeat('',$value['level']);
+                    $menus[] = $value;
+                }
+                elseif($level == 2)
+                {
+                    $value['str'] = '&emsp;&emsp;&emsp;&emsp;'.'└ ';
+                    $menus[$size]['list'][] = $value;
+                }
+                else
+                {
+                    $value['str'] = '&emsp;&emsp;'.'└ ';
+                    $menus[$size]['list'][] = $value;
+                }
+                
+                $this->menulist($menu,$value['id'],$value['level']);
+            }
+        }
+        return $menus;
+    }
+
 
     /**
      * 管理员角色删除

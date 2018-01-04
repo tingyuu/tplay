@@ -108,6 +108,20 @@ class Common extends Controller
                     if($name['password'] != $post['password']) {
                         return $this->error('密码错误');
                     } else {
+                        //是否记住账号
+                        if(!empty($post['remember']) and $post['remember'] == 1) {
+                            //检查当前有没有记住的账号
+                            if(Cookie::has('usermember')) {
+                                Cookie::delete('usermember');
+                            }
+                            //保存新的
+                            Cookie::forever('usermember',$post['name']);
+                        } else {
+                            //未选择记住账号，或属于取消操作
+                            if(Cookie::has('usermember')) {
+                                Cookie::delete('usermember');
+                            }
+                        }
                         Cookie::set("admin",$name['id'],7200); //保存新的,最长为2小时
                         //记录登录时间和ip
                         Db::name('admin')->where('id',$name['id'])->update(['login_ip' =>  $this->request->ip(),'login_time' => time()]);
@@ -119,6 +133,9 @@ class Common extends Controller
                     }
                 }
             } else {
+                if(Cookie::has('usermember')) {
+                    $this->assign('usermember',Cookie::get('usermember'));
+                }
                 return $this->fetch();
             }
         } else {

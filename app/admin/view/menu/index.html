@@ -76,9 +76,9 @@
       <td>{eq name="$vo.is_display" value="1"}显示在左侧菜单{else /}只做为操作节点{/eq}</td>
       <td>{$vo.create_time}</td>
       <td class="operation-menu">
-        <a href="{:url('admin/menu/publish',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu"><i class="layui-icon"></i></a>
-        <a href="{:url('admin/menu/publish',['pid'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu"><i class="layui-icon"></i></a>
-        <a href="javascript:;" class="layui-btn layui-btn-xs delete" id="{$vo.id}"><i class="layui-icon"></i></a>
+        <a href="{:url('admin/menu/publish',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu" style="margin-right: 0;font-size:12px;">修改</a>
+        <a href="{:url('admin/menu/publish',['pid'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu" style="margin-right: 0;font-size:12px;">新增</a>
+        <a href="javascript:;" class="layui-btn layui-btn-xs layui-btn-danger delete" id="{$vo.id}" style="margin-right: 0;font-size:12px;">删除</a>
       </td>
     </tr>
     {/volist}

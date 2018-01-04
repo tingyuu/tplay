@@ -93,7 +93,7 @@
                                 <label class="kit-login-icon">
                                     <i class="layui-icon">&#xe612;</i>
                                 </label>
-                                <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="用户名" class="layui-input">
+                                <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="用户名" class="layui-input" {notempty name="usermember"}value="{$usermember}"{/notempty}>
                             </div>
                             <div class="layui-form-item">
                                 <label class="kit-login-icon">
@@ -109,7 +109,7 @@
                             </div>
                             <div class="layui-form-item">
                                 <div class="kit-pull-left kit-login-remember">
-                                    <input type="checkbox" value="true" lay-skin="primary" title="记住帐号?">
+                                    <input type="checkbox" value="1" lay-skin="primary" title="记住帐号?" name="remember" {notempty name="usermember"}checked=""{/notempty}>
                                 </div>
                                 <div class="kit-pull-right">
                                     <button class="layui-btn layui-btn-primary" lay-submit lay-filter="login">

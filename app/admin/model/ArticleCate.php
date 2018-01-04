@@ -22,7 +22,7 @@ class ArticleCate extends Model
 				$value['level'] = $level+1;
 				if($level == 0)
 				{
-					$value['str'] = str_repeat('<i class="fa fa-angle-double-right"></i> ',$value['level']);
+					$value['str'] = str_repeat('',$value['level']);
 				}
 				elseif($level == 2)
 				{

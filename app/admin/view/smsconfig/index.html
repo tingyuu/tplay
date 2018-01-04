@@ -21,6 +21,7 @@
     <div class="layui-input-inline">
       <input name="appkey" type="keywords" lay-verify="pass" autocomplete="off" class="layui-input" value="{$data.appkey}" placeholder="">
     </div>
+    <div class="layui-form-mid layui-word-aux">阿里大鱼短信接口的AppKey,<a href="https://dayu.aliyun.com/" target="_blank">点击申请</a></div>
   </div>
 
   <div class="layui-form-item">
@@ -28,6 +29,7 @@
     <div class="layui-input-inline">
       <input name="secretkey" lay-verify="pass" autocomplete="off" class="layui-input" type="keywords" value="{$data.secretkey}" placeholder="">
     </div>
+    <div class="layui-form-mid layui-word-aux">阿里大鱼短信接口的SecretKey,<a href="https://dayu.aliyun.com/" target="_blank">点击申请</a></div>
   </div>
 
   <div class="layui-form-item">
@@ -35,6 +37,7 @@
     <div class="layui-input-inline">
       <input name="type" type="text" lay-verify="pass" autocomplete="off" class="layui-input" value="{$data.type}">
     </div>
+    <div class="layui-form-mid layui-word-aux">文字短信默认为：normal</div>
   </div>
 
   <div class="layui-form-item">
@@ -42,19 +45,21 @@
     <div class="layui-input-inline">
       <input name="name" type="text" lay-verify="pass" autocomplete="off" autocomplete="off" class="layui-input" value="{$data.name}">
     </div>
+    <div class="layui-form-mid layui-word-aux">必须是在阿里大于“管理中心-验证码/短信通知/推广短信-配置短信签名”中的可用签名</div>
   </div>
 
   <div class="layui-form-item">
-    <label class="layui-form-label">短信模板</label>
+    <label class="layui-form-label">短信模板id</label>
     <div class="layui-input-inline">
       <input type="text" name="code" lay-verify="pass" autocomplete="off" class="layui-input" value="{$data.code}">
     </div>
+    <div class="layui-form-mid layui-word-aux">短信模板ID，传入的模板必须是在阿里大于“管理中心-短信模板管理”中的可用模板</div>
   </div>
 
   <div class="layui-form-item layui-form-text">
-    <label class="layui-form-label">短信模板</label>
+    <label class="layui-form-label">附加内容</label>
     <div class="layui-input-block" style="max-width:600px;">
-      <textarea placeholder="请输入内容" class="layui-textarea" name="content" id="container" >{$data.content}</textarea>
+      <textarea placeholder="可通过设置阿里短信的系统变量来调用" class="layui-textarea" name="content" id="container" >{$data.content}</textarea>
     </div>
   </div>
 

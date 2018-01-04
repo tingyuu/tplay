@@ -21,6 +21,7 @@
     <div class="layui-input-inline">
       <input name="from_email" type="text" lay-verify="email" autocomplete="off" class="layui-input" value="{$data.from_email}">
     </div>
+    <div class="layui-form-mid layui-word-aux">发送邮件的邮箱地址</div>
   </div>
 
   <div class="layui-form-item">
@@ -35,20 +36,23 @@
     <div class="layui-input-inline">
       <input name="smtp" type="text" lay-verify="pass" autocomplete="off" class="layui-input" value="{$data.smtp}">
     </div>
+    <div class="layui-form-mid layui-word-aux">如：smtp.126.com</div>
   </div>
 
   <div class="layui-form-item">
-    <label class="layui-form-label">登录账号</label>
+    <label class="layui-form-label">账号</label>
     <div class="layui-input-inline">
       <input name="username" type="text" lay-verify="email" autocomplete="off" autocomplete="off" class="layui-input" value="{$data.username}">
     </div>
+    <div class="layui-form-mid layui-word-aux">发送邮件的邮箱账户</div>
   </div>
 
   <div class="layui-form-item">
-    <label class="layui-form-label">登录密码</label>
+    <label class="layui-form-label">密码</label>
     <div class="layui-input-inline">
       <input type="password" name="password" lay-verify="pass" autocomplete="off" class="layui-input" value="{$data.password}">
     </div>
+    <div class="layui-form-mid layui-word-aux">发送邮件的邮箱密码</div>
   </div>
 
   <div class="layui-form-item">

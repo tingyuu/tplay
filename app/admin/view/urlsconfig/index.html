@@ -132,6 +132,9 @@ layui.use('layer', function(){
         type:2,
         content:[url, 'no'],
         area: ['600px', '400px'],
+        end:function(){
+          location.reload();
+        }
       });
     }
     return false;

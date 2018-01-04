@@ -22,7 +22,7 @@ Tplay的安装非常简单：
 
 路径出现问题：
 
-1.检查自己的域名是不是指向了根目录下的public目录
+1.检查自己的域名是不是指向了根目录下的public目录（实在不能指向public目录请看最后）
 
 2.如果你用的环境工具是wamp，请修改/public/.htaccess文件
 
@@ -42,3 +42,111 @@ Tplay的安装非常简单：
 2.系统自带的‘超级管理员’角色默认拥有所有操作权限，包括你新拓展的，因为系统默认跳过id为1的管理员角色组，如有需求可修改User控制器里的代码。
 
 3.为管理员角色分组分配权限时，系统默认会把普通节点勾选，但不会存入数据表，避免之后修改节点时造成权限错乱，系统会默认跳过普通节点不验证权限。
+
+
+##其他
+
+如果你的域名实在不能指向public目录，只能指向根目录，那也是有解决方案的(谁让我这么好呢(⊙o⊙)…)。
+
+1.修改/app/admin/config.php 
+
+return [
+	'view_replace_str' => [
+		'__CSS__'      => '/public/static/admin/css',
+		'__PUBLIC__'   => '/public/static/public',
+		'__JS__'       => '/public/static/admin/js'
+	],
+];
+
+2.修改/public/static/admin/js/tab.js  第23行
+
+mainUrl: "/public/admin/main/index",
+
+3.修改/public/static/admin/js/kitconfig.js  第5行
+
+resourcePath: '/public/static/admin/',
+
+4.修改/app/admin/controller/common.php  中的upload方法
+
+public function upload($module='admin',$use='admin_thumb')
+    {
+        if($this->request->file('file')){
+            $file = $this->request->file('file');
+        }else{
+            $res['code']=1;
+            $res['msg']='没有上传文件';
+            return json($res);
+        }
+        $module = $this->request->has('module') ? $this->request->param('module') : $module;//模块
+        $web_config = Db::name('webconfig')->where('web','web')->find();
+        $info = $file->validate(['size'=>$web_config['file_size']*1024,'ext'=>$web_config['file_type']])->rule('date')->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . $module . DS . $use);
+        if($info) {
+            //写入到附件表
+            $data = [];
+            $data['module'] = $module;
+            $data['filename'] = $info->getFilename();//文件名
+            $data['filepath'] = DS . 'public' . DS .'uploads' . DS . $module . DS . $use . DS . $info->getSaveName();//文件路径
+            $data['fileext'] = $info->getExtension();//文件后缀
+            $data['filesize'] = $info->getSize();//文件大小
+            $data['create_time'] = time();//时间
+            $data['uploadip'] = $this->request->ip();//IP
+            $data['user_id'] = Cookie::has('admin') ? Cookie::get('admin') : 0;
+            if($data['module'] = 'admin') {
+                //通过后台上传的文件直接审核通过
+                $data['status'] = 1;
+                $data['admin_id'] = $data['user_id'];
+                $data['audit_time'] = time();
+            }
+            $data['use'] = $this->request->has('use') ? $this->request->param('use') : $use;//用处
+            $res['id'] = Db::name('attachment')->insertGetId($data);
+            $res['src'] = DS . 'public' . DS . 'uploads' . DS . $module . DS . $use . DS . $info->getSaveName();
+            $res['code'] = 2;
+            addlog($res['id']);//记录日志
+            return json($res);
+        } else {
+            // 上传失败获取错误信息
+            return $this->error('上传失败：'.$file->getError());
+        }
+    }
+
+5.修改/app/admin/controller/attachment.php  中的upload方法
+
+public function upload($module='admin',$use='attachment')
+    {
+        if($this->request->file('file')){
+            $file = $this->request->file('file');
+        }else{
+            $res['code']=1;
+            $res['msg']='没有上传文件';
+            return json($res);
+        }
+        $web_config = Db::name('webconfig')->where('web','web')->find();
+        $info = $file->validate(['size'=>$web_config['file_size']*1024,'ext'=>$web_config['file_type']])->rule('date')->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . $module . DS . $use);
+        if($info) {
+            //写入到附件表
+            $data = [];
+            $data['module'] = $this->request->has('module') ? $this->request->param('module') : $module;//模块
+            $data['filename'] = $info->getFilename();//文件名
+            $data['filepath'] = DS . 'public' . DS . 'uploads' . DS . $module . DS . $use . DS . $info->getSaveName();//文件路径
+            $data['fileext'] = $info->getExtension();//文件后缀
+            $data['filesize'] = $info->getSize();//文件大小
+            $data['create_time'] = time();//时间
+            $data['uploadip'] = $this->request->ip();//IP
+            $data['user_id'] = Cookie::has('admin') ? Cookie::get('admin') : 0;
+            if($data['module'] = 'admin') {
+                //通过后台上传的文件直接审核通过
+                $data['status'] = 1;
+                $data['admin_id'] = $data['user_id'];
+                $data['audit_time'] = time();
+            }
+            $data['use'] = $this->request->has('use') ? $this->request->param('use') : $use;//用处
+            $res['id'] = Db::name('attachment')->insertGetId($data);
+            addlog($res['id']);//记录日志
+            return $this->success('上传完成','admin/attachment/index');
+        } else {
+            // 上传失败获取错误信息
+            return $this->error('上传失败：'.$file->getError());
+        }
+    }
+
+6.访问 你的域名/public/admin

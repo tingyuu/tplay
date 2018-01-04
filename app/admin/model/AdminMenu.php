@@ -16,13 +16,14 @@ use \think\Model;
 class AdminMenu extends Model
 {
 	public function menulist($menu,$id=0,$level=0){
+		
 		static $menus = array();
 		foreach ($menu as $value) {
 			if ($value['pid']==$id) {
 				$value['level'] = $level+1;
 				if($level == 0)
 				{
-					$value['str'] = str_repeat('<i class="fa fa-angle-double-right"></i> ',$value['level']);
+					$value['str'] = str_repeat('',$value['level']);
 				}
 				elseif($level == 2)
 				{

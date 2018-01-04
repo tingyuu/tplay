@@ -26,8 +26,8 @@
 <body>
 <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;border:0"> 
 <div class="layui-btn-group demoTable">
-  <a href="{:url('admin/articlecate/publish')}" class="a_menu">
-    <button class="layui-btn layui-btn-sm"><i class="fa fa-edit"> </i>添加新分类</button>
+  <a class="layui-btn layui-btn-sm a_menu" href="{:url('admin/articlecate/publish')}" class="a_menu">
+    <i class="fa fa-edit"> </i>添加新分类
   </a>
 </div>
 </fieldset>
@@ -37,7 +37,7 @@
     <col width="150">
     <col width="500">
     <col width="200">
-    <col width="150">
+    <col width="100">
   </colgroup>
   <thead>
     <tr>
@@ -56,9 +56,9 @@
       <td>{$vo.description}</td>
       <td>{$vo.create_time}</td>
       <td class="operation-menu">
-        <a href="{:url('admin/articlecate/publish',['id'=>$vo.id])}" class="a_menu"><button class="layui-btn layui-btn-xs" ><i class="layui-icon"></i></button></a>
-        <a href="{:url('admin/articlecate/publish',['pid'=>$vo.id])}" class="a_menu"><button class="layui-btn layui-btn-xs" ><i class="layui-icon"></i></button></a>
-        <a href="javascript:;"><button class="layui-btn layui-btn-xs delete" id="{$vo.id}"><i class="layui-icon"></i></button></a>
+        <a href="{:url('admin/articlecate/publish',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu" style="margin-right: 0;font-size:12px;">修改</a>
+        <a href="{:url('admin/articlecate/publish',['pid'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu" style="margin-right: 0;font-size:12px;">新增</a>
+        <a href="javascript:;" class="layui-btn layui-btn-xs layui-btn-danger delete" id="{$vo.id}" style="margin-right: 0;font-size:12px;">删除</a>
       </td>
     </tr>
     {/volist}
@@ -105,36 +105,34 @@ $('.delete').click(function(){
 })
 </script>
 <script type="text/javascript">
-$('.a_menu').click(function(){
-  var url = $(this).attr('href');
-  var id = $(this).attr('id');
-  var a = true;
-  if(id) {
-    $.ajax({
-      url:url
-      ,async:false
-      ,data:{id:id}
-      ,success:function(res){
-        if(res.code == 0) {
-          layer.msg(res.msg);
-          a = false;
-        }
-      }
-    })
-  } else {
+layui.use('layer', function(){
+  var layer = layui.layer;
+  $('.a_menu').click(function(){
+    var url = $(this).attr('href');
+    var a = 0;
     $.ajax({
       url:url
       ,async:false
       ,success:function(res){
         if(res.code == 0) {
           layer.msg(res.msg);
-          a = false;
+          a = 1;
         }
       }
     })
-  }
-  return a;
-})
+    if(a === 0) {
+      layer.open({
+        type:2,
+        content:[url, 'no'],
+        area: ['650px', '450px'],
+        end:function(){
+          location.reload();
+        }
+      });
+    }
+    return false;
+  })
+});
 </script>
 </body>
 </html>

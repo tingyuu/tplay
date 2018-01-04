@@ -27,8 +27,8 @@
 
 <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;border:0"> 
 <div class="layui-btn-group demoTable">
-  <a href="{:url('admin/publish')}" class="a_menu">
-    <button class="layui-btn layui-btn-sm"><i class="fa fa-edit"> </i>添加管理员</button>
+  <a href="{:url('admin/publish')}" class="layui-btn layui-btn-sm a_menu">
+    <i class="fa fa-edit"> </i>添加管理员
   </a>
 </div>
 </fieldset>
@@ -69,8 +69,8 @@
       <td>{$vo.login_time|date="Y-m-d H:i:s",###}</td>
       <td>{$vo.login_ip}</td>
       <td class="operation-menu">
-        <a href="{:url('admin/publish',['id'=>$vo.id])}" class="a_menu" id="{$vo.id}"><button class="layui-btn layui-btn-xs" ><i class="layui-icon"></i></button></a>
-        <button class="layui-btn layui-btn-xs delete" id="{$vo.id}"><i class="layui-icon"></i></button>
+        <a href="{:url('admin/publish',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu" id="{$vo.id}" style="margin-right: 0;font-size:12px;">修改</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger delete" id="{$vo.id}" style="margin-right: 0;font-size:12px;">删除</a>
       </td>
     </tr>
     {/volist}
@@ -139,36 +139,34 @@ $('.delete').click(function(){
 })
 </script>
 <script type="text/javascript">
-$('.a_menu').click(function(){
-  var url = $(this).attr('href');
-  var id = $(this).attr('id');
-  var a = true;
-  if(id) {
-    $.ajax({
-      url:url
-      ,async:false
-      ,data:{id:id}
-      ,success:function(res){
-        if(res.code == 0) {
-          layer.msg(res.msg);
-          a = false;
-        }
-      }
-    })
-  } else {
+layui.use('layer', function(){
+  var layer = layui.layer;
+  $('.a_menu').click(function(){
+    var url = $(this).attr('href');
+    var a = 0;
     $.ajax({
       url:url
       ,async:false
       ,success:function(res){
         if(res.code == 0) {
           layer.msg(res.msg);
-          a = false;
+          a = 1;
         }
       }
     })
-  }
-  return a;
-})
+    if(a === 0) {
+      layer.open({
+        type:2,
+        content:[url, 'no'],
+        area: ['700px', '500px'],
+        end:function(){
+          location.reload();
+        }
+      });
+    }
+    return false;
+  })
+});
 </script>
 </body>
 </html>

@@ -13,6 +13,7 @@
 namespace app\admin\controller;
 
 use \think\Db;
+use \think\Cookie;
 class Main extends \think\Controller
 {
     public function index()
@@ -46,15 +47,53 @@ class Main extends \think\Controller
          */
         $web['user_num'] = Db::name('admin')->count();
         $web['admin_cate'] = Db::name('admin_cate')->count();
+        $ip_ban = Db::name('webconfig')->value('black_ip');
+        $web['ip_ban'] = empty($ip_ban) ? 0 : count(explode(',',$ip_ban));
+        
         $web['article_num'] = Db::name('article')->count();
         $web['status_article'] = Db::name('article')->where('status',0)->count();
+        $web['top_article'] = Db::name('article')->where('is_top',1)->count();
         $web['file_num'] = Db::name('attachment')->count();
         $web['status_file'] = Db::name('attachment')->where('status',0)->count();
+        $web['ref_file'] = Db::name('attachment')->where('status',-1)->count();
         $web['message_num'] = Db::name('messages')->count();
         $web['look_message'] = Db::name('messages')->where('is_look',0)->count();
+
+        if(Cookie::has('remember')) {
+            $web['remember'] = Cookie::get('remember');
+            //return $web['remember'];
+        } else {
+            $web['remember'] = '';
+        }
 
         $this->assign('web',$web);
 
         return $this->fetch();
+    }
+
+
+    public function remember()
+    {
+        if($this->request->isPost()) {
+            $post = $this->request->post();
+            if(Cookie::has('remember')) {
+                Cookie::delete('remember');
+            }
+            Cookie::forever('remember',$post['message']);
+            return $this->success('一经记,不轻忘...');
+        }
+    }
+
+
+    public function delremember()
+    {
+        if($this->request->isPost()) {
+            if(Cookie::has('remember')) {
+                Cookie::delete('remember');
+            } else {
+                return $this->error('不曾记,何以忘...');
+            }
+            return $this->success('一经忘,不再想...');
+        }
     }
 }
