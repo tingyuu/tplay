@@ -91,19 +91,19 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
             var tpl = [
                     '<div class="layui-tab layui-tab-card kit-tab" lay-filter="' + that._filter + '">',
                     '<ul class="layui-tab-title">',
-                    '<li class="layui-this" lay-id="-1" data-url="' + _config.mainUrl + '"><i class="layui-icon">&#xe68e;</i> 控制面板</li>',
+                    '<li class="layui-this" lay-id="-1" data-url="' + _config.mainUrl + '"><i class="layui-icon">&#xe68e;</i> 首页</li>',
                     '</ul>',
-                    '<div class="kit-tab-tool">操作&nbsp;<i class="fa fa-caret-down"></i></div>',
-                    '<div class="kit-tab-tool-body layui-anim layui-anim-upbit">',
-                    '<ul>',
-                    '<li class="kit-item" data-target="refresh">刷新当前选项卡</li>',
-                    '<li class="kit-line"></li>',
-                    '<li class="kit-item" data-target="closeCurrent">关闭当前选项卡</li>',
-                    '<li class="kit-item" data-target="closeOther">关闭其他选项卡</li>',
-                    '<li class="kit-line"></li>',
-                    '<li class="kit-item" data-target="closeAll">关闭所有选项卡</li>',
-                    '</ul>',
-                    '</div>',
+                    // '<div class="kit-tab-tool">操作&nbsp;<i class="fa fa-caret-down"></i></div>',
+                    // '<div class="kit-tab-tool-body layui-anim layui-anim-upbit">',
+                    // '<ul>',
+                    // '<li class="kit-item" data-target="refresh">刷新当前选项卡</li>',
+                    // '<li class="kit-line"></li>',
+                    // '<li class="kit-item" data-target="closeCurrent">关闭当前选项卡</li>',
+                    // '<li class="kit-item" data-target="closeOther">关闭其他选项卡</li>',
+                    // '<li class="kit-line"></li>',
+                    // '<li class="kit-item" data-target="closeAll">关闭所有选项卡</li>',
+                    // '</ul>',
+                    // '</div>',
                     '<div class="layui-tab-content">',
                     '<div class="layui-tab-item layui-show" lay-item-id="-1">{{content}}</div>',
                     '</div>',
@@ -125,11 +125,11 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
             var _tool = $('.kit-tab-tool'),
                 _toolBody = $('.kit-tab-tool-body');
             //监听操作点击事件
-            _tool.on('click', function() {
-                _toolBody.toggle();
-            });
+            // _tool.on('click', function() {
+            //     _toolBody.toggle();
+            // });
             //监听操作项点击事件
-            _toolBody.find('li.kit-item').each(function() {
+            _toolBody.find('a.kit-item').each(function() {
                 var $that = $(this);
                 var target = $that.data('target');
                 $that.off('click').on('click', function() {
@@ -171,9 +171,10 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
                             that.tabChange(-1);
                             break;
                     }
-                    _tool.click();
+                    //_tool.click();
                 });
             });
+           
             //监听浏览器窗口改变事件
             that.winResize();
         },

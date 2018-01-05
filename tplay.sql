@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-01-04 14:10:17
+Date: 2018-01-05 16:01:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,7 +37,7 @@ CREATE TABLE `tplay_admin` (
 -- ----------------------------
 -- Records of tplay_admin
 -- ----------------------------
-INSERT INTO `tplay_admin` VALUES ('1', 'Tplay', 'admin', '31c64b511d1e90fcda8519941c1bd660', '1', '1510885948', '1515046061', '1515042059', '127.0.0.1', '1');
+INSERT INTO `tplay_admin` VALUES ('1', 'Tplay', 'admin', '31c64b511d1e90fcda8519941c1bd660', '1', '1510885948', '1515046061', '1515136015', '127.0.0.1', '1');
 
 -- ----------------------------
 -- Table structure for `tplay_admin_cate`
@@ -111,7 +111,7 @@ CREATE TABLE `tplay_admin_menu` (
 -- ----------------------------
 -- Records of tplay_admin_menu
 -- ----------------------------
-INSERT INTO `tplay_admin_menu` VALUES ('1', '设置', 'admin', 'index', 'index', '', '管理软件的基础信息，包括个人的基本信息管理。', '1', '2', '0', '0', '1515038251', 'fa-cogs', '1', '1');
+INSERT INTO `tplay_admin_menu` VALUES ('1', '设置', 'admin', 'index', 'index', '', '管理软件的基础信息，包括个人的基本信息管理。', '1', '2', '0', '0', '1515131654', 'fa-cogs', '0', '1');
 INSERT INTO `tplay_admin_menu` VALUES ('2', '个人信息', 'admin', 'admin', 'personal', '', '对个人的一些信息进行管理。', '1', '2', '1', '0', '1513402673', 'fa-cog', '0', '1');
 INSERT INTO `tplay_admin_menu` VALUES ('4', '会员管理', 'admin', 'index', 'index', '', '后台管理员管理，包括后台权限组的管理。', '1', '2', '0', '1511015413', '1513558364', 'fa-user', '0', '2');
 INSERT INTO `tplay_admin_menu` VALUES ('6', '角色分组', 'admin', 'admin', 'adminCate', '', '管理员角色分组管理。', '1', '2', '4', '1511083098', '1513412856', 'fa-group', '0', '2');
@@ -239,12 +239,13 @@ CREATE TABLE `tplay_attachment` (
   PRIMARY KEY (`id`),
   KEY `id` (`id`) USING BTREE,
   KEY `status` (`status`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='附件表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='附件表';
 
 -- ----------------------------
 -- Records of tplay_attachment
 -- ----------------------------
 INSERT INTO `tplay_attachment` VALUES ('1', 'admin', '79811855a6c06de53047471c4ff82a36.jpg', '\\uploads\\admin\\admin_thumb\\20180104\\79811855a6c06de53047471c4ff82a36.jpg', '13781', 'jpg', '1', '127.0.0.1', '1', '1515046060', '1', '1515046060', 'admin_thumb', '0');
+INSERT INTO `tplay_attachment` VALUES ('2', 'admin', 'fe6503be604640a0ad805a8158e3c77d.jpg', '\\uploads\\admin\\article_thumb\\20180104\\fe6503be604640a0ad805a8158e3c77d.jpg', '13781', 'jpg', '1', '127.0.0.1', '1', '1515055763', '1', '1515055763', 'article_thumb', '0');
 
 -- ----------------------------
 -- Table structure for `tplay_emailconfig`

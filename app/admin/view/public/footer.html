@@ -52,7 +52,8 @@
         layui.use('jquery', function() {
             var $ = layui.jquery;
             $('#clear').on('click', function() {
-                $(this).attr("class","fa fa-spinner");
+                var the = $(this).find('i');
+                the.attr("class","fa fa-spinner");
                 $.ajax({
                   url:"{:url('common/clear')}"
                   ,success:function(res) {
@@ -62,7 +63,7 @@
                                 skin: 'cyan',
                                 msg:res.msg
                             });
-                            $('#clear').attr("class","fa fa-trash");
+                            $('#clear i').attr("class","fa fa-trash");
                         },1000)
                     }
                   }

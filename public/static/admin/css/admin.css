@@ -6,3 +6,34 @@
 	margin:0 10px;
 	font-size:16px;
 }
+.head_menu {
+	float:left;
+	padding:3px 8px;
+	margin:15px 2px;
+	background:#00c0ef;
+	border-radius: 2px;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+	border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+	color:#fff;
+}
+
+.head_menu:hover{
+	color:#fff;
+}
+.head_menu i {
+	font-size: 12px;
+}
+
+.refresh {
+	float:left;
+	padding:3px 8px;
+	margin:15px 0px;
+	color:#fff;
+}
+.refresh i {
+	font-size: 15px;
+}
+
+.layui-tab-title li{
+	padding:0 10px;
+}

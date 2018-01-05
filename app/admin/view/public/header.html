@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
     <link rel="stylesheet" href="__CSS__/app.css" media="all" />
     <link rel="stylesheet" href="__CSS__/themes/default.css" media="all" id="skin" kit-skin />
-    <link rel="stylesheet" href="__CSS__/index.css" />
+    <link rel="stylesheet" href="__CSS__/admin.css" />
 </head>
 
 <body class="kit-theme">
@@ -17,6 +17,9 @@
             <div class="layui-logo">Tplay后台管理框架</div>
             <div class="layui-logo kit-logo-mobile">K</div>
             <ul class="layui-nav layui-layout-left kit-nav">
+                <a class="head_menu" id="kit-side-fold" title="左侧菜单"><i class="fa fa-navicon" aria-hidden="true"></i></a>
+                <<!-- a class="head_menu" style="background:#f39c12;" title="添加文章" href="javascript:;" data-url="{:url('admin/article/publish')}" data-title="添加文章" kit-target><i class="fa fa-pencil" aria-hidden="true"></i></a> -->
+                <a class="head_menu" style="background:#dd4b39;" id="clear" title="清空缓存"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 <!-- <li class="layui-nav-item"><a href="javascript:;" data-url="{:url('main/index')}" data-title="控制台" kit-target><i class="fa fa-home" aria-hidden="true"></i> <span>控制台</span></a></li> -->
                 <!-- <li class="layui-nav-item"><a href="javascript:;">内容管理</a></li> -->
                 <!-- <li class="layui-nav-item">
@@ -29,9 +32,9 @@
                 </li> -->
             </ul>
             <ul class="layui-nav layui-layout-right kit-nav">
+                <ul class="kit-tab-tool-body" style="float: left;"><a class="refresh kit-item" data-target="refresh" title="刷新当前页"><i class="fa fa-refresh" aria-hidden="true"></i></a></ul>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">
-                        <i class="layui-icon">&#xe63f;</i> 皮肤</a>
+                    <a href="javascript:;" style="color:#fff;">皮肤</a>
                     </a>
                     <dl class="layui-nav-child skin">
                         <dd><a href="javascript:;" data-skin="default" style="color:#393D49;"><i class="layui-icon">&#xe658;</i> 默认</a></dd>
@@ -43,14 +46,14 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">
-                        <img src="{$cookie.thumb|geturl}" class="layui-nav-img"> {empty name="$cookie.nickname"}{$cookie.name}{else /}{$cookie.nickname}{/empty}
+                    <a href="javascript:;" style="color:#fff;">
+                        <img src="{$cookie.thumb|geturl}" class="layui-nav-img" style="border: 2px solid #fff;">欢迎, {empty name="$cookie.nickname"}{$cookie.name}{else /}{$cookie.nickname}{/empty}
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" data-url="{:url('admin/admin/personal',['id'=>$cookie.id])}" data-icon="fa-asterisk" data-title="个人信息" kit-target data-id='1'><span>基本资料</span></a></dd>
                         <dd><a href="javascript:;"  data-url="{:url('admin/admin/editPassword')}" data-icon="fa-edit" data-title="修改密码" kit-target data-id='2'><span>修改密码</span></a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="javascript:;" id="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 退了</a></li>
+                <li class="layui-nav-item"><a href="javascript:;" id="logout" style="color:#fff;"><i class="fa fa-sign-out" aria-hidden="true"></i> 退了</a></li>
             </ul>
         </div>
