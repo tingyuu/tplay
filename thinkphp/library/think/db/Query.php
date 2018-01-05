@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2006~2017 http://thinkphp.cn All rights reserved.
+// | Copyright (c) 2006~2018 http://thinkphp.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
@@ -534,22 +534,24 @@ class Query
      * MIN查询
      * @access public
      * @param string $field 字段名
+     * @param bool   $force   强制转为数字类型
      * @return mixed
      */
-    public function min($field)
+    public function min($field, $force = true)
     {
-        return $this->value('MIN(' . $field . ') AS tp_min', 0, true);
+        return $this->value('MIN(' . $field . ') AS tp_min', 0, $force);
     }
 
     /**
      * MAX查询
      * @access public
      * @param string $field 字段名
+     * @param bool   $force   强制转为数字类型
      * @return mixed
      */
-    public function max($field)
+    public function max($field, $force = true)
     {
-        return $this->value('MAX(' . $field . ') AS tp_max', 0, true);
+        return $this->value('MAX(' . $field . ') AS tp_max', 0, $force);
     }
 
     /**
@@ -635,6 +637,7 @@ class Query
                 $this->options = [];
                 return true;
             }
+            return $this->setField($field, ['inc', $field, $step]);
         }
         return $this->setField($field, ['dec', $field, $step]);
     }
@@ -730,7 +733,10 @@ class Query
         if (isset($alias) && $table != $alias) {
             if (isset($this->options['alias'][$table])) {
                 $table = $table . '@think' . uniqid();
+            } elseif ($this->gettable() == $table) {
+                $table = $table . '@think' . uniqid();
             }
+
             $table = [$table => $alias];
             $this->alias($table);
         }
@@ -2599,47 +2605,51 @@ class Query
     public function chunk($count, $callback, $column = null, $order = 'asc')
     {
         $options = $this->getOptions();
-        if (isset($options['table'])) {
-            $table = is_array($options['table']) ? key($options['table']) : $options['table'];
-        } else {
-            $table = '';
-        }
-        $column = $column ?: $this->getPk($table);
-        if (is_array($column)) {
-            $column = $column[0];
-        }
+
+        $column = $column ?: $this->getPk($options);
+
         if (isset($options['order'])) {
             if (App::$debug) {
                 throw new \LogicException('chunk not support call order');
             }
             unset($options['order']);
         }
-        $bind      = $this->bind;
-        $resultSet = $this->options($options)->limit($count)->order($column, $order)->select();
-        if (strpos($column, '.')) {
-            list($alias, $key) = explode('.', $column);
+        $bind = $this->bind;
+        if (is_array($column)) {
+            $times = 1;
+            $query = $this->options($options)->page($times, $count);
         } else {
-            $key = $column;
+            if (strpos($column, '.')) {
+                list($alias, $key) = explode('.', $column);
+            } else {
+                $key = $column;
+            }
+            $query = $this->options($options)->limit($count);
         }
-        if ($resultSet instanceof Collection) {
-            $resultSet = $resultSet->all();
-        }
+        $resultSet = $query->order($column, $order)->select();
 
         while (!empty($resultSet)) {
-            if (false === call_user_func($callback, $resultSet)) {
-                return false;
-            }
-            $end       = end($resultSet);
-            $lastId    = is_array($end) ? $end[$key] : $end->getData($key);
-            $resultSet = $this->options($options)
-                ->limit($count)
-                ->bind($bind)
-                ->where($column, 'asc' == strtolower($order) ? '>' : '<', $lastId)
-                ->order($column, $order)
-                ->select();
             if ($resultSet instanceof Collection) {
                 $resultSet = $resultSet->all();
             }
+
+            if (false === call_user_func($callback, $resultSet)) {
+                return false;
+            }
+
+            if (is_array($column)) {
+                $times++;
+                $query = $this->options($options)->page($times, $count);
+            } else {
+                $end    = end($resultSet);
+                $lastId = is_array($end) ? $end[$key] : $end->getData($key);
+                $query  = $this->options($options)
+                    ->limit($count)
+                    ->where($column, 'asc' == strtolower($order) ? '>' : '<', $lastId);
+            }
+
+            $resultSet = $query->bind($bind)->order($column, $order)->select();
+
         }
         return true;
     }

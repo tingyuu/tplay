@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2006~2017 http://thinkphp.cn All rights reserved.
+// | Copyright (c) 2006~2018 http://thinkphp.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
@@ -1070,12 +1070,17 @@ abstract class Model implements \JsonSerializable, \ArrayAccess
                 }
             }
 
-            if (is_string($pk) && isset($data[$pk])) {
-                if (!isset($where[$pk])) {
-                    unset($where);
-                    $where[$pk] = $data[$pk];
+            $array = [];
+
+            foreach ((array) $pk as $key) {
+                if (isset($data[$key])) {
+                    $array[$key] = $data[$key];
+                    unset($data[$key]);
                 }
-                unset($data[$pk]);
+            }
+
+            if (!empty($array)) {
+                $where = $array;
             }
 
             // 检测字段
@@ -1123,10 +1128,11 @@ abstract class Model implements \JsonSerializable, \ArrayAccess
             }
 
             // 获取自动增长主键
-            if ($result && is_string($pk) && (!isset($this->data[$pk]) || '' == $this->data[$pk])) {
-                $insertId = $this->getQuery()->getLastInsID($sequence);
-                if ($insertId) {
-                    $this->data[$pk] = $insertId;
+            if ($result && $insertId = $this->getQuery()->getLastInsID($sequence)) {
+                foreach ((array) $pk as $key) {
+                    if (!isset($this->data[$key]) || '' == $this->data[$key]) {
+                        $this->data[$key] = $insertId;
+                    }
                 }
             }
 
