@@ -96,23 +96,21 @@ www  WEB部署目录（或者子目录）
 
 ## 安装使用
 
-Tplay的安装非常简单：
-					
-1. 请使用`git`下载源码包到服务器环境的根目录下
-
+1. 首先克隆下载应用项目仓库
+    
     ```bash
     git clone https://github.com/tingyuu/tplay.git
     ```
-2. 使用`composer`自动安装依赖
+2. 然后切换到`tplay`目录下面，再使用`composer`自动安装更新依赖库
 
     ```bash
     composer install 
     ```
-3. 将根目录下的tlay.sql文件导入mysql数据库
+3. 将根目录下的`tlay.sql`文件导入`mysql`数据库
 
-4. 修改/app/database.php文件中的数据库配置信息
+4. 修改项目`/app/database.php`文件中的数据库配置信息
 
-5. 将你的域名指向根目录下的public目录（重要）
+5. 将你的域名指向根目录下的public目录（重要）,详情请安[服务环境部署](#服务环境部署)
 
 6. 浏览器访问：你的域名/admin   默认管理员账户：admin 密码：tplay
 
@@ -120,6 +118,61 @@ Tplay的安装非常简单：
 
 如遇问题可在QQ群221470096交流。
 
+## 服务环境部署 
+####  Nginx 虚拟主机配置参考
+
+```bash
+server {
+    listen 80;
+    server_name tplay.tinywan.com;
+
+    set $root_path $path/tplay/public;
+    root $root_path;
+    index index.php index.html index.htm;
+
+    location / {
+        if (!-e $request_filename) {
+            rewrite  ^(.*)$  /index.php?s=/$1  last;
+            break;
+        }
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass   unix:/var/run/php7.1.9-fpm.sock;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+        fastcgi_buffer_size 128k;
+        fastcgi_buffers 4 256k;
+        fastcgi_busy_buffers_size 256k;
+    }
+
+    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$ {
+            access_log  off;
+            error_log   off;
+            expires     30d;
+    }
+
+    location ~ .*\.(js|css)?$ {
+            access_log   off;
+            error_log    off;
+            expires      12h;
+    }
+}
+```
+> 然后重新启动 Nginx 即可生效
+####  Apache 配置参考
+在项目根目录加入.htaccess文件，只需开启rewrite模块
+```bash
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks -Multiviews
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+</IfModule>
+```
+> 然后重新启动 Apache 即可生效
 
 ## 版权信息
 
