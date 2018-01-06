@@ -100,17 +100,25 @@ www  WEB部署目录（或者子目录）
 
 Tplay的安装非常简单：
 					
-1.将你下载的程序包放在服务器环境的根目录下
+1. 请使用`git`下载源码包到服务器环境的根目录下
 
-2.将根目录下的tlay.sql文件导入mysql数据库
+    ```bash
+    git clone https://github.com/tingyuu/tplay.git
+    ```
+2. 使用`composer`自动安装依赖
 
-3.修改/app/database.php文件中的数据库配置信息
+    ```bash
+    composer install 
+    ```
+3. 将根目录下的tlay.sql文件导入mysql数据库
 
-4.将你的域名指向根目录下的public目录（重要）
+4. 修改/app/database.php文件中的数据库配置信息
 
-5.浏览器访问：你的域名/admin   默认管理员账户：admin 密码：tplay
+5. 将你的域名指向根目录下的public目录（重要）
 
-6.如果你用到了短信配置，请前往阿里大鱼官网申请下载自己的sdk文件，替换/extend/dayu下的文件，在后台配置自己的appkey即可
+6. 浏览器访问：你的域名/admin   默认管理员账户：admin 密码：tplay
+
+7. 如果你用到了短信配置，请前往阿里大鱼官网申请下载自己的sdk文件，替换/extend/dayu下的文件，在后台配置自己的appkey即可
 
 如遇问题可在QQ群221470096交流。
 
