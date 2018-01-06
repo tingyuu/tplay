@@ -32,10 +32,9 @@ Tplay 1.1
 Tplay 1.0
 ===============
 
-
 Tplay是一款基于ThinkPHP5.0.13 + layui2.2.45 + Mysql开发的后台管理框架，PHP版本要求提升到5.5。Tplay集成了一般应用所必须的基础性功能，为开发者减少重复性的工作，提升开发速度，规范团队开发模式。
 
-> Tplay的运行环境要求PHP >= 5.5，其余要求参考thinkPHP5的配置要求。
+> Tplay的运行环境要求PHP >= 5.5，推荐使用PHP7，其余要求参考thinkPHP5的配置要求。
 
 二次开发请参考 [ThinkPHP5完全开发手册](http://www.kancloud.cn/manual/thinkphp5)
 
@@ -96,7 +95,7 @@ www  WEB部署目录（或者子目录）
 
 ## 安装使用
 
-1. 首先克隆下载应用项目仓库
+1. 首先克隆下载应用项目仓库（或者直接下载最新[发布版本包](https://github.com/tingyuu/tplay/releases)）
     
     ```bash
     git clone https://github.com/tingyuu/tplay.git
@@ -108,15 +107,18 @@ www  WEB部署目录（或者子目录）
     ```
 3. 将根目录下的`tlay.sql`文件导入`mysql`数据库
 
+    ```mysql
+    mysql>source 你的(磁盘)路径/tplay.sql
+    ```
 4. 修改项目`/app/database.php`文件中的数据库配置信息
 
-5. 将你的域名指向根目录下的public目录（重要）,详情请安[服务环境部署](#服务环境部署)
+5. 将你的域名指向根目录下的public目录（重要）,详情请看这里 [服务环境部署](#服务环境部署)
 
-6. 浏览器访问：你的域名/admin   默认管理员账户：admin 密码：tplay
+6. 浏览器访问：`你的域名/admin`，默认管理员账户：`admin` 密码：`tplay`
 
 7. 如果你用到了短信配置，请前往阿里大鱼官网申请下载自己的sdk文件，替换/extend/dayu下的文件，在后台配置自己的appkey即可
 
-如遇问题可在QQ群221470096交流。
+> 如遇问题可在QQ群221470096交流。
 
 ## 服务环境部署 
 ####  Nginx 虚拟主机配置参考
@@ -124,9 +126,9 @@ www  WEB部署目录（或者子目录）
 ```bash
 server {
     listen 80;
-    server_name tplay.tinywan.com;
+    server_name tplay.tinywan.com; # 这里修改为你的域名或者公网IP地址
 
-    set $root_path $path/tplay/public;
+    set $root_path $path/tplay/public; # $path 为你的web项目绝对路径
     root $root_path;
     index index.php index.html index.htm;
 
@@ -148,19 +150,20 @@ server {
     }
 
     location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$ {
-            access_log  off;
-            error_log   off;
-            expires     30d;
+        access_log  off;
+        error_log   off;
+        expires     30d;
     }
 
     location ~ .*\.(js|css)?$ {
-            access_log   off;
-            error_log    off;
-            expires      12h;
+        access_log   off;
+        error_log    off;
+        expires      12h;
     }
 }
 ```
-> 然后重新启动 Nginx 即可生效
+> 重新启动 Nginx 即可生效，浏览器输入地址：[http://tplay.tinywan.com/admin/](http://tplay.tinywan.com/admin/)
+
 ####  Apache 配置参考
 在项目根目录加入.htaccess文件，只需开启rewrite模块
 ```bash
@@ -172,7 +175,7 @@ server {
   RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
 </IfModule>
 ```
-> 然后重新启动 Apache 即可生效
+> 重新启动 Apache 即可生效
 
 ## 版权信息
 
