@@ -93,26 +93,26 @@
                                 <label class="kit-login-icon">
                                     <i class="layui-icon">&#xe612;</i>
                                 </label>
-                                <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="用户名" class="layui-input" {notempty name="usermember"}value="{$usermember}"{/notempty}>
+                                <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="用户名" class="layui-input" {notempty name="usermember"}value="{$usermember}"{/notempty} style="border:1px solid rgba(0,150,136,.5);">
                             </div>
                             <div class="layui-form-item">
                                 <label class="kit-login-icon">
                                     <i class="layui-icon">&#xe642;</i>
                                 </label>
-                                <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="密码" class="layui-input">
+                                <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="密码" class="layui-input" style="border:1px solid rgba(0,150,136,.5);">
                             </div>
                             <div class="layui-form-item">
                                 <label class="kit-login-icon">
                                     <i class="layui-icon">&#xe642;</i>
                                 </label>
-                                <input type="text" name="captcha" lay-verify="required" autocomplete="off" placeholder="验证码" class="layui-input" style="width:45%;float: left;margin-right:5px;"><img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}?seed='+Math.random()" height="37" id="captcha" />
+                                <input type="text" name="captcha" lay-verify="required" autocomplete="off" placeholder="验证码" class="layui-input" style="width:45%;float: left;margin-right:5px;border:1px solid rgba(0,150,136,.5);"><img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}?seed='+Math.random()" height="37" id="captcha" />
                             </div>
                             <div class="layui-form-item">
                                 <div class="kit-pull-left kit-login-remember">
                                     <input type="checkbox" value="1" lay-skin="primary" title="记住帐号?" name="remember" {notempty name="usermember"}checked=""{/notempty}>
                                 </div>
                                 <div class="kit-pull-right">
-                                    <button class="layui-btn layui-btn-primary" lay-submit lay-filter="login">
+                                    <button class="layui-btn layui-btn-primary" lay-submit lay-filter="login" style="border:1px solid rgba(0,150,136,.5);">
                                         <i class="fa fa-sign-in" aria-hidden="true"></i> 登录
                                     </button>
                                 </div>

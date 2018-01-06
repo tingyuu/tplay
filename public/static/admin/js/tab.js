@@ -91,7 +91,7 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
             var tpl = [
                     '<div class="layui-tab layui-tab-card kit-tab" lay-filter="' + that._filter + '">',
                     '<ul class="layui-tab-title">',
-                    '<li class="layui-this" lay-id="-1" data-url="' + _config.mainUrl + '"><i class="layui-icon">&#xe68e;</i> 首页</li>',
+                    '<li class="layui-this" lay-id="-1" data-url="' + _config.mainUrl + '">首页</li>',
                     '</ul>',
                     // '<div class="kit-tab-tool">操作&nbsp;<i class="fa fa-caret-down"></i></div>',
                     // '<div class="kit-tab-tool-body layui-anim layui-anim-upbit">',
@@ -257,13 +257,13 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
             if (_config.openWait)
                 loadIndex = that.load();
             var titleHtm = ['<li class="layui-this" lay-id="' + id + '" data-url="' + url + '">'];
-            if (icon) {
-                if (icon.indexOf('fa-') !== -1) {
-                    titleHtm.push('<i class="fa ' + icon + '" aria-hidden="true"></i>');
-                } else {
-                    titleHtm.push('<i class="layui-icon">' + icon + '</i>');
-                }
-            }
+            // if (icon) {
+            //     if (icon.indexOf('fa-') !== -1) {
+            //         titleHtm.push('<i class="fa ' + icon + '" aria-hidden="true"></i>');
+            //     } else {
+            //         titleHtm.push('<i class="layui-icon">' + icon + '</i>');
+            //     }
+            // }
             titleHtm.push('&nbsp;' + title);
             titleHtm.push('<i class="layui-icon layui-unselect layui-tab-close">&#x1006;</i>');
             titleHtm.push('</li>');

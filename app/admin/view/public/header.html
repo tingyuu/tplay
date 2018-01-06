@@ -32,7 +32,11 @@
                 </li> -->
             </ul>
             <ul class="layui-nav layui-layout-right kit-nav">
-                <ul class="kit-tab-tool-body" style="float: left;"><a class="refresh kit-item" data-target="refresh" title="刷新当前页"><i class="fa fa-refresh" aria-hidden="true"></i></a></ul>
+                <ul class="kit-tab-tool-body" style="float: left;">
+                    <li class="layui-nav-item">
+                        <a class="refresh kit-item" data-target="refresh" title="刷新当前页" style="color:#fff;"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
                 <li class="layui-nav-item">
                     <a href="javascript:;" style="color:#fff;">皮肤</a>
                     </a>
@@ -50,8 +54,8 @@
                         <img src="{$cookie.thumb|geturl}" class="layui-nav-img" style="border: 2px solid #fff;">欢迎, {empty name="$cookie.nickname"}{$cookie.name}{else /}{$cookie.nickname}{/empty}
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" data-url="{:url('admin/admin/personal',['id'=>$cookie.id])}" data-icon="fa-asterisk" data-title="个人信息" kit-target data-id='1'><span>基本资料</span></a></dd>
-                        <dd><a href="javascript:;"  data-url="{:url('admin/admin/editPassword')}" data-icon="fa-edit" data-title="修改密码" kit-target data-id='2'><span>修改密码</span></a></dd>
+                        <dd><a href="javascript:;" data-url="{:url('admin/admin/personal',['id'=>$cookie.id])}" data-icon="fa-asterisk" data-title="个人信息" kit-target data-id='1'><span><i class="fa fa-cog"></i>基本资料</span></a></dd>
+                        <dd><a href="javascript:;"  data-url="{:url('admin/admin/editPassword')}" data-icon="fa-edit" data-title="修改密码" kit-target data-id='2'><span><i class="fa fa-edit"></i>修改密码</span></a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item"><a href="javascript:;" id="logout" style="color:#fff;"><i class="fa fa-sign-out" aria-hidden="true"></i> 退了</a></li>
