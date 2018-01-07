@@ -1,3 +1,4 @@
 runtime/*
 *.log
-.idea/*.xml
+.idea/*
+vendor/*
