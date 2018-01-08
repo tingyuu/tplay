@@ -101,6 +101,7 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
             });
             $('#kit-side-fold').off('click').on('click', function() {
                 var display = $('.kit-side-fold span').css('display');
+                var menu = $(this).find('i');
                 if(display == 'inline' || display == 'inline-block') {
                     $('.kit-side-fold span').css('display','none');
                 }
@@ -112,13 +113,14 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
                     _side.removeClass('kit-sided');
                     _doc.find('div.layui-body').removeClass('kit-body-folded');
                     _doc.find('div.layui-footer').removeClass('kit-footer-folded');
+                    menu.attr('class','layui-icon layui-icon-shrink-right');
                 } else {
                     _side.addClass('kit-sided');
                     _doc.find('div.layui-body').addClass('kit-body-folded');
                     _doc.find('div.layui-footer').addClass('kit-footer-folded');
+                    menu.attr('class','layui-icon layui-icon-spread-left');
                 }
             });
-            return that;
         },
         /**
          * 渲染navbar
