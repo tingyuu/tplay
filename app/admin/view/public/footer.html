@@ -44,6 +44,48 @@
                     var skin = getSkinName();
                     switchSkin(skin === undefined ? 'default' : skin);
                 }();
+                
+                $('#color').click(function(){
+                layer.open({
+                    type:1,
+                    title:'配色方案',
+                    area: ['300px', '100%'],
+                    offset: 'rb',
+                    shadeClose:true,
+                    id:'colors',
+                    anim: 2,
+                    shade:0.2,
+                    closeBtn:0,
+                    isOutAnim:false,
+                    resize:false,
+                    skin: 'color-class',
+                    btn:['默认黑','橘子橙','原谅绿','少女粉','天空蓝','枫叶红'],
+                    yes: function(index, layero){
+                        switchSkin('default');
+                      }
+                      ,btn2: function(index, layero){
+                        switchSkin('orange');
+                        return false;
+                      }
+                      ,btn3: function(index, layero){
+                        switchSkin('green');
+                        return false;
+                      }
+                      ,btn4: function(index, layero){
+                        switchSkin('pink');
+                        return false;
+                      }
+                      ,btn5: function(index, layero){
+                        switchSkin('blue.1');
+                        return false;
+                      }
+                      ,btn6: function(index, layero){
+                        switchSkin('red');
+                        return false;
+                      }
+
+                  });
+              })
         });
     </script>
     <script src="__PUBLIC__/jquery/jquery.min.js"></script>

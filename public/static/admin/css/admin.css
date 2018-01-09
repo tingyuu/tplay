@@ -41,3 +41,40 @@
 .layui-tab-title li .layui-tab-close{
 	margin-left:5px;
 }
+
+body .color-class .layui-layer-btn{
+	position: absolute;
+	top:50px;
+}
+
+body .color-class .layui-layer-btn .layui-layer-btn0{
+	background:#23262E;
+	color:#fff;
+	border-color:#23262E;
+}
+
+body .color-class .layui-layer-btn .layui-layer-btn1{
+	background:#ff6700;
+	color:#fff;
+	border-color:#ff6700;
+}
+body .color-class .layui-layer-btn .layui-layer-btn2{
+	background:#00a65a;
+	color:#fff;
+	border-color:#00a65a;
+}
+body .color-class .layui-layer-btn .layui-layer-btn3{
+	background:#FA6086;
+	color:#fff;
+	border-color:#FA6086;
+}
+body .color-class .layui-layer-btn .layui-layer-btn4{
+	background:#00c0ef;
+	color:#fff;
+	border-color:#00c0ef;
+}
+body .color-class .layui-layer-btn .layui-layer-btn5{
+	background:#dd4b39;
+	color:#fff;
+	border-color:#dd4b39;
+}

@@ -121,6 +121,7 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
                     menu.attr('class','layui-icon layui-icon-spread-left');
                 }
             });
+            return that;
         },
         /**
          * 渲染navbar
