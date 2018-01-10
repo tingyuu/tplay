@@ -49,7 +49,7 @@
                 layer.open({
                     type:1,
                     title:'配色方案',
-                    area: ['300px', '100%'],
+                    area: ['300px', 'calc(100% - 90px)'],
                     offset: 'rb',
                     shadeClose:true,
                     id:'colors',
@@ -112,18 +112,6 @@
                 })
             });
         });
-      // $('#clear').click(function() {
-      //   $.ajax({
-      //     url:"{:url('common/clear')}"
-      //     ,success:function(res) {
-      //       layer.msg(res.msg,{offset: '250px',anim: 1});
-      //     }
-      //   })
-      // })
-
-      $('#home').click(function(){
-        location.href = "{:url('admin/index/index')}";
-      })
 
       $('#logout').click(function(){
         layer.confirm('真的要退出?',{icon: 3, title:'提示',anim: 2}, function(index){
@@ -139,6 +127,10 @@
               }
             })
         }) 
+      })
+
+      $('.layui-nav-item').click(function(){
+        $(this).siblings('li').attr('class','layui-nav-item');
       })
     </script>
 </body>

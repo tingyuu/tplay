@@ -93,17 +93,15 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
                     '<ul class="layui-tab-title">',
                     '<li class="layui-this" lay-id="-1" data-url="' + _config.mainUrl + '">首页</li>',
                     '</ul>',
-                    // '<div class="kit-tab-tool">操作&nbsp;<i class="fa fa-caret-down"></i></div>',
-                    // '<div class="kit-tab-tool-body layui-anim layui-anim-upbit">',
-                    // '<ul>',
-                    // '<li class="kit-item" data-target="refresh">刷新当前选项卡</li>',
-                    // '<li class="kit-line"></li>',
-                    // '<li class="kit-item" data-target="closeCurrent">关闭当前选项卡</li>',
-                    // '<li class="kit-item" data-target="closeOther">关闭其他选项卡</li>',
-                    // '<li class="kit-line"></li>',
-                    // '<li class="kit-item" data-target="closeAll">关闭所有选项卡</li>',
-                    // '</ul>',
-                    // '</div>',
+                    '<i class="fa fa-chevron-down kit-tab-tool"></i>',
+                    '<div class="kit-tab-tool-body layui-anim layui-anim-upbit" id="kuaijie">',
+                    '<ul id="menudiv">',
+                    // '<li class="kit-item"><a class="kit-item" data-target="refresh">刷新当前标签页</a></li>',
+                    // '<li class="kit-item"><a class="kit-item" data-target="closeCurrent">关闭当前标签页</a></li>',
+                    '<li class="kit-item"><a class="kit-item" data-target="closeOther">关闭其他标签页</a></li>',
+                    '<li class="kit-item"><a class="kit-item" data-target="closeAll">关闭全部标签页</a></li>',
+                    '</ul>',
+                    '</div>',
                     '<div class="layui-tab-content">',
                     '<div class="layui-tab-item layui-show" lay-item-id="-1">{{content}}</div>',
                     '</div>',
@@ -123,11 +121,18 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
             that._title = $('.kit-tab ul.layui-tab-title');
             that._content = $('.kit-tab div.layui-tab-content');
             var _tool = $('.kit-tab-tool'),
-                _toolBody = $('.kit-tab-tool-body');
+                _toolBody = $('.kit-tab-tool-body'),
+                _tooMenu = $('#kuaijie');
             //监听操作点击事件
-            // _tool.on('click', function() {
-            //     _toolBody.toggle();
-            // });
+            _tool.on('mouseover', function() {
+                _tooMenu.toggle();
+            });
+            _tooMenu.on('mouseover', function() {
+                _tooMenu.show();
+            });
+            // _tooMenu.mouseout(function(){
+            //     _tooMenu.hide();
+            // })
             //监听操作项点击事件
             _toolBody.find('a.kit-item').each(function() {
                 var $that = $(this);
@@ -172,6 +177,7 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
                             break;
                     }
                     //_tool.click();
+                    _tooMenu.hide();
                 });
             });
            
