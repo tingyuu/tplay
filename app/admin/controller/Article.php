@@ -32,6 +32,10 @@ class Article extends User
         if (isset($post['article_cate_id']) and $post['article_cate_id'] > 0) {
             $where['article_cate_id'] = $post['article_cate_id'];
         }
+
+        if (isset($post['admin_id']) and $post['admin_id'] > 0) {
+            $where['admin_id'] = $post['admin_id'];
+        }
         
         if (isset($post['status']) and ($post['status'] == 1 or $post['status'] === '0')) {
             $where['status'] = $post['status'];
