@@ -145,7 +145,7 @@ body .demo-class .layui-layer-btn{
                                 <li>点击加群，如果实在加不了还有群号啊[221470096]
                                 </li>
                                 <li>下载地址：
-                                    <a href="https://github.com/tingyuu/tplay" target="_blank">Github </a> <a href="https://gitee.com/pengweimy/tplay" target="_blank">码云 </a>(记得给个star哦！有问题可在交流群里@群主。)
+                                    <a href="http://tplay.pengyichen.cn" target="_blank">免费去下载 </a>(记得给个star哦！有问题可在交流群里@群主。)
                                 </li>
                                 <li>目前也只是做了适配性较强的一些功能模块，后续会不断增加新功能模块(⊙o⊙)…</li>
                             </ul>
@@ -228,49 +228,5 @@ body .demo-class .layui-layer-btn{
       
     });
     </script>
-
-<script type="text/javascript">
-  layui.use('layer', function(){
-    var layer = layui.layer;
-    var remember = '';
-    $(document).ready(function(){
-      layer.prompt({
-        formType: 2,
-        anim: 3,
-        offset: 'rb',
-        value: "{$web.remember}",
-        title: '便签 => 是存在本地的',
-        skin: 'demo-class',
-        area: ['280px', '150px'],
-        id: 'remember' ,//设定一个id，防止重复弹出
-        btn: ['朕写好了', '忘了吧...'],
-        shade: 0,
-        moveType: 1, //拖拽模式，0或者1
-        btn2: function(index, layero){
-            $.ajax({
-                url:"{:url('admin/main/delremember')}"
-                ,type:"post"
-                ,success:function(res) {
-                    layer.msg(res.msg);
-                    if(res.code == 1) {
-                        $('#remember textarea').val('');
-                    }
-                }
-            })
-            return false;
-          }
-      },function(value, index, elem){
-        $.ajax({
-            url:"{:url('admin/main/remember')}"
-            ,type:"post"
-            ,data:{message:value}
-            ,success:function(res) {
-                layer.msg(res.msg);
-            }
-        })
-      })
-    });
-  });              
-</script>
 </body>
 </html>

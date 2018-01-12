@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-01-05 16:01:07
+Date: 2018-01-12 13:33:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,13 +31,16 @@ CREATE TABLE `tplay_admin` (
   `login_ip` varchar(100) DEFAULT NULL COMMENT '最后登录ip',
   `admin_cate_id` int(2) NOT NULL DEFAULT '1' COMMENT '管理员分组',
   PRIMARY KEY (`id`),
-  KEY `id` (`id`) USING BTREE
+  KEY `id` (`id`) USING BTREE,
+  KEY `admin_cate_id` (`admin_cate_id`) USING BTREE,
+  KEY `nickname` (`nickname`) USING BTREE,
+  KEY `create_time` (`create_time`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tplay_admin
 -- ----------------------------
-INSERT INTO `tplay_admin` VALUES ('1', 'Tplay', 'admin', '31c64b511d1e90fcda8519941c1bd660', '1', '1510885948', '1515046061', '1515136015', '127.0.0.1', '1');
+INSERT INTO `tplay_admin` VALUES ('1', 'Tplay', 'admin', '31c64b511d1e90fcda8519941c1bd660', '1', '1510885948', '1515046061', '1515734698', '127.0.0.1', '1');
 
 -- ----------------------------
 -- Table structure for `tplay_admin_cate`
@@ -51,7 +54,9 @@ CREATE TABLE `tplay_admin_cate` (
   `update_time` int(11) NOT NULL,
   `desc` text COMMENT '备注',
   PRIMARY KEY (`id`),
-  KEY `id` (`id`) USING BTREE
+  KEY `id` (`id`) USING BTREE,
+  KEY `name` (`name`) USING BTREE,
+  KEY `create_time` (`create_time`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -72,7 +77,8 @@ CREATE TABLE `tplay_admin_log` (
   `create_time` int(11) NOT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`),
   KEY `id` (`id`) USING BTREE,
-  KEY `admin_id` (`admin_id`) USING BTREE
+  KEY `admin_id` (`admin_id`) USING BTREE,
+  KEY `create_time` (`create_time`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -156,7 +162,7 @@ INSERT INTO `tplay_admin_menu` VALUES ('65', '添加留言', 'admin', 'tomessage
 INSERT INTO `tplay_admin_menu` VALUES ('66', '管理员登录', 'admin', 'common', 'login', '', '管理员登录。', '2', '2', '0', '1513061455', '1513402429', '', '0', '100');
 INSERT INTO `tplay_admin_menu` VALUES ('67', '系统设置', 'admin', 'webconfig', 'index', '', '网站信息设置。', '1', '2', '1', '1513131135', '1515038283', 'fa-desktop', '0', '3');
 INSERT INTO `tplay_admin_menu` VALUES ('68', '修改网站配置', 'admin', 'webconfig', 'publish', '', '修改网站配置信息。', '2', '1', '67', '1513131161', '1513408856', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('69', '上传文件', 'admin', 'common', 'upload', '', '上传文件。', '2', '2', '0', '1513155130', '1515036247', '', '0', '200');
+INSERT INTO `tplay_admin_menu` VALUES ('69', '上传文件', 'admin', 'common', 'upload', '', '上传文件。', '2', '2', '0', '1513155130', '1515036247', '', '0', '199');
 INSERT INTO `tplay_admin_menu` VALUES ('70', '上传附件', 'admin', 'attachment', 'upload', '', '上传附件。', '2', '1', '79', '1513323699', '1513403557', '', '0', '0');
 INSERT INTO `tplay_admin_menu` VALUES ('71', '文件下载', 'admin', 'attachment', 'download', '', '文件下载。', '2', '1', '79', '1513325699', '1513403571', '', '0', '0');
 INSERT INTO `tplay_admin_menu` VALUES ('72', '管理员', 'admin', 'admin', 'index', '', '管理员列表。', '1', '2', '4', '1513402959', '1513402959', 'fa-user', '0', '1');
@@ -190,7 +196,10 @@ CREATE TABLE `tplay_article` (
   PRIMARY KEY (`id`),
   KEY `id` (`id`) USING BTREE,
   KEY `status` (`status`) USING BTREE,
-  KEY `is_top` (`is_top`) USING BTREE
+  KEY `is_top` (`is_top`) USING BTREE,
+  KEY `article_cate_id` (`article_cate_id`) USING BTREE,
+  KEY `admin_id` (`admin_id`) USING BTREE,
+  KEY `create_time` (`create_time`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -238,14 +247,15 @@ CREATE TABLE `tplay_attachment` (
   `download` int(11) NOT NULL DEFAULT '0' COMMENT '下载量',
   PRIMARY KEY (`id`),
   KEY `id` (`id`) USING BTREE,
-  KEY `status` (`status`) USING BTREE
+  KEY `status` (`status`) USING BTREE,
+  KEY `filename` (`filename`) USING BTREE,
+  KEY `create_time` (`create_time`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='附件表';
 
 -- ----------------------------
 -- Records of tplay_attachment
 -- ----------------------------
 INSERT INTO `tplay_attachment` VALUES ('1', 'admin', '79811855a6c06de53047471c4ff82a36.jpg', '\\uploads\\admin\\admin_thumb\\20180104\\79811855a6c06de53047471c4ff82a36.jpg', '13781', 'jpg', '1', '127.0.0.1', '1', '1515046060', '1', '1515046060', 'admin_thumb', '0');
-INSERT INTO `tplay_attachment` VALUES ('2', 'admin', 'fe6503be604640a0ad805a8158e3c77d.jpg', '\\uploads\\admin\\article_thumb\\20180104\\fe6503be604640a0ad805a8158e3c77d.jpg', '13781', 'jpg', '1', '127.0.0.1', '1', '1515055763', '1', '1515055763', 'article_thumb', '0');
 
 -- ----------------------------
 -- Table structure for `tplay_emailconfig`
@@ -280,7 +290,9 @@ CREATE TABLE `tplay_messages` (
   `message` text NOT NULL,
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id` (`id`) USING BTREE
+  KEY `id` (`id`) USING BTREE,
+  KEY `is_look` (`is_look`) USING BTREE,
+  KEY `create_time` (`create_time`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------

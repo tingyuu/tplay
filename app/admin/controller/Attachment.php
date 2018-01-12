@@ -21,7 +21,24 @@ class Attachment extends User
     public function index()
     {
         $model = new model();
-        $attachment = $model->order('create_time desc')->paginate(20);
+
+        $post = $this->request->post();
+        if (isset($post['keywords']) and !empty($post['keywords'])) {
+            $where['filename'] = ['like', '%' . $post['keywords'] . '%'];
+        }
+        
+        if (isset($post['status']) and ($post['status'] == 1 or $post['status'] === '0' or $post['status'] == -1)) {
+            $where['status'] = $post['status'];
+        }
+ 
+        if(isset($post['create_time']) and !empty($post['create_time'])) {
+            $min_time = strtotime($post['create_time']);
+            $max_time = $min_time + 24 * 60 * 60;
+            $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
+        }
+        
+        $attachment = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20);
+        
         $this->assign('attachment',$attachment);
         return $this->fetch();
     }

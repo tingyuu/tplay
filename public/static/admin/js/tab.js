@@ -124,11 +124,8 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
                 _toolBody = $('.kit-tab-tool-body'),
                 _tooMenu = $('#kuaijie');
             //监听操作点击事件
-            _tool.on('mouseover', function() {
+            _tool.on('click', function() {
                 _tooMenu.toggle();
-            });
-            _tooMenu.on('mouseover', function() {
-                _tooMenu.show();
             });
             // _tooMenu.mouseout(function(){
             //     _tooMenu.hide();

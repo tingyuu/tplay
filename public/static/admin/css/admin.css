@@ -74,3 +74,32 @@ body .color-class .layui-layer-btn .layui-layer-btn5{
 	color:#fff;
 	border-color:#dd4b39;
 }
+
+body .demo-class textarea {background:#fff;width:200px;color:#000;border:0;}
+#LAY_layuipro {position: relative;}
+body .demo-class .layui-layer-btn{
+    position: absolute;
+    bottom:10px;
+    right:0;
+    padding:0;
+}
+
+body #copyrights{
+	padding:10px;
+}
+body #copyrights p{
+	padding:10px 0 0 0;
+}
+body #copyrights hr{
+	margin:10px 0 0 0;
+}
+body #copyrights blockquote{
+	border-left:0;
+}
+body #copyrights a{
+	margin-top: 10px;
+}
+
+.serch input{
+	height:31px;
+}

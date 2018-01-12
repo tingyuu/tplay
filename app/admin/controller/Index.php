@@ -14,6 +14,7 @@ namespace app\admin\controller;
 
 use app\admin\controller\User;
 use \think\Db;
+use \think\Cookie;
 class Index extends User
 {
     public function index()
@@ -30,6 +31,7 @@ class Index extends User
         }
         $menus = $this->menulist($menu);
         $this->assign('menus',$menus);
+
         return $this->fetch();
     }
 

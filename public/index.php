@@ -15,5 +15,5 @@
 define('APP_PATH', __DIR__ . '/../app/');
 // 加载框架引导文件
 require __DIR__ . '/../thinkphp/start.php';
-// 自动生成admin模块
-//\think\Build::module('extend');
+// 自动生成模块
+//\think\Build::module('index');

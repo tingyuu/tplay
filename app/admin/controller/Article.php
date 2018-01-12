@@ -25,12 +25,37 @@ class Article extends User
     public function index()
     {
         $model = new articleModel();
-        $articles = $model->select();
+        $post = $this->request->post();
+        if (isset($post['keywords']) and !empty($post['keywords'])) {
+            $where['name'] = ['like', '%' . $post['keywords'] . '%'];
+        }
+        if (isset($post['article_cate_id']) and $post['article_cate_id'] > 0) {
+            $where['article_cate_id'] = $post['article_cate_id'];
+        }
+        
+        if (isset($post['status']) and ($post['status'] == 1 or $post['status'] === '0')) {
+            $where['status'] = $post['status'];
+        }
+
+        if (isset($post['is_top']) and ($post['is_top'] == 1 or $post['is_top'] === '0')) {
+            $where['is_top'] = $post['is_top'];
+        }
+ 
+        if(isset($post['create_time']) and !empty($post['create_time'])) {
+            $min_time = strtotime($post['create_time']);
+            $max_time = $min_time + 24 * 60 * 60;
+            $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
+        }
+        
+        $articles = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20);
         //添加最后修改人的name
         foreach ($articles as $key => $value) {
             $articles[$key]['edit_admin'] = Db::name('admin')->where('id',$value['edit_admin_id'])->value('nickname');
         }
         $this->assign('articles',$articles);
+        $info['cate'] = Db::name('article_cate')->select();
+        $info['admin'] = Db::name('admin')->select();
+        $this->assign('info',$info);
         return $this->fetch();
     }
 

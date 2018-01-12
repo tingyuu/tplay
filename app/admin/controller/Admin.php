@@ -27,8 +27,26 @@ class Admin extends User
     {
         //实例化管理员模型
         $model = new adminModel();
-        $admin = $model->paginate(20);
+
+        $post = $this->request->post();
+        if (isset($post['keywords']) and !empty($post['keywords'])) {
+            $where['nickname'] = ['like', '%' . $post['keywords'] . '%'];
+        }
+        if (isset($post['admin_cate_id']) and $post['admin_cate_id'] > 0) {
+            $where['admin_cate_id'] = $post['admin_cate_id'];
+        }
+ 
+        if(isset($post['create_time']) and !empty($post['create_time'])) {
+            $min_time = strtotime($post['create_time']);
+            $max_time = $min_time + 24 * 60 * 60;
+            $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
+        }
+        
+        $admin = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20);
+        
         $this->assign('admin',$admin);
+        $info['cate'] = Db::name('admin_cate')->select();
+        $this->assign('info',$info);
         return $this->fetch();
     }
 
@@ -229,7 +247,20 @@ class Admin extends User
     public function adminCate()
     {
     	$model = new \app\admin\model\AdminCate;
-        $cate = $model->paginate(15);
+
+        $post = $this->request->post();
+        if (isset($post['keywords']) and !empty($post['keywords'])) {
+            $where['name'] = ['like', '%' . $post['keywords'] . '%'];
+        }
+ 
+        if(isset($post['create_time']) and !empty($post['create_time'])) {
+            $min_time = strtotime($post['create_time']);
+            $max_time = $min_time + 24 * 60 * 60;
+            $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
+        }
+        
+        $cate = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20);
+        
     	$this->assign('cate',$cate);
     	return $this->fetch();
 
@@ -402,11 +433,31 @@ class Admin extends User
     public function log()
     {
         $model = new \app\admin\model\AdminLog();
-        $log = $model->order('create_time desc')->paginate(20);
+
+        $post = $this->request->post();
+        if (isset($post['admin_menu_id']) and $post['admin_menu_id'] > 0) {
+            $where['admin_menu_id'] = $post['admin_menu_id'];
+        }
+        
+        if (isset($post['admin_id']) and $post['admin_id'] > 0) {
+            $where['admin_id'] = $post['admin_id'];
+        }
+ 
+        if(isset($post['create_time']) and !empty($post['create_time'])) {
+            $min_time = strtotime($post['create_time']);
+            $max_time = $min_time + 24 * 60 * 60;
+            $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
+        }
+        
+        $log = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20);
+        
         $this->assign('log',$log);
         //身份列表
         $admin_cate = Db::name('admin_cate')->select();
         $this->assign('admin_cate',$admin_cate);
+        $info['menu'] = Db::name('admin_menu')->select();
+        $info['admin'] = Db::name('admin')->select();
+        $this->assign('info',$info);
         return $this->fetch();
     }
 

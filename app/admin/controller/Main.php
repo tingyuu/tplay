@@ -70,30 +70,4 @@ class Main extends \think\Controller
 
         return $this->fetch();
     }
-
-
-    public function remember()
-    {
-        if($this->request->isPost()) {
-            $post = $this->request->post();
-            if(Cookie::has('remember')) {
-                Cookie::delete('remember');
-            }
-            Cookie::forever('remember',$post['message']);
-            return $this->success('一经记,不轻忘...');
-        }
-    }
-
-
-    public function delremember()
-    {
-        if($this->request->isPost()) {
-            if(Cookie::has('remember')) {
-                Cookie::delete('remember');
-            } else {
-                return $this->error('不曾记,何以忘...');
-            }
-            return $this->success('一经忘,不再想...');
-        }
-    }
 }

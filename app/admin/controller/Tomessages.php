@@ -21,7 +21,23 @@ class Tomessages extends User
     public function index()
     {
         $model = new Messages();
-        $message = $model->order('create_time desc')->paginate(20);
+
+        $post = $this->request->post();
+        if (isset($post['keywords']) and !empty($post['keywords'])) {
+            $where['message'] = ['like', '%' . $post['keywords'] . '%'];
+        }
+        
+        if (isset($post['is_look']) and ($post['is_look'] == 1 or $post['is_look'] === '0')) {
+            $where['is_look'] = $post['is_look'];
+        }
+ 
+        if(isset($post['create_time']) and !empty($post['create_time'])) {
+            $min_time = strtotime($post['create_time']);
+            $max_time = $min_time + 24 * 60 * 60;
+            $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
+        }
+        
+        $message = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20);
         $this->assign('message',$message);
         return $this->fetch();
     }
