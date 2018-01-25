@@ -37,7 +37,7 @@ class Attachment extends User
             $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
         }
         
-        $attachment = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20);
+        $attachment = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20,false,['query'=>$this->request->param()]);
         
         $this->assign('attachment',$attachment);
         return $this->fetch();

@@ -14,6 +14,7 @@ namespace app\admin\controller;
 
 use \think\Db;
 use \think\Cookie;
+use \think\Session;
 use app\admin\model\Admin as adminModel;//管理员模型
 use app\admin\model\AdminMenu;
 use app\admin\controller\User;
@@ -42,7 +43,7 @@ class Admin extends User
             $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
         }
         
-        $admin = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20);
+        $admin = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20,false,['query'=>$this->request->param()]);
         
         $this->assign('admin',$admin);
         $info['cate'] = Db::name('admin_cate')->select();
@@ -58,7 +59,7 @@ class Admin extends User
     public function personal()
     {
         //获取管理员id
-        $id = Cookie::get('admin');
+        $id = Session::get('admin');
         $model = new adminModel();
         if($id > 0) {
             //是修改操作
@@ -185,7 +186,7 @@ class Admin extends User
     {
     	$id = $this->request->has('id') ? $this->request->param('id', 0, 'intval') : 0;
     	if($id > 0) {
-    		if($id == Cookie::get('admin')) {
+    		if($id == Session::get('admin')) {
     			$post = $this->request->post();
     			//验证  唯一规则： 表名，字段名，排除主键值，主键名
 	            $validate = new \think\Validate([
@@ -227,7 +228,7 @@ class Admin extends User
     		if($id == 1) {
     			return $this->error('网站所有者不能被删除');
     		}
-    		if($id == Cookie::get('admin')) {
+    		if($id == Session::get('admin')) {
     			return $this->error('自己不能删除自己');
     		}
     		if(false == Db::name('admin')->where('id',$id)->delete()) {
@@ -259,7 +260,7 @@ class Admin extends User
             $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
         }
         
-        $cate = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20);
+        $cate = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20,false,['query'=>$this->request->param()]);
         
     	$this->assign('cate',$cate);
     	return $this->fetch();
@@ -449,7 +450,7 @@ class Admin extends User
             $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
         }
         
-        $log = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20);
+        $log = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20,false,['query'=>$this->request->param()]);
         
         $this->assign('log',$log);
         //身份列表
@@ -459,49 +460,5 @@ class Admin extends User
         $info['admin'] = Db::name('admin')->select();
         $this->assign('info',$info);
         return $this->fetch();
-    }
-
-    public function ceshi()
-    {
-        //不是超级管理员，获取访问的url结构
-        $where['module'] = $this->request->module();
-        $where['controller'] = $this->request->controller();
-        $where['function'] = $this->request->action();
-        $where['type'] = 1;
-        //获取除了域名和后缀外的url，是字符串
-        $parameter = $this->request->path() ? $this->request->path() : null;
-        //将字符串转化为数组
-        $parameter = explode('/',$parameter);
-        //剔除url中的模块、控制器和方法
-        foreach ($parameter as $key => $value) {
-            if($value != $where['module'] and $value != $where['controller'] and $value != $where['function']) {
-                $param[] = $value;
-            }
-        }
-
-        if(isset($param) and !empty($param)) {
-            //确定有参数
-            $string = '';
-            foreach ($param as $key => $value) {
-                //奇数为参数的参数名，偶数为参数的值
-                if($key%2 !== 0) {
-                    //过滤只有一个参数和最后一个参数的情况
-                    if(count($param) > 2 and $key < count($param)-1) {
-                        $string.=$value.'&';
-                    } else {
-                        $string.=$value;
-                    }
-                } else {
-                    $string.=$value.'=';
-                }
-            } 
-        } else {
-            $string = [];
-            $param = $this->request->param();
-            foreach ($param as $key => $value) {
-                $string[] = $key.'='.$value;
-            }
-            $string = implode('&',$string);
-        } 
     }
 }

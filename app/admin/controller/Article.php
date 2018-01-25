@@ -17,6 +17,7 @@ use \think\Controller;
 use think\Loader;
 use think\Db;
 use \think\Cookie;
+use \think\Session;
 use app\admin\controller\User;
 use app\admin\model\Article as articleModel;
 use app\admin\model\ArticleCate as cateModel;
@@ -51,7 +52,9 @@ class Article extends User
             $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
         }
         
-        $articles = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20);
+        $articles = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20,false,['query'=>$this->request->param()]);
+
+        //$articles = $article->toArray();
         //添加最后修改人的name
         foreach ($articles as $key => $value) {
             $articles[$key]['edit_admin'] = Db::name('admin')->where('id',$value['edit_admin_id'])->value('nickname');
@@ -93,7 +96,7 @@ class Article extends User
 	            	return $this->error('id不正确');
 	            }
                 //设置修改人
-                $post['edit_admin_id'] = Cookie::get('admin');
+                $post['edit_admin_id'] = Session::get('admin');
 	            if(false == $model->allowField(true)->save($post,['id'=>$id])) {
 	            	return $this->error('修改失败');
 	            } else {
@@ -130,7 +133,7 @@ class Article extends User
 	                $this->error('提交失败：' . $validate->getError());
 	            }
                 //设置创建人
-                $post['admin_id'] = Cookie::get('admin');
+                $post['admin_id'] = Session::get('admin');
                 //设置修改人
                 $post['edit_admin_id'] = $post['admin_id'];
 	            if(false == $model->allowField(true)->save($post)) {

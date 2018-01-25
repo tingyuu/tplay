@@ -17,6 +17,7 @@ use \think\Controller;
 use think\Loader;
 use think\Db;
 use \think\Cookie;
+use \think\Session;
 class Common extends Controller
 {
     /**
@@ -59,7 +60,7 @@ class Common extends Controller
             $data['filesize'] = $info->getSize();//文件大小
             $data['create_time'] = time();//时间
             $data['uploadip'] = $this->request->ip();//IP
-            $data['user_id'] = Cookie::has('admin') ? Cookie::get('admin') : 0;
+            $data['user_id'] = Session::has('admin') ? Session::get('admin') : 0;
             if($data['module'] = 'admin') {
                 //通过后台上传的文件直接审核通过
                 $data['status'] = 1;
@@ -84,7 +85,7 @@ class Common extends Controller
      */
     public function login()
     {
-        if(Cookie::has('admin') == false) { 
+        if(Session::has('admin') == false) { 
             if($this->request->isPost()) {
                 //是登录操作
                 $post = $this->request->post();
@@ -122,14 +123,12 @@ class Common extends Controller
                                 Cookie::delete('usermember');
                             }
                         }
-                        Cookie::set("admin",$name['id'],7200); //保存新的,最长为2小时
+                        Session::set("admin",$name['id']); //保存新的
                         //记录登录时间和ip
                         Db::name('admin')->where('id',$name['id'])->update(['login_ip' =>  $this->request->ip(),'login_time' => time()]);
                         //记录操作日志
                         addlog();
-                        //Db::name('admin_log')->data(['ip' =>  $this->request->ip(),'create_time' => time(),'name'=>'管理员登录','admin_id'=>$name['id']])->insert();
                         return $this->success('登录成功,正在跳转...','admin/index/index');
-                        //$this->redirect('admin/index/index');
                     }
                 }
             } else {
@@ -149,8 +148,8 @@ class Common extends Controller
      */
     public function logout()
     {
-        Cookie::delete('admin');
-        if(!empty(Cookie::get('admin'))) {
+        Session::delete('admin');
+        if(Session::has('admin')) {
             return $this->error('退出失败');
         } else {
             return $this->success('正在退出...','admin/common/login');

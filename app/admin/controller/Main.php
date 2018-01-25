@@ -59,13 +59,6 @@ class Main extends \think\Controller
         $web['message_num'] = Db::name('messages')->count();
         $web['look_message'] = Db::name('messages')->where('is_look',0)->count();
 
-        if(Cookie::has('remember')) {
-            $web['remember'] = Cookie::get('remember');
-            //return $web['remember'];
-        } else {
-            $web['remember'] = '';
-        }
-
         $this->assign('web',$web);
 
         return $this->fetch();

@@ -37,7 +37,7 @@ class Tomessages extends User
             $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
         }
         
-        $message = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20);
+        $message = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20,false,['query'=>$this->request->param()]);
         $this->assign('message',$message);
         return $this->fetch();
     }

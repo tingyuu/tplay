@@ -16,7 +16,7 @@ use \think\Cache;
 use \think\Controller;
 use think\Loader;
 use think\Db;
-use \think\Cookie;
+use \think\Session;
 class User extends Controller
 {
 
@@ -38,16 +38,35 @@ class User extends Controller
             $ip = $this->request->ip();
             if(in_array($ip,$black_ip)) {
                 //清空cookie
-                if(!empty(Cookie::get('admin'))) {
-                    Cookie::delete('admin');
+                if(Session::has('admin')) {
+                    Session::delete('admin');
                 }
                 return $this->error('你的ip在黑名单里','admin/common/login');
             }
         }
         
         //检查是否登录
-        $admin_id = Cookie::get('admin');
-        if(!empty($admin_id)) {
+        
+        if(Session::has('admin')) {
+            $admin_id = Session::get('admin');
+            $options = [
+                // 缓存类型为File
+                'type'  =>  'File', 
+                // 缓存有效期
+                'expire'=>  7200, 
+                //缓存前缀
+                'prefix'=>  'admin',
+                 // 指定缓存目录
+                'path'  =>  APP_PATH.'runtime/cache/',
+            ];
+            Cache::connect($options);
+
+            if(Cache::get('admin')) {
+                $cookie = Cache::get('admin');
+            } else {
+                $cookie = Db::name('admin')->where('id',$admin_id)->find();
+                Cache::set('admin',$cookie);
+            }
             $cookie = Db::name('admin')->where('id',$admin_id)->find();
             $this->assign('cookie',$cookie);
         } else {
