@@ -68,12 +68,12 @@ function addlog($operation_id='')
                 }
             } 
         } else {
-            //这里有个bug，ajax请求方式，传递的参数path()接收不到，所以只能param()
+            //ajax请求方式，传递的参数path()接收不到，所以只能param()
             $string = [];
             $param = $request->param();
             foreach ($param as $key => $value) {
                 if(!is_array($value)) {
-                    //这里不完美，param()会接收到页面表单的数据，数据里有字段的值是数组，所以会出错，这里过滤掉值为数组的参数
+                    //这里过滤掉值为数组的参数
                     $string[] = $key.'='.$value;
                 }
             }

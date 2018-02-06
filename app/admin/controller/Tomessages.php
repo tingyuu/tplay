@@ -14,15 +14,15 @@ namespace app\admin\controller;
 
 use \think\Controller;
 use think\Db;
-use app\admin\controller\User;
+use app\admin\controller\Permissions;
 use app\admin\model\Messages;
-class Tomessages extends User
+class Tomessages extends Permissions
 {
     public function index()
     {
         $model = new Messages();
 
-        $post = $this->request->post();
+        $post = $this->request->param();
         if (isset($post['keywords']) and !empty($post['keywords'])) {
             $where['message'] = ['like', '%' . $post['keywords'] . '%'];
         }

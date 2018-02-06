@@ -18,15 +18,15 @@ use think\Loader;
 use think\Db;
 use \think\Cookie;
 use \think\Session;
-use app\admin\controller\User;
+use app\admin\controller\Permissions;
 use app\admin\model\Article as articleModel;
 use app\admin\model\ArticleCate as cateModel;
-class Article extends User
+class Article extends Permissions
 {
     public function index()
     {
         $model = new articleModel();
-        $post = $this->request->post();
+        $post = $this->request->param();
         if (isset($post['keywords']) and !empty($post['keywords'])) {
             $where['name'] = ['like', '%' . $post['keywords'] . '%'];
         }

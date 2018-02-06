@@ -14,10 +14,13 @@ namespace app\admin\controller;
 
 use \think\Db;
 use \think\Cookie;
-class Main extends \think\Controller
+use app\admin\controller\Permissions;
+class Main extends Permissions
 {
     public function index()
     {
+        //tplay版本号
+        $info['tplay'] = TPLAY_VERSION;
         //tp版本号
         $info['tp'] = THINK_VERSION;
         //php版本
@@ -58,6 +61,30 @@ class Main extends \think\Controller
         $web['ref_file'] = Db::name('attachment')->where('status',-1)->count();
         $web['message_num'] = Db::name('messages')->count();
         $web['look_message'] = Db::name('messages')->where('is_look',0)->count();
+
+
+        //登陆次数和下载次数
+        $today = date('Y-m-d');
+
+        //取当前时间的前十四天
+        $date = [];
+        $date_string = '';
+        for ($i=9; $i >0 ; $i--) { 
+            $date[] = date("Y-m-d",strtotime("-{$i} day"));
+            $date_string.= date("Y-m-d",strtotime("-{$i} day")) . ',';
+        }
+        $date[] = $today;
+        $date_string.= $today;
+        $web['date_string'] = $date_string;
+
+        $login_sum = '';
+        foreach ($date as $k => $val) {
+            $min_time = strtotime($val);
+            $max_time = $min_time + 60*60*24;
+            $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
+            $login_sum.= Db::name('admin_log')->where(['admin_menu_id'=>50])->where($where)->count() . ',';
+        }
+        $web['login_sum'] = $login_sum;
 
         $this->assign('web',$web);
 

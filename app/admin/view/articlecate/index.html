@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
   <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
   <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
-  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
   <style type="text/css">
 
 /* tooltip */
@@ -23,116 +22,71 @@
 }
 </style>
 </head>
-<body>
-<fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;border:0"> 
-<div class="layui-btn-group demoTable">
-  <a class="layui-btn layui-btn-sm a_menu" href="{:url('admin/articlecate/publish')}" class="a_menu">
-    添加新分类
-  </a>
-</div>
-</fieldset>
-<table class="layui-table" lay-even="" lay-skin="row" lay-size="sm">
-  <colgroup>
-    <col width="50">
-    <col width="150">
-    <col width="500">
-    <col width="200">
-    <col width="100">
-  </colgroup>
-  <thead>
-    <tr>
-      <th>编号</th>
-      <th>名称</th>
-      <th>描述</th>
-      <th>创建时间</th>
-      <th>操作</th>
-    </tr> 
-  </thead>
-  <tbody>
-    {volist name="cates" id="vo"}
-    <tr>
-      <td>{$vo.id}</td>
-      <td><span style="font-weight:500;">{$vo.str}</span>{$vo.name}</td>
-      <td>{$vo.description}</td>
-      <td>{$vo.create_time}</td>
-      <td class="operation-menu">
-        <a href="{:url('admin/articlecate/publish',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu" style="margin-right: 0;font-size:12px;">修改</a>
-        <a href="{:url('admin/articlecate/publish',['pid'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu" style="margin-right: 0;font-size:12px;">新增</a>
-        <a href="javascript:;" class="layui-btn layui-btn-xs layui-btn-danger delete" id="{$vo.id}" style="margin-right: 0;font-size:12px;">删除</a>
-      </td>
-    </tr>
-    {/volist}
-  </tbody>
-</table>
-        
-<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
-<script src="__PUBLIC__/jquery/jquery.min.js"></script>
-<script>
-        var message;
-        layui.config({
-            base: '__JS__/',
-            version: '1.0.1'
-        }).use(['app', 'message'], function() {
-            var app = layui.app,
-                $ = layui.jquery,
-                layer = layui.layer;
-            //将message设置为全局以便子页面调用
-            message = layui.message;
-            //主入口
-            app.set({
-                type: 'iframe'
-            }).init();
-        });
-    </script> 
-<script type="text/javascript">
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li class="layui-this">分类管理</li>
+        <li><a href="{:url('admin/articlecate/publish')}" class="a_menu">新增分类</a></li>
+      </ul>
+    </div>
+    <table class="layui-table" lay-size="sm">
+      <colgroup>
+        <col width="50">
+        <col width="150">
+        <col width="500">
+        <col width="200">
+        <col width="100">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th>名称</th>
+          <th>描述</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr> 
+      </thead>
+      <tbody>
+        {volist name="cates" id="vo"}
+        <tr>
+          <td>{$vo.id}</td>
+          <td><span style="font-weight:500;">{$vo.str}</span>{$vo.name}</td>
+          <td>{$vo.description}</td>
+          <td>{$vo.create_time}</td>
+          <td class="operation-menu">
+            <div class="layui-btn-group">
+              <a href="{:url('admin/articlecate/publish',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu layui-btn-primary" style="margin-right: 0;font-size:12px;"><i class="layui-icon"></i></a>
+              <a href="{:url('admin/articlecate/publish',['pid'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu layui-btn-primary" style="margin-right: 0;font-size:12px;"><i class="layui-icon"></i></a>
+              <a href="javascript:;" class="layui-btn layui-btn-xs layui-btn-primary delete" id="{$vo.id}" style="margin-right: 0;font-size:12px;"><i class="layui-icon"></i></a>
+            </div>
+          </td>
+        </tr>
+        {/volist}
+      </tbody>
+    </table>
+            
+    {include file="public/foot"}
+    <script type="text/javascript">
 
-$('.delete').click(function(){
-  var id = $(this).attr('id');
-  layer.confirm('确定要删除?', function(index) {
-    $.ajax({
-      url:"{:url('admin/articlecate/delete')}",
-      data:{id:id},
-      success:function(res) {
-        layer.msg(res.msg);
-        if(res.code == 1) {
-          setTimeout(function(){
-            location.href = res.url;
-          },1500)
-        }
-      }
+    $('.delete').click(function(){
+      var id = $(this).attr('id');
+      layer.confirm('确定要删除?', function(index) {
+        $.ajax({
+          url:"{:url('admin/articlecate/delete')}",
+          data:{id:id},
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              setTimeout(function(){
+                location.href = res.url;
+              },1500)
+            }
+          }
+        })
+      })
     })
-  })
-})
-</script>
-<script type="text/javascript">
-layui.use('layer', function(){
-  var layer = layui.layer;
-  $('.a_menu').click(function(){
-    var url = $(this).attr('href');
-    var a = 0;
-    $.ajax({
-      url:url
-      ,async:false
-      ,success:function(res){
-        if(res.code == 0) {
-          layer.msg(res.msg);
-          a = 1;
-        }
-      }
-    })
-    if(a === 0) {
-      layer.open({
-        type:2,
-        content:[url, 'no'],
-        area: ['650px', '450px'],
-        end:function(){
-          location.reload();
-        }
-      });
-    }
-    return false;
-  })
-});
-</script>
+    </script>
+  </div>
 </body>
 </html>

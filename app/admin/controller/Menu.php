@@ -17,9 +17,9 @@ use \think\Controller;
 use think\Loader;
 use think\Db;
 use \think\Cookie;
-use app\admin\controller\User;
+use app\admin\controller\Permissions;
 use app\admin\model\AdminMenu as menuModel;
-class Menu extends User
+class Menu extends Permissions
 {
     public function index()
     {
@@ -46,9 +46,9 @@ class Menu extends User
 	            $validate = new \think\Validate([
 	                ['name', 'require', '菜单名称不能为空'],
 	                ['pid', 'require', '请选择上级菜单'],
-	                ['module', 'require', '请填写模块名称'],
-	                ['controller', 'require', '请填写控制器名称'],
-	                ['function', 'require', '请填写方法名称'],
+	                // ['module', 'require', '请填写模块名称'],
+	                // ['controller', 'require', '请填写控制器名称'],
+	                // ['function', 'require', '请填写方法名称'],
 	                ['type', 'require', '请选择菜单类型'],
 	            ]);
 	            //验证部分数据合法性
@@ -92,9 +92,9 @@ class Menu extends User
 	            $validate = new \think\Validate([
 	                ['name', 'require', '菜单名称不能为空'],
 	                ['pid', 'require', '请选择上级菜单'],
-	                ['module', 'require', '请填写模块名称'],
-	                ['controller', 'require', '请填写控制器名称'],
-	                ['function', 'require', '请填写方法名称'],
+	                // ['module', 'require', '请填写模块名称'],
+	                // ['controller', 'require', '请填写控制器名称'],
+	                // ['function', 'require', '请填写方法名称'],
 	                ['type', 'require', '请选择菜单类型'],
 	            ]);
 	            //验证部分数据合法性

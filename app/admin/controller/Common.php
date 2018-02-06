@@ -124,6 +124,7 @@ class Common extends Controller
                             }
                         }
                         Session::set("admin",$name['id']); //保存新的
+                        Session::set("admin_cate_id",$name['admin_cate_id']); //保存新的
                         //记录登录时间和ip
                         Db::name('admin')->where('id',$name['id'])->update(['login_ip' =>  $this->request->ip(),'login_time' => time()]);
                         //记录操作日志
@@ -143,13 +144,14 @@ class Common extends Controller
     }
 
     /**
-     * 管理员退出，清除名字为admin的cookie
+     * 管理员退出，清除名字为admin的session
      * @return [type] [description]
      */
     public function logout()
     {
         Session::delete('admin');
-        if(Session::has('admin')) {
+        Session::delete('admin_cate_id');
+        if(Session::has('admin') or Session::has('admin_cate_id')) {
             return $this->error('退出失败');
         } else {
             return $this->success('正在退出...','admin/common/login');

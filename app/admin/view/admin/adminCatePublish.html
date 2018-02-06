@@ -8,169 +8,176 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
   <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
-  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
 </head>
-<body>
-<div style="margin-top: 20px;">
-</div>
-
-<form class="layui-form" id="admin">
-  <div class="layui-form-item">
-    <label class="layui-form-label">角色名</label>
-    <div class="layui-input-inline">
-      <input name="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" type="text" {notempty name="$info.cate.name"}value="{$info.cate.name}"{/notempty}>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li><a href="{:url('admin/admin/adminCate')}" class="a_menu">角色管理</a></li>
+        <li class="layui-this">新增角色</li>
+      </ul>
+    </div> 
+    <div style="margin-top: 20px;">
     </div>
-  </div>
+    <form class="layui-form" id="admin">
+      <div class="layui-form-item">
+        <label class="layui-form-label">角色名</label>
+        <div class="layui-input-inline">
+          <input name="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" type="text" {notempty name="$info.cate.name"}value="{$info.cate.name}"{/notempty}>
+        </div>
+      </div>
 
-<div class="layui-form-item">
-  <div class="layui-collapse" lay-accordion="" style="width:500px;margin-left:110px;">
-    {volist name="$info.menu" id="data"}
-    {notempty name="$data.list"}
-    <div class="layui-colla-item" style="">
-      <h2 class="layui-colla-title" style="background:0;">{$data.name}</h2>
-      <div class="layui-colla-content">
-        <table>
-          <tbody>
-            {eq name="data.type" value="1"}
-            <tr>
-              <td>
-                {$data.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$data.id}" {notempty name="$info.cate.permissions"}{volist name="$info.cate.permissions" id="datas"}{eq name="$datas" value="$data.id"}checked{/eq}{/volist}{/notempty}>{$data.name}
-              </td>
-            </tr>
-            {/eq}
-            {volist name="$data.list" id="vo"}
-            <tr>
-              {eq name="vo.is_display" value="1"} 
-              <td>
-                {$vo.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$vo.id}" {notempty name="$info.cate.permissions"}{volist name="$info.cate.permissions" id="datas"}{eq name="$datas" value="$vo.id"}checked {else /}{eq name="$vo.type" value="2"}checked disabled{/eq}{/eq}{/volist}{else /}{eq name="$vo.type" value="2"}checked disabled{/eq}{/notempty}>{$vo.name}
-              </td>
-              {else /}{eq name="vo.type" value="1"} 
-              <td>
-                {$vo.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$vo.id}" {notempty name="$info.cate.permissions"}{volist name="$info.cate.permissions" id="datas"}{eq name="$datas" value="$vo.id"}checked {else /}{eq name="$vo.type" value="2"}checked disabled{/eq}{/eq}{/volist}{else /}{eq name="$vo.type" value="2"}checked disabled{/eq}{/notempty}>{$vo.name}
-              </td>
-              {/eq}{/eq}
-            </tr>
-            {/volist}
-          </tbody>
-        </table>
+    <div class="layui-form-item">
+      <div class="layui-collapse" lay-accordion="" style="margin-left:110px;">
+        {volist name="$info.menu" id="data"}
+        {notempty name="$data.list"}
+        <div class="layui-colla-item" style="">
+          <h2 class="layui-colla-title" style="background:0;">{$data.name}</h2>
+          <div class="layui-colla-content">
+            <table>
+              <tbody>
+                {eq name="data.type" value="1"}
+                <tr>
+                  <td>
+                    {$data.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$data.id}" {notempty name="$info.cate.permissions"}{volist name="$info.cate.permissions" id="datas"}{eq name="$datas" value="$data.id"}checked{/eq}{/volist}{/notempty}>{$data.name}
+                  </td>
+                </tr>
+                {/eq}
+                {volist name="$data.list" id="vo"}
+                <tr>
+                  {eq name="vo.is_display" value="1"} 
+                  <td>
+                    {$vo.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$vo.id}" {notempty name="$info.cate.permissions"}{volist name="$info.cate.permissions" id="datas"}{eq name="$datas" value="$vo.id"}checked {else /}{eq name="$vo.type" value="2"}checked disabled{/eq}{/eq}{/volist}{else /}{eq name="$vo.type" value="2"}checked disabled{/eq}{/notempty}>{$vo.name}
+                  </td>
+                  {else /}{eq name="vo.type" value="1"} 
+                  <td>
+                    {$vo.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$vo.id}" {notempty name="$info.cate.permissions"}{volist name="$info.cate.permissions" id="datas"}{eq name="$datas" value="$vo.id"}checked {else /}{eq name="$vo.type" value="2"}checked disabled{/eq}{/eq}{/volist}{else /}{eq name="$vo.type" value="2"}checked disabled{/eq}{/notempty}>{$vo.name}
+                  </td>
+                  {/eq}{/eq}
+                </tr>
+                {/volist}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {else /}
+        {eq name="data.type" value="1"}
+        <div class="layui-colla-item" style="border:0;">
+          <h2 class="layui-colla-title" style="background:0;">{$data.name}</h2>
+          <div class="layui-colla-content">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    {$data.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$data.id}" {notempty name="$info.cate.permissions"}{volist name="$info.cate.permissions" id="datas"}{eq name="$datas" value="$data.id"}checked{/eq}{/volist}{/notempty}>{$data.name}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {/eq}
+        {/notempty}
+        {/volist}
       </div>
     </div>
-    {else /}
-    {eq name="data.type" value="1"}
-    <div class="layui-colla-item" style="border:0;">
-      <h2 class="layui-colla-title" style="background:0;">{$data.name}</h2>
-      <div class="layui-colla-content">
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                {$data.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$data.id}" {notempty name="$info.cate.permissions"}{volist name="$info.cate.permissions" id="datas"}{eq name="$datas" value="$data.id"}checked{/eq}{/volist}{/notempty}>{$data.name}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">备注</label>
+      <div class="layui-input-block" style="max-width:500px;">
+        <textarea placeholder="请输入内容" class="layui-textarea" name="desc">{notempty name="$info.cate.desc"}{$info.cate.desc}{/notempty}</textarea>
       </div>
     </div>
-    {/eq}
+
+
+    {notempty name="$info.cate"}
+    <input type="hidden" name="id" value="{$info.cate.id}">
     {/notempty}
-    {/volist}
-  </div>
-</div>
-
-<div class="layui-form-item layui-form-text">
-  <label class="layui-form-label">备注</label>
-  <div class="layui-input-block" style="max-width:500px;">
-    <textarea placeholder="请输入内容" class="layui-textarea" name="desc">{notempty name="$info.cate.desc"}{$info.cate.desc}{/notempty}</textarea>
-  </div>
-</div>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="admin">立即提交</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+      </div>
+      
+    </form>
 
 
-{notempty name="$info.cate"}
-<input type="hidden" name="id" value="{$info.cate.id}">
-{/notempty}
-  <div class="layui-form-item">
-    <div class="layui-input-block">
-      <button class="layui-btn" lay-submit lay-filter="admin">立即提交</button>
-      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-    </div>
-  </div>
-  
-</form>
-
-
-<script src="__PUBLIC__/layui/layui.js"></script>
-<script src="__PUBLIC__/jquery/jquery.min.js"></script>
-<script>
-    var message;
-    layui.config({
-        base: '__JS__/',
-        version: '1.0.1'
-    }).use(['app', 'message'], function() {
-        var app = layui.app,
-            $ = layui.jquery,
-            layer = layui.layer;
-        //将message设置为全局以便子页面调用
-        message = layui.message;
-        //主入口
-        app.set({
-            type: 'iframe'
-        }).init();
-    });
-</script>
-<script>
-layui.use('upload', function(){
-  var upload = layui.upload;
-  //执行实例
-  var uploadInst = upload.render({
-    elem: '#thumb' //绑定元素
-    ,url: "{:url('common/upload')}" //上传接口
-    ,done: function(res){
-      //上传完毕回调
-      if(res.code == 2) {
-        $('#demo1').attr('src',res.src);
-        $('#upload-thumb').append('<input type="hidden" name="thumb" value="'+ res.src +'">');
-      } else {
-        layer.msg(res.msg);
-      }
-    }
-    ,error: function(){
-      //请求异常回调
-      //演示失败状态，并实现重传
-      var demoText = $('#demoText');
-      demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-      demoText.find('.demo-reload').on('click', function(){
-        uploadInst.upload();
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <script src="__PUBLIC__/jquery/jquery.min.js"></script>
+    <script>
+        var message;
+        layui.config({
+            base: '__JS__/',
+            version: '1.0.1'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+        });
+    </script>
+    <script>
+    layui.use('upload', function(){
+      var upload = layui.upload;
+      //执行实例
+      var uploadInst = upload.render({
+        elem: '#thumb' //绑定元素
+        ,url: "{:url('common/upload')}" //上传接口
+        ,done: function(res){
+          //上传完毕回调
+          if(res.code == 2) {
+            $('#demo1').attr('src',res.src);
+            $('#upload-thumb').append('<input type="hidden" name="thumb" value="'+ res.src +'">');
+          } else {
+            layer.msg(res.msg);
+          }
+        }
+        ,error: function(){
+          //请求异常回调
+          //演示失败状态，并实现重传
+          var demoText = $('#demoText');
+          demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+          demoText.find('.demo-reload').on('click', function(){
+            uploadInst.upload();
+          });
+        }
       });
-    }
-  });
-});
-</script>
-<script>
-  layui.use(['layer', 'form'], function() {
-      var layer = layui.layer,
-          $ = layui.jquery,
-          form = layui.form;
-      $(window).on('load', function() {
-          form.on('submit(admin)', function(data) {
-              $.ajax({
-                  url:"{:url('admin/admin/adminCatePublish')}",
-                  data:$('#admin').serialize(),
-                  type:'post',
-                  async: false,
-                  success:function(res) {
-                      layer.msg(res.msg);
-                      if(res.code == 1) {
-                          setTimeout(function(){
-                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                            parent.layer.close(index); //再执行关闭
-                          },1500) 
+    });
+    </script>
+    <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+                  $.ajax({
+                      url:"{:url('admin/admin/adminCatePublish')}",
+                      data:$('#admin').serialize(),
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          layer.msg(res.msg);
+                          if(res.code == 1) {
+                              setTimeout(function(){
+                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                parent.layer.close(index); //再执行关闭
+                              },1500) 
+                          }
                       }
-                  }
-              })
-              return false;
+                  })
+                  return false;
+              });
           });
       });
-  });
-</script>
+    </script>
+  </div>
 </body>
 </html>

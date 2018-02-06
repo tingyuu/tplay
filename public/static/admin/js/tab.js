@@ -91,13 +91,11 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
             var tpl = [
                     '<div class="layui-tab layui-tab-card kit-tab" lay-filter="' + that._filter + '">',
                     '<ul class="layui-tab-title">',
-                    '<li class="layui-this" lay-id="-1" data-url="' + _config.mainUrl + '">首页</li>',
+                    '<li class="layui-this" lay-id="-1" data-url="' + _config.mainUrl + '"><i class="layui-icon layui-icon-home"></i></li>',
                     '</ul>',
                     '<i class="fa fa-chevron-down kit-tab-tool"></i>',
                     '<div class="kit-tab-tool-body layui-anim layui-anim-upbit" id="kuaijie">',
                     '<ul id="menudiv">',
-                    // '<li class="kit-item"><a class="kit-item" data-target="refresh">刷新当前标签页</a></li>',
-                    // '<li class="kit-item"><a class="kit-item" data-target="closeCurrent">关闭当前标签页</a></li>',
                     '<li class="kit-item"><a class="kit-item" data-target="closeOther">关闭其他标签页</a></li>',
                     '<li class="kit-item"><a class="kit-item" data-target="closeAll">关闭全部标签页</a></li>',
                     '</ul>',
@@ -254,6 +252,7 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
                 id = options.id;
             if (that.tabExists(id)) {
                 that.tabChange(id);
+                $('#refresh').click();
                 return;
             }
             NProgress.start();

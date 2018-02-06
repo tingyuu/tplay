@@ -18,9 +18,9 @@ use think\Loader;
 use think\Db;
 use \think\Cookie;
 use \think\Session;
-use app\admin\controller\User;
+use app\admin\controller\Permissions;
 use app\admin\model\ArticleCate as cateModel;
-class Articlecate extends User
+class Articlecate extends Permissions
 {
     public function index()
     {

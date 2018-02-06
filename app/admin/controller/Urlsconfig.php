@@ -14,9 +14,9 @@ namespace app\admin\controller;
 
 use \think\Controller;
 use think\Db;
-use app\admin\controller\User;
+use app\admin\controller\Permissions;
 use app\admin\model\Urlconfig;
-class Urlsconfig extends User
+class Urlsconfig extends Permissions
 {
     public function index()
     {

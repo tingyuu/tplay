@@ -13,9 +13,9 @@
 namespace app\admin\controller;
 
 use \think\Db;
-use \app\admin\controller\User;
+use \app\admin\controller\Permissions;
 
-class Emailconfig extends User
+class Emailconfig extends Permissions
 {
     public function index()
     {

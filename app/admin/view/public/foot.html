@@ -1,0 +1,84 @@
+    <script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+    <script src="__PUBLIC__/jquery/jquery.min.js"></script>
+    <script>
+            var message;
+            layui.config({
+                base: '__JS__/',
+                version: '1.0.1'
+            }).use(['app', 'message'], function() {
+                var app = layui.app,
+                    $ = layui.jquery,
+                    layer = layui.layer;
+                //将message设置为全局以便子页面调用
+                message = layui.message;
+                //主入口
+                app.set({
+                    type: 'iframe'
+                }).init();
+            });
+        </script> 
+    <script type="text/javascript">
+    $(function(){
+      var x = 10;
+      var y = 20;
+      $(".tooltip").mouseover(function(e){ 
+        var tooltip = "<div id='tooltip'><img src='"+ this.href +"' alt='产品预览图' height='200'/>"+"<\/div>"; //创建 div 元素
+        $("body").append(tooltip);  //把它追加到文档中             
+        $("#tooltip")
+          .css({
+            "top": (e.pageY+y) + "px",
+            "left":  (e.pageX+x)  + "px"
+          }).show("fast");    //设置x坐标和y坐标，并且显示
+        }).mouseout(function(){  
+        $("#tooltip").remove();  //移除 
+        }).mousemove(function(e){
+        $("#tooltip")
+          .css({
+            "top": (e.pageY+y) + "px",
+            "left":  (e.pageX+x)  + "px"
+          });
+      });
+    })
+    </script>
+    <script type="text/javascript">
+    $('.a_menu').click(function(){
+      var url = $(this).attr('href');
+      var id = $(this).attr('id');
+      var a = true;
+      if(id) {
+        $.ajax({
+          url:url
+          ,async:false
+          ,data:{id:id}
+          ,success:function(res){
+            if(res.code == 0) {
+              layer.msg(res.msg);
+              a = false;
+            }
+          }
+        })
+      } else {
+        $.ajax({
+          url:url
+          ,async:false
+          ,success:function(res){
+            if(res.code == 0) {
+              layer.msg(res.msg);
+              a = false;
+            }
+          }
+        })
+      }
+      return a;
+    })
+    </script>
+    <script>
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      
+      //常规用法
+      laydate.render({
+        elem: '#create_time'
+      });
+    });
+    </script>

@@ -1,232 +1,270 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script src="__PUBLIC__/echarts/echarts.min.js"></script>
-    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all">
-    <style>
-        .info-box {
-            height: 85px;
-            background-color: white;
-            background-color: #ecf0f5;
-        }
-        
-        .info-box .info-box-icon {
-            border-top-left-radius: 2px;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 2px;
-            display: block;
-            float: left;
-            height: 85px;
-            width: 85px;
-            text-align: center;
-            font-size: 45px;
-            line-height: 85px;
-            background: rgba(0, 0, 0, 0.2);
-        }
-        
-        .info-box .info-box-content {
-            padding: 10px;
-            margin-left: 85px;
-        }
-        
-        .info-box .info-box-content .info-box-text {
-            display: block;
-            font-size: 14px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-transform: uppercase;
-        }
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>tplay_main</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <script src="__PUBLIC__/echarts/echarts.min.js"></script>
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all">
+  <link rel="stylesheet" href="__CSS__/layer.css" media="all">
+  <link rel="stylesheet" href="__CSS__/admin-1.css" media="all">
+<body class="layui-layout-body" style="overflow-y:visible;">
+    <div class="layadmin-tabsbody-item layui-show"><div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md8">
+      <div class="layui-row layui-col-space15">
+        <div class="layui-col-md6">
+          <div class="layui-card">
+            <div class="layui-card-header">网站数据</div>
+            <div class="layui-card-body">
 
-        .info-box .info-box-content .info-box-a {
-            display: block;
-            font-size: 14px;
-            white-space: nowrap;
-            overflow: hidden;
-            margin:0 auto;
-            width:60px;
-        }
-        
-        .info-box .info-box-content .info-box-number {
-            display: block;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        
-        .major {
-            font-weight: 10px;
-            color: #01AAED;
-        }
-        
-        .main {
-            margin-top: 25px;
-        }
-        
-        .main .layui-row {
-            margin: 10px 0;
-        }
-
-body .demo-class textarea {background:#fff;width:200px;color:#000;border:0;}
-#LAY_layuipro {position: relative;}
-body .demo-class .layui-layer-btn{
-    position: absolute;
-    bottom:10px;
-    right:0;
-    padding:0;
-}
-
-    </style>
-</head>
-
-<body>
-    <div class="layui-fluid main">
-        <div class="layui-row layui-col-space15">
-            <div class="layui-col-md3">
-                <div class="info-box">
-                    <span class="info-box-icon" style="background-color:#00c0ef !important;color:white;"><i class="fa fa-users" aria-hidden="true"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">会员总数</span>
-                        <span class="info-box-number">{$web.user_num}</span>
-                        <span class="info-box-text">角色组：<span class="layui-badge">{$web.admin_cate}</span> ip黑名单：<span class="layui-badge">{$web.ip_ban}</span></span>
-                    </div>
+              <div class="layui-carousel layadmin-carousel layadmin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 280px;">
+                <div carousel-item="">
+                  <ul class="layui-row layui-col-space10 layui-this">
+                    <li class="layui-col-xs6">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>会员</h3>
+                        <p><cite>{$web.user_num}</cite></p>
+                      </a>
+                    </li>
+                    <li class="layui-col-xs6">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>文章</h3>
+                        <p><cite>{$web.article_num}</cite></p>
+                      </a>
+                    </li>
+                    <li class="layui-col-xs6">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>文件</h3>
+                        <p><cite>{$web.file_num}</cite></p>
+                      </a>
+                    </li>
+                    <li class="layui-col-xs6">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>留言</h3>
+                        <p><cite>{$web.message_num}</cite></p>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
+              <button class="layui-icon layui-carousel-arrow" lay-type="sub"></button><button class="layui-icon layui-carousel-arrow" lay-type="add"></button></div>
             </div>
-            <div class="layui-col-md3">
-                <div class="info-box">
-                    <span class="info-box-icon" style="background-color:#f39c12 !important;color:white;"><i class="fa fa-book" aria-hidden="true"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">文章总数</span>
-                        <span class="info-box-number">{$web.article_num}</span>
-                        <span class="info-box-text">待审核：<span class="layui-badge">{$web.status_article}</span> 已置顶：<span class="layui-badge">{$web.top_article}</span></span>
-                    </div>
-                </div>
-            </div>
-            <div class="layui-col-md3">
-                <div class="info-box">
-                    <span class="info-box-icon" style="background-color:#00a65a !important;color:white;"><i class="fa fa-folder-open" aria-hidden="true"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">文件总数</span>
-                        <span class="info-box-number">{$web.file_num}</span>
-                        <span class="info-box-text">待审核：<span class="layui-badge">{$web.status_file}</span> 已拒绝：<span class="layui-badge">{$web.ref_file}</span></span>
-                    </div>
-                </div>
-            </div>
-            <div class="layui-col-md3">
-                <div class="info-box">
-                    <span class="info-box-icon" style="background-color:#dd4b39 !important;color:white;"><i class="fa fa-comments" aria-hidden="true"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">留言总数</span>
-                        <span class="info-box-number">{$web.message_num}</span>
-                        <span class="info-box-text">待处理：<span class="layui-badge">{$web.look_message}</span></span>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-        <br>
+        <div class="layui-col-md6">
+          <div class="layui-card">
+            <div class="layui-card-header">待办事项</div>
+            <div class="layui-card-body">
 
-        
-          <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
-              <ul class="layui-timeline">
-                    <li class="layui-timeline-item">
-                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                        <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">置顶的说明文档</h3>
-                            <ul>
-                                <li>交流群：
-                                    <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5wZeNTd"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="Tplay" title="Tplay"></a>
-                                </li>
-                                <li>点击加群，如果实在加不了还有群号啊[221470096]
-                                </li>
-                                <li>下载地址：
-                                    <a href="http://tplay.pengyichen.cn" target="_blank">免费去下载 </a>(记得给个star哦！有问题可在交流群里@群主。)
-                                </li>
-                                <li>目前也只是做了适配性较强的一些功能模块，后续会不断增加新功能模块(⊙o⊙)…</li>
-                            </ul>
-                        </div>
+              <div class="layui-carousel layadmin-carousel layadmin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 280px;">
+                <div carousel-item="">
+                  <ul class="layui-row layui-col-space10 layui-this">
+                    <li class="layui-col-xs6">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>黑名单</h3>
+                        <p><cite>{$web.ip_ban}</cite></p>
+                      </a>
                     </li>
-                    <li class="layui-timeline-item">
-                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                        <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">开发基于</h3>
-                                <ul>
-                                    <li>Tplay是一款基于ThinkPHP{$info.tp} + layui2.2.5 + Mysql开发的后台管理框架，PHP版本要求提升到5.5，Tplay集成了一般应用所必须的功能模块，为开发者减少重复性的工作，提升开发速度，规范团队开发模式。</li>
-                                    <li>ThinkPHP版本：{$info.tp} <a href="https://www.kancloud.cn/manual/thinkphp5/118003" target="_blank">查看开发文档</a></li>
-                                    <li>Layui版本：2.2.5 <a href="http://www.layui.com/doc/" target="_blank">查看开发文档</a></li>
-                                </ul>
-                        </div>
+                    <li class="layui-col-xs6">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>待审文章</h3>
+                        <p><cite>{$web.status_article}</cite></p>
+                      </a>
                     </li>
-                    <li class="layui-timeline-item">
-                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                        <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">系统信息</h3>
-                            <p>
-                                <ul>
-                                    <li>操作系统：{$info.win}</li>
-                                    <li>PHP版本：{$info.php}</li>
-                                    <li>运行环境：{$info.environment}</li>
-                                    <li>上传最大限制：{$info.upload_size}</li>
-                                    <li>执行时间限制：{$info.execution_time}</li>
-                                    <li>剩余空间大小：{notempty name="$info.disk"}{$info.disk}{else/}未知{/notempty}</li>
-                                </ul>
-                            </p>
-                        </div>
+                    <li class="layui-col-xs6">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>待审文件</h3>
+                        <p><cite>{$web.status_file}</cite></p>
+                      </a>
                     </li>
-                </ul>
+                    <li class="layui-col-xs6">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>待处理留言</h3>
+                        <p><cite>{$web.look_message}</cite></p>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              <button class="layui-icon layui-carousel-arrow" lay-type="sub"></button><button class="layui-icon layui-carousel-arrow" lay-type="add"></button></div>
             </div>
+          </div>
         </div>
+        <div class="layui-col-md12">
+          <div class="layui-card">
+            <div class="layui-card-header">管理员登录</div>
+            <div class="layui-card-body" id="main" style="height: 400px;">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="layui-col-md4">
+      <div class="layui-card">
+        <div class="layui-card-header">版本信息</div>
+        <div class="layui-card-body layui-text">
+          <table class="layui-table">
+            <colgroup>
+              <col width="100">
+              <col>
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>当前版本</td>
+                <td>
+                    Tplay {$info.tplay}
+                    <a href="{:url('index/index/log')}" target="_blank" style="padding-left: 15px;">更新日志</a> 
+                </td>
+              </tr>
+              <tr>
+                <td>基于框架</td>
+                <td>
+                 layui-v2.2.5 / thinkphp-v{$info.tp} 
+               </td>
+              </tr>
+              <tr>
+                <td>主要特色</td>
+                <td>适配强 / 高颜值 / 清爽 / 简洁</td>
+              </tr>
+              <tr>
+                <td>下载交流</td>
+                <td style="padding-bottom: 0;">
+                  <div class="layui-btn-container">
+                    <a href="https://jq.qq.com/?_wv=1027&k=5wZeNTd" target="_blank" class="layui-btn layui-btn-danger">官方交流群</a>
+                    <a href="http://tplay.pengyichen.cn" target="_blank" class="layui-btn">下载最新版</a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="layui-card">
+        <div class="layui-card-header">系统信息</div>
+        <div class="layui-card-body layadmin-takerates">
+          <ul>
+              <li>操作系统：---------------{$info.win}</li>
+              <li>PHP版本：----------------{$info.php}</li>
+              <li>运行环境：---------------{$info.environment}</li>
+              <li>上传最大限制：-----------{$info.upload_size}</li>
+              <li>执行时间限制：-----------{$info.execution_time}</li>
+              <li>剩余空间大小：-----------{notempty name="$info.disk"}{$info.disk}{else/}未知{/notempty}</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="layui-card">
+        <div class="layui-card-header">
+          作者寄语
+        </div>
+        <div class="layui-card-body layui-text layadmin-text">
+          <p>Tplay后台管理框架搭载的是国内最受欢迎的两大框架Layui和ThinkPHP，ThinkPHP的大道至简和Layui的简而全在理念上可谓是不谋而合，两大框架结合所产生的结果就是将WEB开发精简到了极致。</p>
+          <p>Tplay目前还处于刚刚起步的阶段，功能上只做了适配性较强的部分，后续的开发方向将主要集中在润色和优化上，同时不定期加入部分适配性高的功能。</p>
+          <p>最后：此版本为春节前最后一个版本，祝大家新春快乐！</p>
+          <p>—— 听雨</p>
+        </div>
+      </div>
+      
+      
+    </div>
+    
+  </div>
+  </div>
+  </div>
 
 
-    <script src="__PUBLIC__/layui/layui.js"></script>
-    <script src="__PUBLIC__/jquery/jquery.min.js"></script>
-    <script>
-    layui.use('element', function(){
-      var $ = layui.jquery
-      ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
-      
-      //触发事件
-      var active = {
-        tabAdd: function(){
-          //新增一个Tab项
-          element.tabAdd('demo', {
-            title: '新选项'+ (Math.random()*1000|0) //用于演示
-            ,content: '内容'+ (Math.random()*1000|0)
-            ,id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
-          })
+
+<script type="text/javascript">
+var a = "{$web.date_string}";
+var date = a.split(",");
+
+var b = "{$web.login_sum}";
+var login_sum = b.split(",");
+
+
+var myChart = echarts.init(document.getElementById('main'));
+
+option = {
+    tooltip: {
+        trigger: 'axis',
+        position: function (pt) {
+            return [pt[0], '10%'];
         }
-        ,tabDelete: function(othis){
-          //删除指定Tab项
-          element.tabDelete('demo', '44'); //删除：“商品管理”
-          
-          
-          othis.addClass('layui-btn-disabled');
+    },
+    grid: {
+        top: 50,
+        bottom: 70,
+        left:40,
+        right:50
+    },
+    toolbox: {
+        feature: {
+            dataZoom: {
+                yAxisIndex: 'none'
+            },
+            restore: {},
+            saveAsImage: {}
         }
-        ,tabChange: function(){
-          //切换到指定Tab项
-          element.tabChange('demo', '22'); //切换到：用户管理
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: date
+    },
+    yAxis: {
+        type: 'value',
+        boundaryGap: [0, '100%']
+    },
+    dataZoom: [{
+        type: 'inside',
+        start: 0,
+        end: 100
+    }, {
+        start: 0,
+        end: 100,
+        handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+        handleSize: '100%',
+        handleStyle: {
+            color: '#fff',
+            shadowBlur: 3,
+            shadowColor: '#009688',
+            shadowOffsetX: 2,
+            shadowOffsetY: 2
         }
-      };
-      
-      $('.site-demo-active').on('click', function(){
-        var othis = $(this), type = othis.data('type');
-        active[type] ? active[type].call(this, othis) : '';
-      });
-      
-      //Hash地址的定位
-      var layid = location.hash.replace(/^#test=/, '');
-      element.tabChange('test', layid);
-      
-      element.on('tab(test)', function(elem){
-        location.hash = 'test='+ $(this).attr('lay-id');
-      });
-      
-    });
-    </script>
+    }],
+    series: [
+        {
+            name:'管理员登录',
+            type:'line',
+            smooth:true,
+            symbol: 'none',
+            sampling: 'average',
+            itemStyle: {
+                normal: {
+                    color: '#009688'
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: '#009688'
+                    }, {
+                        offset: 1,
+                        color: '#009688'
+                    }])
+                }
+            },
+            data: login_sum
+        }
+    ]
+};
+myChart.setOption(option);
+</script>
 </body>
 </html>

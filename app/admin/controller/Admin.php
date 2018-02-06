@@ -17,8 +17,8 @@ use \think\Cookie;
 use \think\Session;
 use app\admin\model\Admin as adminModel;//管理员模型
 use app\admin\model\AdminMenu;
-use app\admin\controller\User;
-class Admin extends User
+use app\admin\controller\Permissions;
+class Admin extends Permissions
 {
     /**
      * 管理员列表
@@ -29,7 +29,7 @@ class Admin extends User
         //实例化管理员模型
         $model = new adminModel();
 
-        $post = $this->request->post();
+        $post = $this->request->param();
         if (isset($post['keywords']) and !empty($post['keywords'])) {
             $where['nickname'] = ['like', '%' . $post['keywords'] . '%'];
         }
@@ -212,6 +212,8 @@ class Admin extends User
     			return $this->error('不能修改别人的密码');
     		}
     	} else {
+            $id == Session::get('admin');
+            $this->assign('id',$id);
     		return $this->fetch();
     	}
     }
@@ -249,7 +251,7 @@ class Admin extends User
     {
     	$model = new \app\admin\model\AdminCate;
 
-        $post = $this->request->post();
+        $post = $this->request->param();
         if (isset($post['keywords']) and !empty($post['keywords'])) {
             $where['name'] = ['like', '%' . $post['keywords'] . '%'];
         }
@@ -393,6 +395,11 @@ class Admin extends User
                     $value['str'] = '&emsp;&emsp;&emsp;&emsp;'.'└ ';
                     $menus[$size]['list'][] = $value;
                 }
+                elseif($level == 3)
+                {
+                    $value['str'] = '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;'.'└ ';
+                    $menus[$size]['list'][] = $value;
+                }
                 else
                 {
                     $value['str'] = '&emsp;&emsp;'.'└ ';
@@ -435,7 +442,7 @@ class Admin extends User
     {
         $model = new \app\admin\model\AdminLog();
 
-        $post = $this->request->post();
+        $post = $this->request->param();
         if (isset($post['admin_menu_id']) and $post['admin_menu_id'] > 0) {
             $where['admin_menu_id'] = $post['admin_menu_id'];
         }

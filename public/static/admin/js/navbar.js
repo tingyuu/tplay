@@ -113,12 +113,20 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
                     _side.removeClass('kit-sided');
                     _doc.find('div.layui-body').removeClass('kit-body-folded');
                     _doc.find('div.layui-footer').removeClass('kit-footer-folded');
-                    menu.attr('class','layui-icon layui-icon-shrink-right');
+                    menu.attr('class','fa fa-arrow-left');
+                    $('#logo span').css('display','block');
+                    $('#logo').css('width','220px');
+                    $('.tplay-left-icon').css('display','none');
+                    $('.layui-layout-left').css('left','220px');
                 } else {
                     _side.addClass('kit-sided');
                     _doc.find('div.layui-body').addClass('kit-body-folded');
                     _doc.find('div.layui-footer').addClass('kit-footer-folded');
-                    menu.attr('class','layui-icon layui-icon-spread-left');
+                    menu.attr('class','fa fa-arrow-right');
+                    $('#logo span').css('display','none');
+                    $('#logo').css('width','50px');
+                    $('.tplay-left-icon').css('display','block');
+                    $('.layui-layout-left').css('left','50px');
                 }
             });
             return that;
@@ -227,3 +235,18 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
     };
     exports('navbar', navbar);
 });
+
+
+var a_link = document.querySelectorAll('.menu_ul li a');
+for (var i = 0, len = a_link.length; i < len; i++) {
+    a_link[i].addEventListener('click',function(e){
+        console.log(this.parentNode.children[1])
+        if(this.parentNode.children[1].style.display == 'block'){
+            this.parentNode.children[1].style.display = 'none';
+            this.parentNode.children[0].children[2].children[0].className = 'fa fa-angle-down';
+        }else{
+            this.parentNode.children[1].style.display = 'block';
+            this.parentNode.children[0].children[2].children[0].className = 'fa fa-angle-up';
+        }
+    },false);
+}

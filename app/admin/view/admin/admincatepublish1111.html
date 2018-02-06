@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>表单</title>
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+    <link rel="icon" href="/static/frame/static/image/code.png">
+</head>
+<body class="body">
+
+<form class="layui-form" action="" method="post" id="editform">
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">角色名称</label>
+            <div class="layui-input-inline">
+                <input type="type" name="title" lay-verify="title" autocomplete="off" placeholder="请输入角色名称" class="layui-input" value="超级">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">角色描述</label>
+            <div class="layui-input-inline">
+                <input type="type" name="notation" lay-verify="" autocomplete="off" placeholder="请输入角色描述" class="layui-input" value="只能查看列表">
+            </div>
+        </div>
+    </div>
+    
+<style type="text/css">
+#auth-tree{}
+#auth-tree ul .auth-t0{margin-left:0px;width:800px;overflow:hidden;}
+#auth-tree ul .auth-t0 ul li.auth-t1{margin-left:40px;width:800px;overflow:hidden;}
+#auth-tree ul .auth-t0 ul li.auth-t1 ul{margin-left:40px;}
+#auth-tree ul .auth-t0 ul li.auth-t1 ul li.auth-t2{margin-left:10px;float:left;overflow:hidden;}
+#auth-tree ul{}
+</style>
+
+    <div class="layui-form-item">
+	  	<div class="layui-inline">
+	    <label class="layui-form-label">权限</label>
+	    <div class="layui-input-inline" id="auth-tree">
+	    	<ul><li class="auth-t0" data-level="0"><input type="checkbox" name="rules[]" lay-skin="primary" title="后台首页" value="1" checked="" lay-checkbox lay-filter="formauth"><ul><li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="首页信息统计" value="117" checked="" lay-checkbox lay-filter="formauth"></li>
+</ul></li>
+<li class="auth-t0" data-level="0"><input type="checkbox" name="rules[]" lay-skin="primary" title="系统用户管理" value="2" checked="" lay-checkbox lay-filter="formauth"><ul><li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="用户列表" value="3" checked="" lay-checkbox lay-filter="formauth"><ul><li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="新增用户" value="29" checked="" lay-checkbox lay-filter="formauth"></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="编辑用户" value="30" checked="" lay-checkbox lay-filter="formauth"></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="删除用户" value="31" checked="" lay-checkbox lay-filter="formauth"></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="授权角色" value="56" checked="" lay-checkbox lay-filter="formauth"></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="快捷操作" value="124" checked="" lay-checkbox lay-filter="formauth"></li>
+</ul></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="角色列表管理" value="4" checked="" lay-checkbox lay-filter="formauth"><ul><li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="新增角色" value="32" checked="" lay-checkbox lay-filter="formauth"></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="编辑角色" value="33" checked="" lay-checkbox lay-filter="formauth"></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="删除角色" value="34" checked="" lay-checkbox lay-filter="formauth"></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="快捷状态修改" value="123" checked="" lay-checkbox lay-filter="formauth"></li>
+</ul></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="权限节点列表" value="5" checked="" lay-checkbox lay-filter="formauth"><ul><li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="新增管理员节点" value="11" checked="" lay-checkbox lay-filter="formauth"></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="编辑管理员节点" value="12" checked="" lay-checkbox lay-filter="formauth"></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="删除管理员节点" value="13" checked="" lay-checkbox lay-filter="formauth"></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="权限状态管理" value="120" lay-checkbox lay-filter="formauth" ></li>
+</ul></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="用户分类" value="127" checked="" lay-checkbox lay-filter="formauth"><ul><li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="添加用户分类" value="128" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="修改用户分类" value="129" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="删去用户分类" value="130" checked="" lay-checkbox lay-filter="formauth"></li>
+</ul></li>
+</ul></li>
+<li class="auth-t0" data-level="0"><input type="checkbox" name="rules[]" lay-skin="primary" title="系统管理" value="39" checked="" lay-checkbox lay-filter="formauth"><ul><li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="新增字段" value="41" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="站点配置" value="44" checked="" lay-checkbox lay-filter="formauth"></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="系统配置" value="45" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="上传配置" value="47" checked="" lay-checkbox lay-filter="formauth"></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="图片上传" value="136" lay-checkbox lay-filter="formauth" ></li>
+</ul></li>
+<li class="auth-t0" data-level="0"><input type="checkbox" name="rules[]" lay-skin="primary" title="站长工具" value="48" lay-checkbox lay-filter="formauth" ><ul><li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="清除缓存" value="49" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="登录日志" value="92" lay-checkbox lay-filter="formauth" ><ul><li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="删除登录日志" value="93" lay-checkbox lay-filter="formauth" ></li>
+</ul></li>
+</ul></li>
+<li class="auth-t0" data-level="0"><input type="checkbox" name="rules[]" lay-skin="primary" title="文章管理" value="50" checked="" lay-checkbox lay-filter="formauth"><ul><li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="文章分类" value="57" checked="" lay-checkbox lay-filter="formauth"><ul><li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="新增文章分类" value="58" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="编辑文章分类" value="59" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="删除文章分类" value="60" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="快捷分类状态" value="65" checked="" lay-checkbox lay-filter="formauth"></li>
+</ul></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="文章列表" value="61" lay-checkbox lay-filter="formauth" ><ul><li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="新增文章" value="62" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="编辑文章" value="63" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="删除文章" value="64" lay-checkbox lay-filter="formauth" ></li>
+</ul></li>
+</ul></li>
+<li class="auth-t0" data-level="0"><input type="checkbox" name="rules[]" lay-skin="primary" title="数据库管理" value="98" checked="" lay-checkbox lay-filter="formauth"><ul><li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="数据库列表" value="99" checked="" lay-checkbox lay-filter="formauth"><ul><li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="备份数据库" value="100" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="优化数据库表" value="118" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="修复数据库表" value="119" lay-checkbox lay-filter="formauth" ></li>
+</ul></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="还原数据库" value="101" checked="" lay-checkbox lay-filter="formauth"><ul><li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="还原" value="102" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="下载" value="103" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t2" data-level="2"><input type="checkbox" name="rules[]" lay-skin="primary" title="删除" value="104" lay-checkbox lay-filter="formauth" ></li>
+</ul></li>
+</ul></li>
+<li class="auth-t0" data-level="0"><input type="checkbox" name="rules[]" lay-skin="primary" title="会员管理" value="131" lay-checkbox lay-filter="formauth" ><ul><li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="添加会员" value="132" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="修改会员" value="133" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="删去会员" value="134" lay-checkbox lay-filter="formauth" ></li>
+<li class="auth-t1" data-level="1"><input type="checkbox" name="rules[]" lay-skin="primary" title="会员列表" value="135" lay-checkbox lay-filter="formauth" ></li>
+</ul></li>
+</ul>	    </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+  <input type="hidden" name="id" value="2">
+ 
+</form>
+<!-- 通用-970*90 -->
+<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'laydate'], function(){
+        var form = layui.form
+                ,layer = layui.layer
+                ,$ = layui.$ //重点处
+
+    //权限联动选择状态
+    form.on('checkbox(formauth)',function(data) {
+        if(data.elem.checked){
+            thiselem = $(data.elem);
+            level = thiselem.parent().attr('data-level');
+            for (var i = level; i >= 0; i--) {
+                thiselem.parents(".auth-t"+i+"").find('input:eq(0)').attr('checked',true);
+                thiselem.parents(".auth-t"+i+"").find('div:eq(0)').addClass('layui-form-checked');
+            }
+        }else{
+            thiselem = $(data.elem);
+            thiselem.parent().find('input').attr('checked',false);
+            thiselem.parent().find('div').removeClass('layui-form-checked');
+        }
+    });
+
+        //监听指定开关
+      form.on('submit(demo1)', function(data) {
+        $.post('/index.php/admin/auth_group/edit.html', $('#editform').serialize(),
+          function(data) {
+            if (data.code == 1) {
+              layer.alert(data.msg, {
+                skin: 'layui-layer-molv' //样式类名
+                  ,
+                closeBtn: 0
+              }, function() {
+                location.href = data.url;
+              });
+            } else {
+              layer.msg(data.msg);
+            }
+          });
+        return false;
+      });
+
+
+    });
+</script>
+
+</body>
+</html>

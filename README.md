@@ -1,3 +1,24 @@
+Tplay 1.3.2 恭贺新春版
+===============
+
+更新说明：
+
+1.修复某些列表页的搜索条件不支持翻页的bug（这次真的修复了）
+
+2.左侧菜单现在支持到三级了
+
+3.现在当你同时设置菜单+权限节点后，该菜单将对没有该权限的角色隐藏了
+
+4.现在当你想要打开一个已存在的标签时，不仅会跳转到该标签，还默认刷新一次
+
+5.更精简的目录结构
+
+6.更高的颜值
+
+7.thinkphp版本提升到5.0.15
+
+8.分别增加了一套控制台和登录页面模板
+
 Tplay 1.3.1
 ===============
 
@@ -111,23 +132,12 @@ www  WEB部署目录（或者子目录）
 │  ├─router.php         快速测试文件
 │  └─.htaccess          用于apache的重写
 │
-├─thinkphp              框架系统目录
-│  ├─lang               语言文件目录
-│  ├─library            框架类库目录
-│  │  ├─think           Think类库包目录
-│  │  └─traits          系统Trait目录
-│  │
-│  ├─tpl                系统模板目录
-│  ├─base.php           基础定义文件
-│  ├─console.php        控制台入口文件
-│  ├─convention.php     框架惯例配置文件
-│  ├─helper.php         助手函数文件
-│  ├─phpunit.xml        phpunit配置文件
-│  └─start.php          框架入口文件
+├─simport              框架系统目录
+│  ├─thinkphp             thinkphp核心文件
+│  ├─extend          扩展类库目录
+│  └─vendor          第三方类库目录（Composer依赖库
 │
-├─extend                扩展类库目录
 ├─runtime               应用的运行时目录（可写，可定制）
-├─vendor                第三方类库目录（Composer依赖库）
 ├─build.php             自动生成定义文件（参考）
 ├─composer.json         composer 定义文件
 ├─LICENSE.txt           授权说明文件

@@ -29,6 +29,10 @@ class AdminMenu extends Model
 				{
 					$value['str'] = '&emsp;&emsp;&emsp;&emsp;'.'└ ';
 				}
+				elseif($level == 3)
+				{
+					$value['str'] = '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;'.'└ ';
+				}
 				else
 				{
 					$value['str'] = '&emsp;&emsp;'.'└ ';

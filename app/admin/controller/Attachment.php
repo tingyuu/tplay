@@ -13,16 +13,16 @@
 namespace app\admin\controller;
 
 use \think\Db;
-use \app\admin\controller\User;
+use \app\admin\controller\Permissions;
 use \app\admin\model\Attachment as model;
 use \think\Cookie;
-class Attachment extends User
+class Attachment extends Permissions
 {
     public function index()
     {
         $model = new model();
 
-        $post = $this->request->post();
+        $post = $this->request->param();
         if (isset($post['keywords']) and !empty($post['keywords'])) {
             $where['filename'] = ['like', '%' . $post['keywords'] . '%'];
         }

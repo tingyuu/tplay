@@ -14,56 +14,24 @@
 <body class="kit-theme">
     <div class="layui-layout layui-layout-admin kit-layout-admin">
         <div class="layui-header">
-            <div class="layui-logo">Tplay后台管理框架</div>
-            <div class="layui-logo kit-logo-mobile">K</div>
-            <ul class="layui-nav layui-layout-left kit-nav">
-                <a class="head_menu" id="kit-side-fold" title="左侧菜单"><i class="layui-icon layui-icon-shrink-right" aria-hidden="true"></i></a>
-                <<!-- a class="head_menu" style="background:#f39c12;" title="添加文章" href="javascript:;" data-url="{:url('admin/article/publish')}" data-title="添加文章" kit-target><i class="fa fa-pencil" aria-hidden="true"></i></a> -->
-                <a class="head_menu" style="background:#dd4b39;" id="clear" title="清空缓存"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                <!-- <li class="layui-nav-item"><a href="javascript:;" data-url="{:url('main/index')}" data-title="控制台" kit-target><i class="fa fa-home" aria-hidden="true"></i> <span>控制台</span></a></li> -->
-                <!-- <li class="layui-nav-item"><a href="javascript:;">内容管理</a></li> -->
-                <!-- <li class="layui-nav-item">
-                    <a href="javascript:;">其它系统</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">文件管理</a></dd>
-                        <dd><a href="javascript:;">菜单管理</a></dd>
-                        <dd><a href="javascript:;">权限管理</a></dd>
-                    </dl>
-                </li> -->
+            <div class="layui-logo" id="logo"><span>Tplay后台管理框架</span></div>
+            <ul class="layui-nav layui-layout-left kit-nav kit-tab-tool-body">
+                <li class="layui-nav-item"><a id="kit-side-fold" title="左侧菜单" style="color:#333;"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>
+                <li class="layui-nav-item"><a href="/" target="_block" title="主页" style="color:#333;"><i class="fa fa-life-ring" aria-hidden="true"></i></a></li>
+                <li class="layui-nav-item"><a id="clear" title="清空缓存" style="color:#333;"><i class="fa fa-university" aria-hidden="true"></i></a></li>
+                <li class="layui-nav-item"><a class="kit-item" data-target="refresh" title="刷新当前页" style="color:#333;" id="refresh"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
             </ul>
             <ul class="layui-nav layui-layout-right kit-nav">
-                <ul class="kit-tab-tool-body" style="float: left;">
-                    <li class="layui-nav-item" style="background-color: transparent !important;">
-                        <a class="refresh kit-item" data-target="refresh" title="刷新当前页" style="color:#fff;"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                    </li>
-                </ul>
-                <!-- <li class="layui-nav-item">
-                    <a href="javascript:;" style="color:#fff;">皮肤</a>
-                    </a>
-                    <dl class="layui-nav-child skin">
-                        <dd><a href="javascript:;" data-skin="default" style="color:#393D49;"><i class="layui-icon">&#xe658;</i> 默认</a></dd>
-                        <dd><a href="javascript:;" data-skin="orange" style="color:#ff6700;"><i class="layui-icon">&#xe658;</i> 橘子橙</a></dd>
-                        <dd><a href="javascript:;" data-skin="green" style="color:#00a65a;"><i class="layui-icon">&#xe658;</i> 原谅绿</a></dd>
-                        <dd><a href="javascript:;" data-skin="pink" style="color:#FA6086;"><i class="layui-icon">&#xe658;</i> 少女粉</a></dd>
-                        <dd><a href="javascript:;" data-skin="blue.1" style="color:#00c0ef;"><i class="layui-icon">&#xe658;</i> 天空蓝</a></dd>
-                        <dd><a href="javascript:;" data-skin="red" style="color:#dd4b39;"><i class="layui-icon">&#xe658;</i> 枫叶红</a></dd>
-                    </dl>
-                </li> -->
-                <li class="layui-nav-item"><a href="javascript:;" id="tag" style="color:#fff;"><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+                <li class="layui-nav-item"><a href="javascript:;" id="tag" style="color:#333;"><i class="fa fa-tag" aria-hidden="true"></i></a></li>
                 <li class="layui-nav-item" style="background-color: transparent !important;">
-                    <a href="javascript:;" id="color" style="color:#fff;" class="refresh">皮肤<span class="layui-badge-dot"></span></a>
+                    <a href="javascript:;" id="color" style="color:#333;" class="refresh">皮肤<span class="layui-badge-dot"></span></a>
                     </a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;" style="color:#fff;">
-                        <img src="{$cookie.thumb|geturl}" class="layui-nav-img" style="border: 2px solid #fff;">欢迎, {empty name="$cookie.nickname"}{$cookie.name}{else /}{$cookie.nickname}{/empty}
+                    <a href="javascript:;" style="color:#333;">
+                        <img src="{$cookie.thumb|geturl}" class="layui-nav-img">欢迎, {empty name="$cookie.nickname"}{$cookie.name}{else /}{$cookie.nickname}{/empty}
                     </a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" data-url="{:url('admin/admin/personal',['id'=>$cookie.id])}" data-icon="fa-asterisk" data-title="个人信息" kit-target data-id='1'><span><i class="fa fa-cog"></i> 基本资料</span></a></dd>
-                        <dd><a href="javascript:;"  data-url="{:url('admin/admin/editPassword')}" data-icon="fa-edit" data-title="修改密码" kit-target data-id='2'><span><i class="fa fa-edit"></i> 修改密码</span></a></dd>
-                        <dd><a href="javascript:;"  id="logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i> 退了</span></a></dd>
-                    </dl>
                 </li>
-                <li class="layui-nav-item"><a href="javascript:;" id="copyright" style="color:#fff;"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a></li>
+                <li class="layui-nav-item"><a href="javascript:;"  id="logout" style="color:#333;"><span><i class="fa fa-sign-out" aria-hidden="true"></i> 退了</span></a></li>
             </ul>
         </div>

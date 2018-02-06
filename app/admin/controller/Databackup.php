@@ -4,9 +4,9 @@ use think\Controller;
 use think\Db;
 use think\Request;
 use think\Session;
-use \app\admin\controller\User;
+use \app\admin\controller\Permissions;
 use \databackup\src\Backup;
-class Databackup extends User
+class Databackup extends Permissions
 {
     public function index()
     {

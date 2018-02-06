@@ -12,9 +12,9 @@
 
 namespace app\admin\controller;
 
-use app\admin\controller\User;
+use app\admin\controller\Permissions;
 use \think\Db;
-class Webconfig extends User
+class Webconfig extends Permissions
 {
     public function index()
     {
