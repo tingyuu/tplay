@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-01-12 13:33:44
+Date: 2018-02-06 14:06:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,7 +40,7 @@ CREATE TABLE `tplay_admin` (
 -- ----------------------------
 -- Records of tplay_admin
 -- ----------------------------
-INSERT INTO `tplay_admin` VALUES ('1', 'Tplay', 'admin', '31c64b511d1e90fcda8519941c1bd660', '1', '1510885948', '1515046061', '1515734698', '127.0.0.1', '1');
+INSERT INTO `tplay_admin` VALUES ('1', 'Tplay', 'admin', '31c64b511d1e90fcda8519941c1bd660', '1', '1510885948', '1517622948', '1517887954', '127.0.0.1', '1');
 
 -- ----------------------------
 -- Table structure for `tplay_admin_cate`
@@ -62,7 +62,7 @@ CREATE TABLE `tplay_admin_cate` (
 -- ----------------------------
 -- Records of tplay_admin_cate
 -- ----------------------------
-INSERT INTO `tplay_admin_cate` VALUES ('1', '超级管理员', '57,58,60,61,68,82,83,84,30,29,73,74,37,38,40,41,85,86,63,64,33,34,70,71,49,50,51,53,54,77,78,80', '0', '1515044109', '超级管理员，拥有最高权限！');
+INSERT INTO `tplay_admin_cate` VALUES ('1', '超级管理员', '4,5,6,7,8,11,13,14,16,17,19,20,21,25,26,28,29,34,35,37,38,39,40,42,43,44,45,47,48', '0', '1517022009', '超级管理员，拥有最高权限！');
 
 -- ----------------------------
 -- Table structure for `tplay_admin_log`
@@ -112,68 +112,62 @@ CREATE TABLE `tplay_admin_menu` (
   KEY `function` (`function`) USING BTREE,
   KEY `is_display` (`is_display`) USING BTREE,
   KEY `type` (`type`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=87 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='系统菜单表';
 
 -- ----------------------------
 -- Records of tplay_admin_menu
 -- ----------------------------
-INSERT INTO `tplay_admin_menu` VALUES ('1', '设置', 'admin', 'index', 'index', '', '管理软件的基础信息，包括个人的基本信息管理。', '1', '2', '0', '0', '1515131654', 'fa-cogs', '0', '1');
-INSERT INTO `tplay_admin_menu` VALUES ('2', '个人信息', 'admin', 'admin', 'personal', '', '对个人的一些信息进行管理。', '1', '2', '1', '0', '1513402673', 'fa-cog', '0', '1');
-INSERT INTO `tplay_admin_menu` VALUES ('4', '会员管理', 'admin', 'index', 'index', '', '后台管理员管理，包括后台权限组的管理。', '1', '2', '0', '1511015413', '1513558364', 'fa-user', '0', '2');
-INSERT INTO `tplay_admin_menu` VALUES ('6', '角色分组', 'admin', 'admin', 'adminCate', '', '管理员角色分组管理。', '1', '2', '4', '1511083098', '1513412856', 'fa-group', '0', '2');
-INSERT INTO `tplay_admin_menu` VALUES ('73', '添加/修改管理员', 'admin', 'admin', 'publish', '', '添加/修改管理员。', '2', '1', '72', '1513403009', '1513403009', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('74', '删除管理员', 'admin', 'admin', 'delete', '', '删除管理员。', '2', '1', '72', '1513403036', '1513403036', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('45', '日志管理', 'admin', 'index', 'index', '', '日志管理。', '1', '2', '0', '1511940197', '1513396527', 'fa-book', '0', '4');
-INSERT INTO `tplay_admin_menu` VALUES ('77', '添加/修改菜单', 'admin', 'menu', 'publish', '', '添加/修改菜单。', '2', '1', '76', '1513403367', '1513403367', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('78', '删除菜单', 'admin', 'menu', 'delete', '', '删除菜单。', '2', '1', '76', '1513403393', '1513403393', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('30', '删除权限分组', 'admin', 'admin', 'adminCateDelete', '', '删除后台管理员权限分组。', '2', '1', '6', '1511227568', '1513396473', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('13', '修改密码', 'admin', 'admin', 'editPassword', '', '修改个人登录密码。', '1', '2', '1', '1511083565', '1513395989', 'fa-edit', '0', '2');
-INSERT INTO `tplay_admin_menu` VALUES ('29', '添加/修改权限分组', 'admin', 'admin', 'adminCatePublish', '', '添加/修改管理员权限分组。', '2', '1', '6', '1511227503', '1513396481', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('79', '文件管理', 'admin', 'attachment', 'index', '', '文件管理。', '1', '2', '47', '1513403488', '1513404676', 'fa-file', '0', '1');
-INSERT INTO `tplay_admin_menu` VALUES ('33', '文件审核', 'admin', 'attachment', 'audit', '', '对文件进行审核。', '2', '1', '79', '1511227899', '1513403526', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('34', '文件删除', 'admin', 'attachment', 'delete', '', '对文件进行删除操作。', '2', '1', '79', '1511227936', '1513403541', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('35', '门户管理', 'admin', 'index', 'index', '', '门户内容管理', '1', '2', '0', '1511320705', '1513408714', 'fa-th', '0', '6');
-INSERT INTO `tplay_admin_menu` VALUES ('36', '分类管理', 'admin', 'articlecate', 'index', '', '分类列表管理。', '1', '2', '35', '1511320748', '1513402018', 'fa-tags', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('37', '添加/修改分类', 'admin', 'articlecate', 'publish', '', '添加/修改分类操作。', '2', '1', '36', '1511320794', '1513402031', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('38', '删除分类', 'admin', 'articlecate', 'delete', '', '删除分类操作。', '2', '1', '36', '1511320824', '1513402041', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('39', '文章管理', 'admin', 'article', 'index', '', '文章列表管理', '1', '2', '35', '1511320850', '1513402055', 'fa-file-text', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('40', '添加/修改文章', 'admin', 'article', 'publish', '', '添加/修改文章操作。', '2', '1', '39', '1511320883', '1513402066', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('41', '删除文章', 'admin', 'article', 'delete', '', '删除文章操作。', '2', '1', '39', '1511320907', '1513402079', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('46', '操作日志', 'admin', 'admin', 'log', '', '管理员操作日志。', '1', '2', '45', '1511940227', '1513396537', 'fa-book', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('47', '数据管理', 'admin', 'index', 'index', '', '数据相关的管理。', '1', '2', '0', '1511940263', '1513402145', 'fa-cubes', '0', '5');
-INSERT INTO `tplay_admin_menu` VALUES ('48', '数据库', 'admin', 'databackup', 'index', '', '数据库管理', '1', '2', '47', '1511940334', '1513402218', 'fa-database', '0', '2');
-INSERT INTO `tplay_admin_menu` VALUES ('49', '数据库备份', 'admin', 'databackup', 'export', '', '数据库备份。', '2', '1', '48', '1511940383', '1513402229', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('50', '数据库优化', 'admin', 'databackup', 'optimize', '', '数据库优化。', '2', '1', '48', '1511940422', '1513402239', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('51', '数据库修复', 'admin', 'databackup', 'repair', '', '数据库修复', '2', '1', '48', '1511940450', '1513402248', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('52', '备份管理', 'admin', 'databackup', 'importlist', '', '数据库备份文件管理。', '1', '2', '47', '1511940505', '1513402265', 'fa-bookmark', '0', '3');
-INSERT INTO `tplay_admin_menu` VALUES ('53', '数据库备份还原', 'admin', 'databackup', 'import', '', '数据库还原。', '2', '1', '52', '1511940554', '1513402275', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('54', '数据库备份删除', 'admin', 'databackup', 'del', '', '数据库备份删除。', '2', '1', '52', '1511940587', '1513402284', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('75', '菜单管理', 'admin', 'index', 'index', '', '菜单管理。', '1', '2', '0', '1513403151', '1513403151', 'fa-sitemap', '0', '3');
-INSERT INTO `tplay_admin_menu` VALUES ('56', '邮件配置', 'admin', 'emailconfig', 'index', '', '邮件配置。', '1', '2', '1', '1512811551', '1513402539', 'fa-envelope', '0', '4');
-INSERT INTO `tplay_admin_menu` VALUES ('57', '修改邮件配置', 'admin', 'emailconfig', 'publish', '', '修改邮件配置。', '2', '1', '56', '1512811595', '1513402369', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('58', '发送测试邮件', 'admin', 'emailconfig', 'mailto', '', '发送测试邮件。', '2', '1', '56', '1512811635', '1513402381', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('59', '短信配置', 'admin', 'smsconfig', 'index', '', '短信配置。', '1', '2', '1', '1512977784', '1513402562', 'fa-comment', '0', '5');
-INSERT INTO `tplay_admin_menu` VALUES ('60', '修改短信配置', 'admin', 'smsconfig', 'publish', '', '修改短信配置。', '2', '1', '59', '1512977821', '1513402412', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('61', '发送测试短信', 'admin', 'smsconfig', 'smsto', '', '发送测试短信。', '2', '1', '59', '1512977851', '1513402421', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('62', '留言管理', 'admin', 'tomessages', 'index', '', '留言管理。', '1', '2', '35', '1513047149', '1513402094', 'fa-comments', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('63', '标记留言', 'admin', 'tomessages', 'mark', '', '标记留言。', '2', '1', '62', '1513047177', '1513402105', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('64', '删除留言', 'admin', 'tomessages', 'delete', '', '删除留言。', '2', '1', '62', '1513047205', '1513402113', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('65', '添加留言', 'admin', 'tomessages', 'publish', '', '添加留言。', '2', '2', '62', '1513047239', '1513402120', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('66', '管理员登录', 'admin', 'common', 'login', '', '管理员登录。', '2', '2', '0', '1513061455', '1513402429', '', '0', '100');
-INSERT INTO `tplay_admin_menu` VALUES ('67', '系统设置', 'admin', 'webconfig', 'index', '', '网站信息设置。', '1', '2', '1', '1513131135', '1515038283', 'fa-desktop', '0', '3');
-INSERT INTO `tplay_admin_menu` VALUES ('68', '修改网站配置', 'admin', 'webconfig', 'publish', '', '修改网站配置信息。', '2', '1', '67', '1513131161', '1513408856', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('69', '上传文件', 'admin', 'common', 'upload', '', '上传文件。', '2', '2', '0', '1513155130', '1515036247', '', '0', '199');
-INSERT INTO `tplay_admin_menu` VALUES ('70', '上传附件', 'admin', 'attachment', 'upload', '', '上传附件。', '2', '1', '79', '1513323699', '1513403557', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('71', '文件下载', 'admin', 'attachment', 'download', '', '文件下载。', '2', '1', '79', '1513325699', '1513403571', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('72', '管理员', 'admin', 'admin', 'index', '', '管理员列表。', '1', '2', '4', '1513402959', '1513402959', 'fa-user', '0', '1');
-INSERT INTO `tplay_admin_menu` VALUES ('76', '后台菜单', 'admin', 'menu', 'index', '', '添加/修改菜单。', '1', '2', '75', '1513403248', '1513403248', 'fa-sliders', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('80', '菜单排序', 'admin', 'menu', 'orders', '', '后台菜单排序。', '2', '1', '76', '1513408418', '1513408418', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('81', 'URL美化', 'admin', 'urlsconfig', 'index', '', 'URL美化设置。', '1', '2', '1', '1513574783', '1513574783', 'fa-link', '0', '6');
-INSERT INTO `tplay_admin_menu` VALUES ('82', '新增/修改url美化', 'admin', 'urlsconfig', 'publish', '', '新增/修改url美化规则。', '2', '1', '81', '1513574935', '1513574935', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('83', '启用/禁用url美化', 'admin', 'urlsconfig', 'status', '', '启用/禁用url美化规则。', '2', '1', '81', '1513574979', '1513575215', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('84', '删除url美化规则', 'admin', 'urlsconfig', 'delete', '', '删除url美化规则。', '2', '1', '81', '1513575009', '1513575009', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('85', '置顶/取消置顶', 'admin', 'article', 'is_top', '', '置顶或取消置顶文章操作。', '2', '1', '39', '1515043744', '1515043744', '', '0', '0');
-INSERT INTO `tplay_admin_menu` VALUES ('86', '审核/下架文章', 'admin', 'article', 'status', '', '对文章进行审核或者下架操作。', '2', '1', '39', '1515043796', '1515043796', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('1', '系统', '', '', '', '', '系统设置。', '1', '2', '0', '0', '1517015748', 'fa-cog', '1', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('2', '菜单', '', '', '', '', '菜单管理。', '1', '2', '1', '0', '1517015764', 'fa-paw', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('51', '系统菜单排序', 'admin', 'menu', 'orders', '', '系统菜单排序。', '2', '1', '3', '1517562047', '1517562047', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('3', '系统菜单', 'admin', 'menu', 'index', null, '系统菜单管理', '1', '2', '2', '0', '0', 'fa-share-alt', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('4', '新增/修改系统菜单', 'admin', 'menu', 'publish', '', '新增/修改系统菜单.', '2', '1', '3', '1516948769', '1516948769', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('5', '删除系统菜单', 'admin', 'menu', 'delete', '', '删除系统菜单。', '2', '1', '3', '1516948857', '1516948857', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('6', '个人', '', '', '', '', '个人信息管理。', '1', '1', '1', '1516949308', '1517021986', 'fa-user', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('7', '个人信息', 'admin', 'admin', 'personal', '', '个人信息修改。', '1', '1', '6', '1516949435', '1516949435', 'fa-user', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('8', '修改密码', 'admin', 'admin', 'editpassword', '', '管理员修改个人密码。', '1', '1', '6', '1516949702', '1517619887', 'fa-unlock-alt', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('9', '设置', '', '', '', '', '系统相关设置。', '1', '2', '1', '1516949853', '1517015878', 'fa-cog', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('10', '网站设置', 'admin', 'webconfig', 'index', '', '网站相关设置首页。', '1', '2', '9', '1516949994', '1516949994', 'fa-bullseye', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('11', '修改网站设置', 'admin', 'webconfig', 'publish', '', '修改网站设置。', '2', '1', '10', '1516950047', '1516950047', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('12', '邮件设置', 'admin', 'emailconfig', 'index', '', '邮件配置首页。', '1', '2', '9', '1516950129', '1516950129', 'fa-envelope', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('13', '修改邮件设置', 'admin', 'emailconfig', 'publish', '', '修改邮件设置。', '2', '1', '12', '1516950215', '1516950215', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('14', '发送测试邮件', 'admin', 'emailconfig', 'mailto', '', '发送测试邮件。', '2', '1', '12', '1516950295', '1516950295', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('15', '短信设置', 'admin', 'smsconfig', 'index', '', '短信设置首页。', '1', '2', '9', '1516950394', '1516950394', 'fa-comments', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('16', '修改短信设置', 'admin', 'smsconfig', 'publish', '', '修改短信设置。', '2', '1', '15', '1516950447', '1516950447', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('17', '发送测试短信', 'admin', 'smsconfig', 'smsto', '', '发送测试短信。', '2', '1', '15', '1516950483', '1516950483', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('18', 'URL 设置', 'admin', 'urlsconfig', 'index', '', 'url 设置。', '1', '2', '9', '1516950738', '1516950804', 'fa-code-fork', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('19', '新增/修改url设置', 'admin', 'urlsconfig', 'publish', '', '新增/修改url设置。', '2', '1', '18', '1516950850', '1516950850', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('20', '启用/禁用url美化', 'admin', 'urlsconfig', 'status', '', '启用/禁用url美化。', '2', '1', '18', '1516950909', '1516950909', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('21', ' 删除url美化规则', 'admin', 'urlsconfig', 'delete', '', ' 删除url美化规则。', '2', '1', '18', '1516950941', '1516950941', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('22', '会员', '', '', '', '', '会员管理。', '1', '2', '0', '1516950991', '1517015810', 'fa-users', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('23', '管理员', '', '', '', '', '系统管理员管理。', '1', '2', '22', '1516951071', '1517015819', 'fa-user', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('24', '管理员', 'admin', 'admin', 'index', '', '系统管理员列表。', '1', '2', '23', '1516951163', '1516951163', 'fa-user', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('25', '新增/修改管理员', 'admin', 'admin', 'publish', '', '新增/修改系统管理员。', '2', '1', '24', '1516951224', '1516951224', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('26', '删除管理员', 'admin', 'admin', 'delete', '', '删除管理员。', '2', '1', '24', '1516951253', '1516951253', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('27', '权限组', 'admin', 'admin', 'admincate', '', '权限分组。', '1', '2', '23', '1516951353', '1517018168', 'fa-dot-circle-o', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('28', '新增/修改权限组', 'admin', 'admin', 'admincatepublish', '', '新增/修改权限组。', '2', '1', '27', '1516951483', '1516951483', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('29', '删除权限组', 'admin', 'admin', 'admincatedelete', '', '删除权限组。', '2', '1', '27', '1516951515', '1516951515', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('30', '操作日志', 'admin', 'admin', 'log', '', '系统管理员操作日志。', '1', '2', '23', '1516951754', '1517018196', 'fa-pencil', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('31', '内容', '', '', '', '', '内容管理。', '1', '2', '0', '1516952262', '1517015835', 'fa-th-large', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('32', '文章', '', '', '', '', '文章相关管理。', '1', '2', '31', '1516952698', '1517015846', 'fa-bookmark', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('33', '分类', 'admin', 'articlecate', 'index', '', '文章分类管理。', '1', '2', '32', '1516952856', '1516952856', 'fa-tag', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('34', '新增/修改文章分类', 'admin', 'articlecate', 'publish', '', '新增/修改文章分类。', '2', '1', '33', '1516952896', '1516952896', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('35', '删除文章分类', 'admin', 'articlecate', 'delete', '', '删除文章分类。', '2', '1', '33', '1516952942', '1516952942', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('36', '文章', 'admin', 'article', 'index', '', '文章管理。', '1', '2', '32', '1516953011', '1516953028', 'fa-bookmark', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('37', '新增/修改文章', 'admin', 'article', 'publish', '', '新增/修改文章。', '2', '1', '36', '1516953056', '1516953056', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('38', '审核/拒绝文章', 'admin', 'article', 'status', '', '审核/拒绝文章。', '2', '1', '36', '1516953113', '1516953113', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('39', '置顶/取消置顶文章', 'admin', 'article', 'is_top', '', '置顶/取消置顶文章。', '2', '1', '36', '1516953162', '1516953162', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('40', '删除文章', 'admin', 'article', 'delete', '', '删除文章。', '2', '1', '36', '1516953183', '1516953183', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('41', '附件', 'admin', 'attachment', 'index', '', '附件管理。', '1', '2', '31', '1516953306', '1516953306', 'fa-cube', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('42', '附件审核', 'admin', 'attachment', 'audit', '', '附件审核。', '2', '1', '41', '1516953359', '1516953440', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('43', '附件上传', 'admin', 'attachment', 'upload', '', '附件上传。', '2', '1', '41', '1516953392', '1516953392', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('44', '附件下载', 'admin', 'attachment', 'download', '', '附件下载。', '2', '1', '41', '1516953430', '1516953430', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('45', '附件删除', 'admin', 'attachment', 'delete', '', '附件删除。', '2', '1', '41', '1516953477', '1516953477', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('46', '留言', 'admin', 'tomessages', 'index', '', '留言管理。', '1', '2', '31', '1516953526', '1516953526', 'fa-comments', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('47', '留言处理', 'admin', 'tomessages', 'mark', '', '留言处理。', '2', '1', '46', '1516953605', '1516953605', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('48', '留言删除', 'admin', 'tomessages', 'delete', '', '留言删除。', '2', '1', '46', '1516953648', '1516953648', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('49', '图片上传', 'admin', 'common', 'upload', '', '图片上传。', '2', '2', '0', '1516954491', '1516954491', '', '0', '0');
+INSERT INTO `tplay_admin_menu` VALUES ('50', '管理员登录', 'admin', 'common', 'login', '', '管理员登录。', '2', '2', '0', '1516954517', '1516954517', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for `tplay_article`
@@ -250,7 +244,7 @@ CREATE TABLE `tplay_attachment` (
   KEY `status` (`status`) USING BTREE,
   KEY `filename` (`filename`) USING BTREE,
   KEY `create_time` (`create_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='附件表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='附件表';
 
 -- ----------------------------
 -- Records of tplay_attachment
@@ -334,11 +328,12 @@ CREATE TABLE `tplay_urlconfig` (
   PRIMARY KEY (`id`),
   KEY `id` (`id`) USING BTREE,
   KEY `status` (`status`) USING BTREE
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tplay_urlconfig
 -- ----------------------------
+INSERT INTO `tplay_urlconfig` VALUES ('1', 'admin_login', 'admin/common/login', '后台登录地址。', '0', '1517621629', '1517621629');
 
 -- ----------------------------
 -- Table structure for `tplay_webconfig`
