@@ -212,7 +212,7 @@ class Admin extends Permissions
     			return $this->error('不能修改别人的密码');
     		}
     	} else {
-            $id == Session::get('admin');
+            $id = Session::get('admin');
             $this->assign('id',$id);
     		return $this->fetch();
     	}
