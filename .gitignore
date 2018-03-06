@@ -1,4 +1,5 @@
-runtime/*
+*.xml
 *.log
-.idea/*
+runtime/*
 vendor/*
+.idea/*
