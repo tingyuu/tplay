@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:65:"E:\phpStudy\WWW\tplay\public/../app/admin\view\article\index.html";i:1517625736;s:53:"E:\phpStudy\WWW\tplay\app\admin\view\public\foot.html";i:1517625496;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:65:"E:\phpStudy\WWW\tplay\public/../app/admin\view\article\index.html";i:1519608263;s:53:"E:\phpStudy\WWW\tplay\app\admin\view\public\foot.html";i:1517625496;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,7 +136,7 @@
         <?php endforeach; endif; else: echo "" ;endif; ?>
       </tbody>
     </table>
-            
+    <div style="padding:0 20px;"><?php echo $articles->render(); ?></div> 
         <script src="/static/public/layui/layui.js" charset="utf-8"></script>
     <script src="/static/public/jquery/jquery.min.js"></script>
     <script>

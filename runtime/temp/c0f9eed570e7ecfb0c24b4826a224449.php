@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:74:"E:\phpStudy\WWW\tplay\public/../app/admin\view\admin\admincatepublish.html";i:1517623328;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:74:"E:\phpStudy\WWW\tplay\public/../app/admin\view\admin\admincatepublish.html";i:1520319835;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -160,12 +160,12 @@
                       type:'post',
                       async: false,
                       success:function(res) {
-                          layer.msg(res.msg);
                           if(res.code == 1) {
-                              setTimeout(function(){
-                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                                parent.layer.close(index); //再执行关闭
-                              },1500) 
+                              layer.alert(res.msg, function(index){
+                                location.href = res.url;
+                              })
+                          } else {
+                              layer.msg(res.msg);
                           }
                       }
                   })

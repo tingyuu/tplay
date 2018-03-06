@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:62:"E:\phpStudy\WWW\tplay\public/../app/admin\view\main\index.html";i:1517895821;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:62:"E:\phpStudy\WWW\tplay\public/../app/admin\view\main\index.html";i:1520320579;}*/ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,7 +10,6 @@
   <script src="/static/public/echarts/echarts.min.js"></script>
   <link rel="stylesheet" href="/static/public/layui/css/layui.css" media="all">
   <link rel="stylesheet" href="/static/public/font-awesome/css/font-awesome.min.css" media="all">
-  <link rel="stylesheet" href="/static/admin/css/layer.css" media="all">
   <link rel="stylesheet" href="/static/admin/css/admin-1.css" media="all">
 <body class="layui-layout-body" style="overflow-y:visible;">
     <div class="layadmin-tabsbody-item layui-show"><div class="layui-fluid">
@@ -96,7 +95,7 @@
         <div class="layui-col-md12">
           <div class="layui-card">
             <div class="layui-card-header">管理员登录</div>
-            <div class="layui-card-body" id="main" style="height: 400px;">
+            <div class="layui-card-body" id="main" style="height: 450px;">
 
             </div>
           </div>
@@ -118,7 +117,7 @@
                 <td>当前版本</td>
                 <td>
                     Tplay <?php echo $info['tplay']; ?>
-                    <a href="<?php echo url('index/index/log'); ?>" target="_blank" style="padding-left: 15px;">更新日志</a> 
+                    <a href="http://tplay.pengyichen.cn/tplay/public/index/index/log.shtml" target="_blank" style="padding-left: 15px;">更新日志</a> 
                 </td>
               </tr>
               <tr>
@@ -135,8 +134,8 @@
                 <td>下载交流</td>
                 <td style="padding-bottom: 0;">
                   <div class="layui-btn-container">
-                    <a href="https://jq.qq.com/?_wv=1027&k=5wZeNTd" target="_blank" class="layui-btn layui-btn-danger">官方交流群</a>
-                    <a href="http://tplay.pengyichen.cn" target="_blank" class="layui-btn">下载最新版</a>
+                    <a href="https://jq.qq.com/?_wv=1027&k=5wZeNTd" target="_blank" class="layui-btn layui-btn-danger layui-btn-sm">官方交流群</a>
+                    <a href="http://tplay.pengyichen.cn" target="_blank" class="layui-btn layui-btn-sm">下载最新版</a>
                   </div>
                 </td>
               </tr>
@@ -144,34 +143,64 @@
           </table>
         </div>
       </div>
-      
-      <div class="layui-card">
-        <div class="layui-card-header">系统信息</div>
-        <div class="layui-card-body layadmin-takerates">
-          <ul>
-              <li>操作系统：---------------<?php echo $info['win']; ?></li>
-              <li>PHP版本：----------------<?php echo $info['php']; ?></li>
-              <li>运行环境：---------------<?php echo $info['environment']; ?></li>
-              <li>上传最大限制：-----------<?php echo $info['upload_size']; ?></li>
-              <li>执行时间限制：-----------<?php echo $info['execution_time']; ?></li>
-              <li>剩余空间大小：-----------<?php if(!(empty($info['disk']) || (($info['disk'] instanceof \think\Collection || $info['disk'] instanceof \think\Paginator ) && $info['disk']->isEmpty()))): ?><?php echo $info['disk']; else: ?>未知<?php endif; ?></li>
-          </ul>
-        </div>
-      </div>
-      
+
       <div class="layui-card">
         <div class="layui-card-header">
-          作者寄语
+          官方公告
         </div>
         <div class="layui-card-body layui-text layadmin-text">
           <p>Tplay后台管理框架搭载的是国内最受欢迎的两大框架Layui和ThinkPHP，ThinkPHP的大道至简和Layui的简而全在理念上可谓是不谋而合，两大框架结合所产生的结果就是将WEB开发精简到了极致。</p>
-          <p>Tplay目前还处于刚刚起步的阶段，功能上只做了适配性较强的部分，后续的开发方向将主要集中在润色和优化上，同时不定期加入部分适配性高的功能。</p>
-          <p>最后：此版本为春节前最后一个版本，祝大家新春快乐！</p>
-          <p>—— 听雨</p>
         </div>
       </div>
-      
-      
+
+      <div class="layui-card">
+        <div class="layui-card-header">系统信息</div>
+        <div class="layui-card-body layui-text">
+          <table class="layui-table">
+            <colgroup>
+              <col width="200">
+              <col>
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>操作系统</td>
+                <td>
+                    <?php echo $info['win']; ?> 
+                </td>
+              </tr>
+              <tr>
+                <td>PHP版本</td>
+                <td>
+                 <?php echo $info['php']; ?> 
+               </td>
+              </tr>
+              <tr>
+                <td>运行环境</td>
+                <td><?php echo $info['environment']; ?></td>
+              </tr>
+              <tr>
+                <td>上传最大限制</td>
+                <td>
+                  <?php echo $info['upload_size']; ?>
+                </td>
+              </tr>
+              <tr>
+                <td>执行时间限制</td>
+                <td>
+                  <?php echo $info['execution_time']; ?>
+                </td>
+              </tr>
+              <tr>
+                <td>剩余空间大小</td>
+                <td>
+                  <?php if(!(empty($info['disk']) || (($info['disk'] instanceof \think\Collection || $info['disk'] instanceof \think\Paginator ) && $info['disk']->isEmpty()))): ?><?php echo $info['disk']; else: ?>未知<?php endif; ?>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
     
   </div>

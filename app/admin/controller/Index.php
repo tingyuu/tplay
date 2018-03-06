@@ -39,7 +39,7 @@ class Index extends Permissions
         	if(empty($value['parameter'])) {
         		$url = url($value['module'].'/'.$value['controller'].'/'.$value['function']);
         	} else {
-                $url = url($value['module'].'/'.$value['controller'].'/'.$value['function'].','.$value['parameter']);
+                $url = url($value['module'].'/'.$value['controller'].'/'.$value['function'],$value['parameter']);
         	}
         	$menu[$key]['url'] = $url;
         }

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"E:\phpStudy\WWW\tplay\public/../app/admin\view\common\login.html";i:1517887917;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"E:\phpStudy\WWW\tplay\public/../app/admin\view\common\login.html";i:1517995305;}*/ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,7 +9,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <link href="/static/public/layui/css/layui.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/admin/css/layer.css" media="all">
   <link rel="stylesheet" href="/static/admin/css/admin-1.css" media="all">
   <link href="/static/admin/css/login-1.css" rel="stylesheet" />
   <link href="/static/public/font-awesome/css/font-awesome.css" rel="stylesheet" />
@@ -27,11 +26,11 @@
       <form class="layui-form" id="login">
         <div class="layui-form-item">
           <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"><i class="fa fa-user"></i></label>
-          <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="用户名:demo" class="layui-input" <?php if(!(empty($usermember) || (($usermember instanceof \think\Collection || $usermember instanceof \think\Paginator ) && $usermember->isEmpty()))): ?>value="<?php echo $usermember; ?>"<?php endif; ?>>
+          <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="用户名" class="layui-input" <?php if(!(empty($usermember) || (($usermember instanceof \think\Collection || $usermember instanceof \think\Paginator ) && $usermember->isEmpty()))): ?>value="<?php echo $usermember; ?>"<?php endif; ?>>
         </div>
         <div class="layui-form-item">
           <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"><i class="fa fa-unlock-alt"></i></label>
-          <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="密码:tplay" class="layui-input">
+          <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="密码" class="layui-input">
         </div>
         <div class="layui-form-item">
           <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"><i class="fa fa-code"></i></label>
