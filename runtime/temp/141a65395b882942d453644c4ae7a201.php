@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"E:\phpStudy\WWW\tplay\public/../app/admin\view\index\index.html";i:1513993331;s:55:"E:\phpStudy\WWW\tplay\app\admin\view\public\header.html";i:1517896231;s:53:"E:\phpStudy\WWW\tplay\app\admin\view\public\left.html";i:1516954683;s:55:"E:\phpStudy\WWW\tplay\app\admin\view\public\footer.html";i:1517895121;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:63:"E:\phpStudy\WWW\tplay\public/../app/admin\view\index\index.html";i:1513993331;s:55:"E:\phpStudy\WWW\tplay\app\admin\view\public\header.html";i:1517896231;s:53:"E:\phpStudy\WWW\tplay\app\admin\view\public\left.html";i:1520384265;s:55:"E:\phpStudy\WWW\tplay\app\admin\view\public\footer.html";i:1517895121;}*/ ?>
 <!-- 头部公共文件 -->
 <!DOCTYPE html>
 <html>
