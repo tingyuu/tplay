@@ -28,7 +28,7 @@ class Article extends Permissions
         $model = new articleModel();
         $post = $this->request->param();
         if (isset($post['keywords']) and !empty($post['keywords'])) {
-            $where['name'] = ['like', '%' . $post['keywords'] . '%'];
+            $where['title'] = ['like', '%' . $post['keywords'] . '%'];
         }
         if (isset($post['article_cate_id']) and $post['article_cate_id'] > 0) {
             $where['article_cate_id'] = $post['article_cate_id'];
