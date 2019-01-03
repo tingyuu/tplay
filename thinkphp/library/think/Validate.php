@@ -42,7 +42,6 @@ class Validate
         'float'       => ':attribute must be float',
         'boolean'     => ':attribute must be bool',
         'email'       => ':attribute not a valid email address',
-        'mobile'      => ':attribute not a valid mobile',
         'array'       => ':attribute must be a array',
         'accepted'    => ':attribute must be yes,on or 1',
         'date'        => ':attribute not a valid datetime',
@@ -68,6 +67,8 @@ class Validate
         'min'         => 'min size of :attribute must be :rule',
         'after'       => ':attribute cannot be less than :rule',
         'before'      => ':attribute cannot exceed :rule',
+        'afterWith'   => ':attribute cannot be less than :rule',
+        'beforeWith'  => ':attribute cannot exceed :rule',
         'expire'      => ':attribute not within :rule',
         'allowIp'     => 'access IP is not allowed',
         'denyIp'      => 'access IP denied',
@@ -1114,9 +1115,10 @@ class Validate
      * @access protected
      * @param mixed     $value  字段值
      * @param mixed     $rule  验证规则
+     * @param array     $data  数据
      * @return bool
      */
-    protected function after($value, $rule)
+    protected function after($value, $rule, $data)
     {
         return strtotime($value) >= strtotime($rule);
     }
@@ -1126,11 +1128,40 @@ class Validate
      * @access protected
      * @param mixed     $value  字段值
      * @param mixed     $rule  验证规则
+     * @param array     $data  数据
      * @return bool
      */
-    protected function before($value, $rule)
+    protected function before($value, $rule, $data)
     {
         return strtotime($value) <= strtotime($rule);
+    }
+
+    /**
+     * 验证日期字段
+     * @access protected
+     * @param mixed     $value  字段值
+     * @param mixed     $rule  验证规则
+     * @param array     $data  数据
+     * @return bool
+     */
+    protected function afterWith($value, $rule, $data)
+    {
+        $rule = $this->getDataValue($data, $rule);
+        return !is_null($rule) && strtotime($value) >= strtotime($rule);
+    }
+
+    /**
+     * 验证日期字段
+     * @access protected
+     * @param mixed     $value  字段值
+     * @param mixed     $rule  验证规则
+     * @param array     $data  数据
+     * @return bool
+     */
+    protected function beforeWith($value, $rule, $data)
+    {
+        $rule = $this->getDataValue($data, $rule);
+        return !is_null($rule) && strtotime($value) <= strtotime($rule);
     }
 
     /**
@@ -1196,7 +1227,7 @@ class Validate
             // 不是正则表达式则两端补上/
             $rule = '/^' . $rule . '$/';
         }
-        return 1 === preg_match($rule, (string) $value);
+        return is_scalar($value) && 1 === preg_match($rule, (string) $value);
     }
 
     /**

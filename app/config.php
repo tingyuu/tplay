@@ -249,7 +249,7 @@ return [
     // | 分页设置
     // +----------------------------------------------------------------------
     'paginate'               => [
-        'type'      => 'layui',
+        'type'      => 'app\Layuipaginate',
         'var_page'  => 'page',
         'list_rows' => 15,
     ],

@@ -1,11 +1,11 @@
 <?php
 
 
-namespace think\paginator\driver;
+namespace app;
 
 use think\Paginator;
 
-class Layui extends Paginator
+class Layuipaginate extends Paginator
 {  
   
     //首页  
