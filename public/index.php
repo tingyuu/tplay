@@ -14,7 +14,7 @@
 // 定义应用目录
 define('APP_PATH', __DIR__ . '/../app/');
 // 定义版本号
-define('TPLAY_VERSION', '1.3.3');
+define('TPLAY_VERSION', '1.3.5');
 //重定义扩展类库目录
 define('EXTEND_PATH', __DIR__ . '/../extend/');
 //重定义第三方类库目录
